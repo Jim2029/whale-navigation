@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="admin_title">鲸波导航 - 管理员后台</title>
+  <style>
+    :root {
+      --bg-page: #f5f6fa; --bg-card: #fff; --bg-input: #fafbff; --bg-hover: #f0f1ff;
+      --bg-sidebar: #fff; --text-primary: #2d3436; --text-secondary: #636e72; --text-muted: #aaa;
+      --text-nav: #555; --border-color: #eceef5; --accent: #667eea;
+      --accent-gradient: linear-gradient(135deg, #667eea, #764ba2);
+      --header-gradient: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+      --header-text: #fff; --scrollbar-thumb: #ddd; --modal-shadow: rgba(0,0,0,.2);
+      --modal-mask: rgba(0,0,0,.45); --toast-bg: #2d3436; --toast-text: #fff;
+      --empty-color: #ccc; --table-header-bg: #f8f9ff; --table-header-border: #eceef5;
+      --table-row-border: #f5f6fa; --table-row-hover: #fafbff; --table-row-drag: #f0f1ff;
+      --url-color: #667eea; --badge-bg: #e17055; --success: #00b894; --danger: #d63031;
+      --warning: #fdcb6e; --format-hint-color: #999; --cat-chip-bg: #f0f1ff;
+      --stat-num-color: #667eea; --batch-bar-bg: #f0f1ff; --preview-error-bg: #fff5f5;
+      --about-bg: #fff; --about-border: #eceef5; --about-text: #636e72; --about-link: #667eea;
+    }
+    [data-theme="dark"] {
+      --bg-page: #16213e; --bg-card: #1e2a3a; --bg-input: #1a2744; --bg-hover: #2a3a5c;
+      --bg-sidebar: #1e2a3a; --text-primary: #e0e0e0; --text-secondary: #8899aa; --text-muted: #556677;
+      --text-nav: #aabbcc; --border-color: #2a3a5c; --accent: #5c7cba;
+      --accent-gradient: linear-gradient(135deg, #5c7cba, #7c5cbf);
+      --header-gradient: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+      --header-text: #e0e0e0; --scrollbar-thumb: #2a3a5c; --modal-shadow: rgba(0,0,0,.4);
+      --modal-mask: rgba(0,0,0,.7); --toast-bg: #e0e0e0; --toast-text: #16213e;
+      --empty-color: #556677; --table-header-bg: #1a2744; --table-header-border: #2a3a5c;
+      --table-row-border: #2a3a5c; --table-row-hover: #2a3a5c; --table-row-drag: #2a3a5c;
+      --url-color: #5c7cba; --badge-bg: #e17055; --success: #55efc4; --danger: #e17055;
+      --warning: #fdcb6e; --format-hint-color: #556677; --cat-chip-bg: #2a3a5c;
+      --stat-num-color: #5c7cba; --batch-bar-bg: #2a3a5c; --preview-error-bg: #3a2020;
+      --about-bg: #1e2a3a; --about-border: #2a3a5c; --about-text: #8899aa; --about-link: #5c7cba;
+    }
+
+    /* ─── 深海 Deep Ocean ─────────────────────────────── */
+    [data-theme="deep"] {
+      --bg-page: #f0f7ff; --bg-card: #fff; --bg-input: #f5faff; --bg-hover: #e8f4ff;
+      --bg-sidebar: #fff; --text-primary: #1a2b4a; --text-secondary: #4a5e7a; --text-muted: #8899aa;
+      --text-nav: #3a4e6a; --border-color: #dce8f5; --accent: #0ea5e9;
+      --accent-gradient: linear-gradient(135deg, #0ea5e9, #6366f1);
+      --header-gradient: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      --header-text: #fff; --about-bg: #fff; --about-border: #dce8f5; --about-text: #4a5e7a; --about-link: #0ea5e9;
+    }
+
+    /* ─── 竹林 Bamboo ─────────────────────────────────── */
+    [data-theme="bamboo"] {
+      --bg-page: #f4f9f4; --bg-card: #fff; --bg-input: #f8fcf8; --bg-hover: #eaf5ea;
+      --bg-sidebar: #fff; --text-primary: #1a3a2a; --text-secondary: #4a6a5a; --text-muted: #88a898;
+      --text-nav: #3a5a4a; --border-color: #dceadc; --accent: #10b981;
+      --accent-gradient: linear-gradient(135deg, #10b981, #059669);
+      --header-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --header-text: #fff; --about-bg: #fff; --about-border: #dceadc; --about-text: #4a6a5a; --about-link: #10b981;
+    }
+
+    /* ─── 晚霞 Sunset ─────────────────────────────────── */
+    [data-theme="sunset"] {
+      --bg-page: #fef5f0; --bg-card: #fff; --bg-input: #fff9f5; --bg-hover: #fdeee5;
+      --bg-sidebar: #fff; --text-primary: #4a1a2a; --text-secondary: #7a4a5a; --text-muted: #b898a8;
+      --text-nav: #6a3a4a; --border-color: #f5dce5; --accent: #f43f5e;
+      --accent-gradient: linear-gradient(135deg, #f43f5e, #fb923c);
+      --header-gradient: linear-gradient(135deg, #f43f5e 0%, #fb923c 100%);
+      --header-text: #fff; --about-bg: #fff; --about-border: #f5dce5; --about-text: #7a4a5a; --about-link: #f43f5e;
+    }
+
+    /* ─── 墨韵 Ink ────────────────────────────────────── */
+    [data-theme="ink"] {
+      --bg-page: #f8f8f6; --bg-card: #fff; --bg-input: #fafaf8; --bg-hover: #f0f0ec;
+      --bg-sidebar: #fff; --text-primary: #2a2a2a; --text-secondary: #5a5a5a; --text-muted: #999;
+      --text-nav: #4a4a4a; --border-color: #e5e5e0; --accent: #374151;
+      --accent-gradient: linear-gradient(135deg, #374151, #6b7280);
+      --header-gradient: linear-gradient(135deg, #374151 0%, #6b7280 100%);
+      --header-text: #fff; --about-bg: #fff; --about-border: #e5e5e0; --about-text: #5a5a5a; --about-link: #374151;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg-page); color: var(--text-primary); min-height: 100vh; transition: background .3s, color .3s; }
+    .admin-header { background: var(--header-gradient); color: var(--header-text); padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between; transition: background .3s; }
+    .admin-header h1 { font-size: 18px; display: flex; align-items: center; gap: 10px; margin: 0; }
+    .admin-header .logo-img { width: 354px; height: 17px; object-fit: contain; display: block; }
+    .admin-header .badge { background: var(--badge-bg); padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+    .admin-header .home-link { color: var(--header-text); text-decoration: none; font-size: 13px;
+      opacity: .85; transition: opacity .2s; margin-right: 14px; }
+    .admin-header .home-link:hover { opacity: 1; text-decoration: underline; }
+    .admin-header .header-right { display: flex; align-items: center; gap: 10px; }
+    .admin-header #langSelect { font-size: 11px; padding: 2px 6px;
+      background: rgba(255,255,255,.15); color: #fff;
+      border: 1px solid rgba(255,255,255,.3); border-radius: 6px; outline: none; cursor: pointer; }
+    .admin-header #langSelect option { color: #222; }
+    .admin-body { display: flex; min-height: calc(100vh - 58px); }
+    .admin-nav { width: 180px; flex-shrink: 0; background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color); padding: 16px 0; transition: background .3s, border-color .3s; }
+    .admin-nav-item { display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; cursor: pointer; font-size: 14px; color: var(--text-nav);
+      transition: all .15s; border-left: 3px solid transparent; }
+    .admin-nav-item:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .admin-nav-item.active { background: var(--bg-hover); color: var(--accent); font-weight: 600; border-left-color: var(--accent); }
+    .admin-panel { flex: 1; padding: 28px 32px; }
+    .panel-section { display: none; }
+    .panel-section.active { display: block; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .section-title { font-size: 17px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+    .btn { padding: 8px 18px; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all .2s; }
+    .btn-primary { background: var(--accent-gradient); color: #fff; }
+    .btn-primary:hover { opacity: .88; }
+    .btn-danger  { background: #ff7675; color: #fff; }
+    .btn-danger:hover { background: var(--danger); }
+    .btn-secondary { background: var(--bg-page); color: var(--text-secondary); }
+    .btn-secondary:hover { background: var(--border-color); }
+    .btn-sm { padding: 5px 12px; font-size: 12px; }
+    .btn-warning { background: var(--warning); color: #fff; }
+    .btn-warning:hover { background: #f9a825; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-success:hover { background: #00a381; }
+    .data-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: background .3s; }
+    .data-table th { background: var(--table-header-bg); padding: 11px 14px; text-align: left; font-size: 12px; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid var(--table-header-border); }
+    .data-table td { padding: 11px 14px; font-size: 13px; border-bottom: 1px solid var(--table-row-border); vertical-align: middle; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--table-row-hover); }
+    .data-table tr.drag-row td { background: var(--table-row-drag); opacity: .5; }
+    .data-table tr.drag-over-row td { border-top: 2px solid var(--accent); }
+    .data-table tr.row-hidden td { opacity: .55; background: var(--bg-page); }
+    .url-cell { max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--url-color); }
+    .td-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .batch-action-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding: 10px 16px;
+      background: var(--batch-bar-bg); border-radius: 10px; font-size: 13px; color: var(--text-secondary); }
+    .batch-action-bar .batch-info { flex: 1; }
+    .form-card { background: var(--bg-card); border-radius: 12px; padding: 24px 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 24px; transition: background .3s; }
+    .form-card-title { font-size: 14px; font-weight: 700; margin-bottom: 18px; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+    .form-input, .form-select { padding: 9px 12px; border: 1.5px solid var(--border-color); border-radius: 8px;
+      font-size: 13px; outline: none; transition: border-color .2s; background: var(--bg-input); color: var(--text-primary); }
+    .form-input:focus, .form-select:focus { border-color: var(--accent); background: var(--bg-card); }
+    .form-actions { margin-top: 18px; display: flex; gap: 10px; }
+    .batch-textarea { width: 100%; min-height: 120px; padding: 10px 12px;
+      border: 1.5px solid var(--border-color); border-radius: 8px; font-size: 12px;
+      outline: none; resize: vertical; font-family: monospace; line-height: 1.6;
+      background: var(--bg-input); color: var(--text-primary); }
+    .batch-textarea:focus { border-color: var(--accent); background: var(--bg-card); }
+    .format-hint { font-size: 11px; color: var(--format-hint-color); margin-top: 6px; line-height: 1.7; }
+    .format-hint code { background: var(--bg-hover); padding: 1px 5px; border-radius: 4px; color: var(--accent); }
+    .cat-chips { display: flex; flex-direction: column; gap: 8px; }
+    .cat-chip { display: flex; align-items: center; gap: 6px; padding: 6px 12px;
+      background: var(--cat-chip-bg); border-radius: 10px; font-size: 13px; color: var(--accent); font-weight: 600; }
+    .cat-chip .chip-name { flex: 1; min-width: 0; }
+    .cat-chip .chip-btn { cursor: pointer; font-size: 13px; opacity: .6;
+      background: none; border: none; padding: 2px 5px; border-radius: 5px;
+      color: inherit; transition: opacity .15s, background .15s; }
+    .cat-chip .chip-btn:hover { opacity: 1; background: rgba(0,0,0,.08); }
+    .cat-chip .chip-del:hover { color: var(--danger); }
+    .cat-chip .chip-edit-input { flex: 1; border: 1.5px solid var(--accent); border-radius: 6px;
+      padding: 2px 8px; font-size: 13px; outline: none; background: var(--bg-card); color: var(--text-primary); }
+    .stat-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    .stat-card { background: var(--bg-card); border-radius: 12px; padding: 18px 24px; min-width: 140px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06); display: flex; flex-direction: column; gap: 4px; transition: background .3s; }
+    .stat-num { font-size: 28px; font-weight: 800; color: var(--stat-num-color); }
+    .stat-label { font-size: 12px; color: var(--text-muted); }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--toast-bg); color: var(--toast-text); padding: 9px 20px; border-radius: 20px;
+      font-size: 13px; z-index: 999; transition: transform .3s ease; white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .modal-mask { display: none; position: fixed; inset: 0; background: var(--modal-mask); z-index: 200;
+      align-items: center; justify-content: center; }
+    .modal-mask.show { display: flex; }
+    .modal { background: var(--bg-card); border-radius: 16px; padding: 28px; width: 460px; max-width: 96vw;
+      box-shadow: 0 20px 60px var(--modal-shadow); animation: fadeInUp .2s ease; transition: background .3s; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-title { font-size: 15px; font-weight: 700; margin-bottom: 20px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+    .empty-hint { text-align: center; padding: 40px; color: var(--empty-color); font-size: 13px; }
+    .about-panel { background: var(--about-bg); border: 1px solid var(--about-border); border-radius: 16px;
+      padding: 32px 40px 36px; max-width: 520px; margin: 0 auto; text-align: center;
+      transition: background .3s, border-color .3s; }
+    .about-header { margin-bottom: 24px; }
+    .about-header .about-logo { width: 48px; height: 48px; border-radius: 14px; object-fit: contain;
+      margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+    .about-header .about-title { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+    .about-body { display: block; text-align: center; }
+    .about-body .about-desc { flex: 1; min-width: 0; font-size: 14px; color: var(--about-text); line-height: 2; }
+    .about-body .about-email { font-size: 14px; color: var(--about-link); user-select: all; cursor: text; }
+    .about-qrcode { flex-shrink: 0; text-align: center; }
+    .about-qrcode img { width: 150px; height: 150px; border-radius: 10px; object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,.12); display: block; }
+    .about-qrcode .qr-label { margin-top: 8px; font-size: 13px; color: var(--about-text); }
+  </style>
+</head>
+<body>
+
+<header class="admin-header">
+  <h1><img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50"></h1>
+  <div class="header-right">
+    <a class="home-link" id="homeLink" href="#">🏠 <span data-i18n="admin_home">回首页</span></a>
+    <span class="badge" id="adminBadge">🔐 <span data-i18n="admin_badge_default">管理员</span></span>
+    <select id="langSelect" title="Language"></select>
+    <select id="themeSelect" title="配色" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+    </select>
+  </div>
+</header>
+
+<div class="admin-body">
+  <nav class="admin-nav">
+    <div class="admin-nav-item active" data-panel="overview">📊 <span data-i18n="admin_overview">数据概览</span></div>
+    <div class="admin-nav-item" data-panel="categories">🏷️ <span data-i18n="admin_categories">分类管理</span></div>
+    <div class="admin-nav-item" data-panel="links">🔗 <span data-i18n="admin_links">网址管理</span></div>
+    <div class="admin-nav-item" data-panel="batch">📋 <span data-i18n="admin_batch_import">批量导入</span></div>
+    <div class="admin-nav-item" data-panel="export">📤 <span data-i18n="admin_batch_export">批量导出</span></div>
+    <div class="admin-nav-item" data-panel="avatar">👤 <span data-i18n="admin_avatar_title">头像设置</span></div>
+    <div class="admin-nav-item" data-panel="about">ℹ️ <span data-i18n="admin_about">关于...</span></div>
+  </nav>
+
+  <div class="admin-panel">
+
+    <div class="panel-section active" id="panel-overview">
+      <div class="section-header">
+        <div class="section-title">📊 <span data-i18n="admin_overview">数据概览</span></div>
+      </div>
+      <div class="stat-row" id="statRow"></div>
+      <div id="overviewTable"></div>
+    </div>
+
+    <div class="panel-section" id="panel-categories">
+      <div class="section-header">
+        <div class="section-title">🏷️ <span data-i18n="admin_categories">分类管理</span></div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-title">➕ <span data-i18n="admin_add_cat_title">添加新分类</span></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="admin_cat_name_label">分类名称 *</label>
+            <input class="form-input" id="catName" placeholder="例：学习资源" data-i18n-placeholder="admin_cat_name_placeholder" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="admin_cat_icon_label">图标 Emoji</label>
+            <input class="form-input" id="catIcon" placeholder="📚" maxlength="4" data-i18n-placeholder="admin_cat_icon_placeholder" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="addCatBtn">➕ <span data-i18n="admin_add_cat_btn">添加分类</span></button>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-title">📋 <span data-i18n="admin_current_cats">当前分类</span></div>
+        <div class="cat-chips" id="catChips"></div>
+      </div>
+    </div>
+
+    <div class="panel-section" id="panel-links">
+      <div class="section-header">
+        <div class="section-title">🔗 <span data-i18n="admin_links">网址管理</span></div>
+        <button class="btn btn-primary" id="addLinkBtn">➕ <span data-i18n="admin_add_link_btn">添加网址</span></button>
+      </div>
+
+      <div class="batch-action-bar">
+        <span class="batch-info" data-i18n="admin_batch_bar_hint">勾选网址后可批量操作：</span>
+        <button class="btn btn-success btn-sm" id="batchShowBtn">👁 <span data-i18n="admin_batch_show">批量显示</span></button>
+        <button class="btn btn-secondary btn-sm" id="batchHideBtn">👁‍🗨 <span data-i18n="admin_batch_hide">批量隐藏</span></button>
+        <button class="btn btn-danger btn-sm" id="batchDeleteBtn">🗑 <span data-i18n="admin_batch_delete">批量删除</span></button>
+      </div>
+
+      <div style="margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--bg-card);padding:10px;border-radius:8px;">
+        <select class="form-select" id="filterCat" style="width:160px;">
+          <option value="" data-i18n="admin_all_cats">全部分类</option>
+        </select>
+        <select class="form-select" id="filterVisibility" style="width:120px;">
+          <option value="all" data-i18n="admin_all_status">全部状态</option>
+          <option value="visible" data-i18n="admin_status_visible">仅可见</option>
+          <option value="hidden" data-i18n="admin_status_hidden">仅隐藏</option>
+        </select>
+        <input class="form-input" id="filterKeyword" placeholder="搜索标题/网址…" style="width:220px;" data-i18n-placeholder="admin_search_placeholder" />
+      </div>
+
+      <div id="linksTable"></div>
+    </div>
+
+    <div class="panel-section" id="panel-batch">
+      <div class="section-header">
+        <div class="section-title">📋 <span data-i18n="admin_batch_import">批量导入网址</span></div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">📝 <span data-i18n="admin_batch_paste_title">粘贴数据（每行一条）</span></div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="admin_batch_target_cat">目标分类</label>
+          <select class="form-select" id="batchCat" style="width:240px;margin-bottom:10px;"></select>
+        </div>
+        <textarea class="batch-textarea" id="batchData" placeholder="标题,网址,描述（描述可选）&#10;例如：&#10;百度,https://www.baidu.com,国内最大搜索引擎&#10;GitHub,https://github.com" data-i18n-placeholder="admin_batch_placeholder"></textarea>
+        <div class="format-hint" data-i18n-html="admin_batch_format_hint">
+          格式：<code>标题,网址,描述（可选）</code>，每行一条，支持英文逗号或Tab分隔。<br/>
+          网址必须以 <code>http://</code> 或 <code>https://</code> 开头。
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="previewBatchBtn">👁 <span data-i18n="admin_preview_btn">预览</span></button>
+          <button class="btn btn-primary" id="importBatchBtn">⬆️ <span data-i18n="admin_import_btn">导入</span></button>
+        </div>
+      </div>
+      <div id="batchPreview"></div>
+    </div>
+
+    <div class="panel-section" id="panel-export">
+      <div class="section-header">
+        <div class="section-title">📤 <span data-i18n="admin_batch_export">批量导出网址</span></div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">📤 <span data-i18n="admin_export_title">导出网址到文本文件</span></div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="admin_export_select_cat">选择分类</label>
+          <select class="form-select" id="exportCat" style="width:240px;margin-bottom:10px;">
+            <option value="" data-i18n="admin_all_cats">全部分类</option>
+          </select>
+        </div>
+        <div class="format-hint" style="margin-bottom:14px;" data-i18n-html="admin_export_format_hint">
+          导出格式：<code>标题,网址</code>，每行一条，与批量导入格式一致。可直接用于批量导入。
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="previewExportBtn">👁 <span data-i18n="admin_preview_btn">预览</span></button>
+          <button class="btn btn-primary" id="exportBtn">📥 <span data-i18n="admin_export_btn">导出为 .txt</span></button>
+        </div>
+        <div id="exportPreview" style="margin-top:14px;"></div>
+      </div>
+    </div>
+
+    <!-- ── 头像设置 ── -->
+    <div class="panel-section" id="panel-avatar">
+      <div class="section-header">
+        <div class="section-title">👤 <span data-i18n="admin_avatar_title">头像设置</span></div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title">🖼️ <span data-i18n="admin_avatar_subtitle">选择你的头像</span></div>
+        <div id="avatarGrid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:16px 0;">
+          <!-- 头像选项由 JS 动态生成 -->
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--text-muted);" data-i18n="admin_avatar_hint">
+          选择后立即生效，首页右上角会显示你的头像。
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section" id="panel-about">
+      <div class="section-header">
+        <div class="section-title">ℹ️ <span data-i18n="admin_about">关于</span></div>
+      </div>
+      <div class="about-panel" style="text-align:center;">
+        <div class="about-header" style="justify-content:center;">
+          <img class="about-logo" src="../icons/logo-circle.png" alt="鲸波导航" width="72" height="72" onerror="this.style.display='none'">
+          <div class="about-title" data-i18n="admin_about_title">鲸波导航 V1.3</div>
+        </div>
+        <div class="about-body" style="text-align:center;">
+          <div class="about-desc" data-i18n-html="admin_about_desc" style="text-align:center;">
+            Copyright (C) 2026 作者：jingbo<br/>
+            本程序是自由软件：您可以根据自由软件基金会发布的 GNU 通用公共许可证（GPL）第 3 版或更高版本的条款，重新分发和/或修改它。<br/>
+            本程序纯本地运行，无任何远程组件或功能；<br/>
+            您录入的网址仅保存在您自己的电脑上。<br/>
+            程序或网址更新请关注微信公众号「半坡云」获取；<br/>
+            交流邮箱：njunion@126.com
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-mask" id="editModal">
+  <div class="modal">
+    <div class="modal-title" id="editModalTitle">✏️ <span data-i18n="admin_edit_modal_title">编辑网址</span></div>
+    <div class="form-group" style="margin-bottom:12px;">
+      <label class="form-label" data-i18n="admin_title_label">标题 *</label>
+      <input class="form-input" id="editTitle" />
+    </div>
+    <div class="form-group" style="margin-bottom:12px;">
+      <label class="form-label" data-i18n="admin_url_label">网址 URL *</label>
+      <input class="form-input" id="editUrl" />
+    </div>
+    <div class="form-group" style="margin-bottom:12px;">
+      <label class="form-label" data-i18n="admin_desc_label">描述</label>
+      <input class="form-input" id="editDesc" />
+    </div>
+    <div class="form-group" style="margin-bottom:12px;">
+      <label class="form-label" data-i18n="admin_cat_label">分类</label>
+      <select class="form-select" id="editCat"></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="cancelEdit" data-i18n="cancelBtn">取消</button>
+      <button class="btn btn-primary"   id="confirmEdit" data-i18n="saveBtn">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../i18n.js"></script>
+<script src="../admin.js"></script>
+</body>
+</html>
