@@ -1,0 +1,182 @@
+{
+  "appName": {
+    "message": "Navegación Ballena"
+  },
+  "appDesc": {
+    "message": "Navegador de marcadores personal. Búsqueda local, multi-motor y favoritos personalizados"
+  },
+  "searchPlaceholder": {
+    "message": "Buscar URLs o nombres..."
+  },
+  "engineLocal": {
+    "message": "Local"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "bingPlaceholder": {
+    "message": "Buscar con Bing..."
+  },
+  "googlePlaceholder": {
+    "message": "Buscar con Google..."
+  },
+  "searchBtnLocal": {
+    "message": "Buscar"
+  },
+  "viewAll": {
+    "message": "Todo"
+  },
+  "viewMine": {
+    "message": "Mío"
+  },
+  "adminBtn": {
+    "message": "Admin"
+  },
+  "adminBtnTitle": {
+    "message": "Panel de administración"
+  },
+  "themeToggleTitle": {
+    "message": "Cambiar tema"
+  },
+  "fabTitle": {
+    "message": "Añadir URL"
+  },
+  "notLoggedIn": {
+    "message": "No has iniciado sesión"
+  },
+  "sidebarSectionTitle": {
+    "message": "Categorías"
+  },
+  "noResults": {
+    "message": "No se encontraron URLs para \"{query}\""
+  },
+  "searchResultsTitle": {
+    "message": "Resultados de búsqueda ({count})"
+  },
+  "loginToViewPersonal": {
+    "message": "Inicia sesión para ver tus URLs personales"
+  },
+  "goLogin": {
+    "message": "Iniciar sesión"
+  },
+  "linksCount": {
+    "message": "{count} URLs"
+  },
+  "noLinks": {
+    "message": "No hay URLs todavía"
+  },
+  "emptyMine": {
+    "message": "Aún no has añadido ninguna URL. Pulsa el botón \"+\" en la esquina inferior derecha para añadir"
+  },
+  "emptyAll": {
+    "message": "No hay datos de URLs"
+  },
+  "deleted": {
+    "message": "Eliminado"
+  },
+  "addModalTitle": {
+    "message": "Añadir a mi navegador"
+  },
+  "addTitleLabel": {
+    "message": "Título de URL *"
+  },
+  "addTitlePlaceholder": {
+    "message": "ej.: Mi blog"
+  },
+  "addUrlLabel": {
+    "message": "URL *"
+  },
+  "addUrlPlaceholder": {
+    "message": "https://..."
+  },
+  "addDescLabel": {
+    "message": "Descripción (opcional)"
+  },
+  "addDescPlaceholder": {
+    "message": "Descripción corta..."
+  },
+  "addCatLabel": {
+    "message": "Categoría *"
+  },
+  "cancelBtn": {
+    "message": "Cancelar"
+  },
+  "saveBtn": {
+    "message": "Guardar"
+  },
+  "loginTab": {
+    "message": "Iniciar sesión"
+  },
+  "registerTab": {
+    "message": "Registrarse"
+  },
+  "usernameLabel": {
+    "message": "Usuario"
+  },
+  "passwordLabel": {
+    "message": "Contraseña"
+  },
+  "usernamePlaceholder": {
+    "message": "Introduce usuario"
+  },
+  "passwordPlaceholder": {
+    "message": "Introduce contraseña"
+  },
+  "logoutConfirm": {
+    "message": "¿Seguro que quieres cerrar sesión?"
+  },
+  "welcomeBack": {
+    "message": "Bienvenido de nuevo, {name}"
+  },
+  "registeredAutoLogin": {
+    "message": "Registro exitoso, sesión iniciada automáticamente"
+  },
+  "loggedOut": {
+    "message": "Sesión cerrada"
+  },
+  "needLogin": {
+    "message": "Inicia sesión primero"
+  },
+  "needTitle": {
+    "message": "Introduce un título"
+  },
+  "needUrl": {
+    "message": "Introduce una URL"
+  },
+  "needValidUrlPersonal": {
+    "message": "Introduce una dirección válida (URL http/https, página local file:///, o ruta de archivo local)"
+  },
+  "needValidUrl": {
+    "message": "Introduce una URL válida (que empiece por http/https)"
+  },
+  "addedToMyNav": {
+    "message": "Añadido a mi navegador"
+  },
+  "usernameLenError": {
+    "message": "El usuario debe tener 3-20 caracteres"
+  },
+  "usernameCharsetError": {
+    "message": "El usuario solo admite chino, letras, números y guiones bajos"
+  },
+  "passwordLenError": {
+    "message": "La contraseña debe tener al menos 6 caracteres"
+  },
+  "passwordMismatch": {
+    "message": "Las contraseñas no coinciden"
+  },
+  "usernameExists": {
+    "message": "El usuario ya está registrado"
+  },
+  "userNotFound": {
+    "message": "Usuario no encontrado"
+  },
+  "passwordWrong": {
+    "message": "Contraseña incorrecta"
+  },
+  "logoutConfirmCurrent": {
+    "message": "Usuario actual"
+  }
+}

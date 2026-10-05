@@ -1,0 +1,182 @@
+{
+  "appName": {
+    "message": "Whale Navigation"
+  },
+  "appDesc": {
+    "message": "Personal bookmark navigator with local search, multi-engine search and custom favorites"
+  },
+  "searchPlaceholder": {
+    "message": "Search URLs or names..."
+  },
+  "engineLocal": {
+    "message": "Local"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "bingPlaceholder": {
+    "message": "Search with Bing..."
+  },
+  "googlePlaceholder": {
+    "message": "Search with Google..."
+  },
+  "searchBtnLocal": {
+    "message": "Search"
+  },
+  "viewAll": {
+    "message": "All"
+  },
+  "viewMine": {
+    "message": "Mine"
+  },
+  "adminBtn": {
+    "message": "Admin"
+  },
+  "adminBtnTitle": {
+    "message": "Admin panel"
+  },
+  "themeToggleTitle": {
+    "message": "Toggle theme"
+  },
+  "fabTitle": {
+    "message": "Add URL"
+  },
+  "notLoggedIn": {
+    "message": "Not logged in"
+  },
+  "sidebarSectionTitle": {
+    "message": "Categories"
+  },
+  "noResults": {
+    "message": "No URLs found for \"{query}\""
+  },
+  "searchResultsTitle": {
+    "message": "Search results ({count})"
+  },
+  "loginToViewPersonal": {
+    "message": "Please log in to view your personal URLs"
+  },
+  "goLogin": {
+    "message": "Log in"
+  },
+  "linksCount": {
+    "message": "{count} URLs"
+  },
+  "noLinks": {
+    "message": "No URLs yet"
+  },
+  "emptyMine": {
+    "message": "You haven't added any URLs yet. Tap the \"+\" button at the bottom right to add one."
+  },
+  "emptyAll": {
+    "message": "No URL data yet"
+  },
+  "deleted": {
+    "message": "Deleted"
+  },
+  "addModalTitle": {
+    "message": "Add to my navigator"
+  },
+  "addTitleLabel": {
+    "message": "URL title *"
+  },
+  "addTitlePlaceholder": {
+    "message": "e.g. My blog"
+  },
+  "addUrlLabel": {
+    "message": "URL *"
+  },
+  "addUrlPlaceholder": {
+    "message": "https://..."
+  },
+  "addDescLabel": {
+    "message": "Description (optional)"
+  },
+  "addDescPlaceholder": {
+    "message": "Short description..."
+  },
+  "addCatLabel": {
+    "message": "Category *"
+  },
+  "cancelBtn": {
+    "message": "Cancel"
+  },
+  "saveBtn": {
+    "message": "Save"
+  },
+  "loginTab": {
+    "message": "Log in"
+  },
+  "registerTab": {
+    "message": "Register"
+  },
+  "usernameLabel": {
+    "message": "Username"
+  },
+  "passwordLabel": {
+    "message": "Password"
+  },
+  "usernamePlaceholder": {
+    "message": "Enter username"
+  },
+  "passwordPlaceholder": {
+    "message": "Enter password"
+  },
+  "logoutConfirm": {
+    "message": "Are you sure you want to log out?"
+  },
+  "welcomeBack": {
+    "message": "Welcome back, {name}"
+  },
+  "registeredAutoLogin": {
+    "message": "Registered successfully, logged in automatically"
+  },
+  "loggedOut": {
+    "message": "Logged out"
+  },
+  "needLogin": {
+    "message": "Please log in first"
+  },
+  "needTitle": {
+    "message": "Please enter a title"
+  },
+  "needUrl": {
+    "message": "Please enter a URL"
+  },
+  "needValidUrlPersonal": {
+    "message": "Please enter a valid address (http/https URL, file:/// local page, or local file path)"
+  },
+  "needValidUrl": {
+    "message": "Please enter a valid URL (must start with http/https)"
+  },
+  "addedToMyNav": {
+    "message": "Added to my navigator"
+  },
+  "usernameLenError": {
+    "message": "Username must be 3-20 characters"
+  },
+  "usernameCharsetError": {
+    "message": "Username allows only Chinese characters, letters, digits and underscores"
+  },
+  "passwordLenError": {
+    "message": "Password must be at least 6 characters"
+  },
+  "passwordMismatch": {
+    "message": "Passwords do not match"
+  },
+  "usernameExists": {
+    "message": "Username already registered"
+  },
+  "userNotFound": {
+    "message": "User not found"
+  },
+  "passwordWrong": {
+    "message": "Wrong password"
+  },
+  "logoutConfirmCurrent": {
+    "message": "Current user"
+  }
+}

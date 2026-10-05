@@ -1,0 +1,182 @@
+{
+  "appName": {
+    "message": "ملاحة الحوت"
+  },
+  "appDesc": {
+    "message": "متصفح الإشارات المرجعية الشخصي. بحث محلي، بحث متعدد المحركات ومفضلة مخصصة"
+  },
+  "searchPlaceholder": {
+    "message": "ابحث عن الروابط أو الأسماء..."
+  },
+  "engineLocal": {
+    "message": "محلي"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "bingPlaceholder": {
+    "message": "البحث باستخدام Bing..."
+  },
+  "googlePlaceholder": {
+    "message": "البحث باستخدام Google..."
+  },
+  "searchBtnLocal": {
+    "message": "بحث"
+  },
+  "viewAll": {
+    "message": "الكل"
+  },
+  "viewMine": {
+    "message": "خاص بي"
+  },
+  "adminBtn": {
+    "message": "إدارة"
+  },
+  "adminBtnTitle": {
+    "message": "لوحة المشرف"
+  },
+  "themeToggleTitle": {
+    "message": "تبديل السمة"
+  },
+  "fabTitle": {
+    "message": "إضافة رابط"
+  },
+  "notLoggedIn": {
+    "message": "لم تسجل الدخول"
+  },
+  "sidebarSectionTitle": {
+    "message": "الفئات"
+  },
+  "noResults": {
+    "message": "لا توجد روابط مطابقة لـ \"{query}\""
+  },
+  "searchResultsTitle": {
+    "message": "نتائج البحث ({count})"
+  },
+  "loginToViewPersonal": {
+    "message": "يرجى تسجيل الدخول لعرض روابطك الشخصية"
+  },
+  "goLogin": {
+    "message": "تسجيل الدخول"
+  },
+  "linksCount": {
+    "message": "{count} رابط"
+  },
+  "noLinks": {
+    "message": "لا توجد روابط بعد"
+  },
+  "emptyMine": {
+    "message": "لم تضف أي رابط بعد. انقر على زر \"+\" في الزاوية اليمنى السفلية للإضافة"
+  },
+  "emptyAll": {
+    "message": "لا توجد بيانات روابط"
+  },
+  "deleted": {
+    "message": "تم الحذف"
+  },
+  "addModalTitle": {
+    "message": "أضف إلى متصفحي"
+  },
+  "addTitleLabel": {
+    "message": "عنوان الرابط *"
+  },
+  "addTitlePlaceholder": {
+    "message": "مثال: مدونتي"
+  },
+  "addUrlLabel": {
+    "message": "الرابط *"
+  },
+  "addUrlPlaceholder": {
+    "message": "https://..."
+  },
+  "addDescLabel": {
+    "message": "الوصف (اختياري)"
+  },
+  "addDescPlaceholder": {
+    "message": "وصف قصير..."
+  },
+  "addCatLabel": {
+    "message": "الفئة *"
+  },
+  "cancelBtn": {
+    "message": "إلغاء"
+  },
+  "saveBtn": {
+    "message": "حفظ"
+  },
+  "loginTab": {
+    "message": "تسجيل الدخول"
+  },
+  "registerTab": {
+    "message": "إنشاء حساب"
+  },
+  "usernameLabel": {
+    "message": "اسم المستخدم"
+  },
+  "passwordLabel": {
+    "message": "كلمة المرور"
+  },
+  "usernamePlaceholder": {
+    "message": "أدخل اسم المستخدم"
+  },
+  "passwordPlaceholder": {
+    "message": "أدخل كلمة المرور"
+  },
+  "logoutConfirm": {
+    "message": "هل أنت متأكد من تسجيل الخروج؟"
+  },
+  "welcomeBack": {
+    "message": "مرحبًا بعودتك، {name}"
+  },
+  "registeredAutoLogin": {
+    "message": "تم التسجيل بنجاح، وتم تسجيل الدخول تلقائيًا"
+  },
+  "loggedOut": {
+    "message": "تم تسجيل الخروج"
+  },
+  "needLogin": {
+    "message": "يرجى تسجيل الدخول أولاً"
+  },
+  "needTitle": {
+    "message": "يرجى إدخال العنوان"
+  },
+  "needUrl": {
+    "message": "يرجى إدخال الرابط"
+  },
+  "needValidUrlPersonal": {
+    "message": "يرجى إدخال عنوان صالح (رابط http/https، صفحة محلية file:///، أو مسار ملف محلي)"
+  },
+  "needValidUrl": {
+    "message": "يرجى إدخال رابط صالح (يبدأ بـ http/https)"
+  },
+  "addedToMyNav": {
+    "message": "تمت الإضافة إلى متصفحي"
+  },
+  "usernameLenError": {
+    "message": "يجب أن يكون اسم المستخدم من 3-20 حرفًا"
+  },
+  "usernameCharsetError": {
+    "message": "يسمح فقط بالصينية والأحرف والأرقام والشرطات السفلية"
+  },
+  "passwordLenError": {
+    "message": "يجب أن تكون كلمة المرور 6 أحرف على الأقل"
+  },
+  "passwordMismatch": {
+    "message": "كلمتا المرور غير متطابقتين"
+  },
+  "usernameExists": {
+    "message": "اسم المستخدم مسجل بالفعل"
+  },
+  "userNotFound": {
+    "message": "المستخدم غير موجود"
+  },
+  "passwordWrong": {
+    "message": "كلمة مرور خاطئة"
+  },
+  "logoutConfirmCurrent": {
+    "message": "المستخدم الحالي"
+  }
+}

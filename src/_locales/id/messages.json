@@ -1,0 +1,182 @@
+{
+  "appName": {
+    "message": "Navigasi Paus"
+  },
+  "appDesc": {
+    "message": "Navigator bookmark pribadi. Pencarian lokal, multi-engine, dan favorit kustom"
+  },
+  "searchPlaceholder": {
+    "message": "Cari URL atau nama..."
+  },
+  "engineLocal": {
+    "message": "Lokal"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "bingPlaceholder": {
+    "message": "Cari dengan Bing..."
+  },
+  "googlePlaceholder": {
+    "message": "Cari dengan Google..."
+  },
+  "searchBtnLocal": {
+    "message": "Cari"
+  },
+  "viewAll": {
+    "message": "Semua"
+  },
+  "viewMine": {
+    "message": "Punya Saya"
+  },
+  "adminBtn": {
+    "message": "Admin"
+  },
+  "adminBtnTitle": {
+    "message": "Panel admin"
+  },
+  "themeToggleTitle": {
+    "message": "Ganti tema"
+  },
+  "fabTitle": {
+    "message": "Tambah URL"
+  },
+  "notLoggedIn": {
+    "message": "Belum login"
+  },
+  "sidebarSectionTitle": {
+    "message": "Kategori"
+  },
+  "noResults": {
+    "message": "Tidak ada URL yang cocok untuk \"{query}\""
+  },
+  "searchResultsTitle": {
+    "message": "Hasil pencarian ({count})"
+  },
+  "loginToViewPersonal": {
+    "message": "Silakan login dulu untuk melihat URL pribadi"
+  },
+  "goLogin": {
+    "message": "Login"
+  },
+  "linksCount": {
+    "message": "{count} URL"
+  },
+  "noLinks": {
+    "message": "Belum ada URL"
+  },
+  "emptyMine": {
+    "message": "Belum ada URL yang ditambahkan. Ketuk tombol \"+\" di kanan bawah untuk menambah"
+  },
+  "emptyAll": {
+    "message": "Belum ada data URL"
+  },
+  "deleted": {
+    "message": "Dihapus"
+  },
+  "addModalTitle": {
+    "message": "Tambahkan ke navigator saya"
+  },
+  "addTitleLabel": {
+    "message": "Judul URL *"
+  },
+  "addTitlePlaceholder": {
+    "message": "mis. Blog saya"
+  },
+  "addUrlLabel": {
+    "message": "URL *"
+  },
+  "addUrlPlaceholder": {
+    "message": "https://..."
+  },
+  "addDescLabel": {
+    "message": "Deskripsi (opsional)"
+  },
+  "addDescPlaceholder": {
+    "message": "Deskripsi singkat..."
+  },
+  "addCatLabel": {
+    "message": "Kategori *"
+  },
+  "cancelBtn": {
+    "message": "Batal"
+  },
+  "saveBtn": {
+    "message": "Simpan"
+  },
+  "loginTab": {
+    "message": "Login"
+  },
+  "registerTab": {
+    "message": "Daftar"
+  },
+  "usernameLabel": {
+    "message": "Nama pengguna"
+  },
+  "passwordLabel": {
+    "message": "Kata sandi"
+  },
+  "usernamePlaceholder": {
+    "message": "Masukkan nama pengguna"
+  },
+  "passwordPlaceholder": {
+    "message": "Masukkan kata sandi"
+  },
+  "logoutConfirm": {
+    "message": "Yakin ingin keluar?"
+  },
+  "welcomeBack": {
+    "message": "Selamat datang kembali, {name}"
+  },
+  "registeredAutoLogin": {
+    "message": "Pendaftaran berhasil, otomatis login"
+  },
+  "loggedOut": {
+    "message": "Sudah keluar"
+  },
+  "needLogin": {
+    "message": "Silakan login dulu"
+  },
+  "needTitle": {
+    "message": "Silakan masukkan judul"
+  },
+  "needUrl": {
+    "message": "Silakan masukkan URL"
+  },
+  "needValidUrlPersonal": {
+    "message": "Masukkan alamat yang valid (URL http/https, halaman lokal file:///, atau jalur file lokal)"
+  },
+  "needValidUrl": {
+    "message": "Masukkan URL yang valid (harus diawali http/https)"
+  },
+  "addedToMyNav": {
+    "message": "Ditambahkan ke navigator saya"
+  },
+  "usernameLenError": {
+    "message": "Nama pengguna harus 3-20 karakter"
+  },
+  "usernameCharsetError": {
+    "message": "Nama pengguna hanya boleh berisi bahasa Mandarin, huruf, angka, dan garis bawah"
+  },
+  "passwordLenError": {
+    "message": "Kata sandi minimal 6 karakter"
+  },
+  "passwordMismatch": {
+    "message": "Kata sandi tidak cocok"
+  },
+  "usernameExists": {
+    "message": "Nama pengguna sudah terdaftar"
+  },
+  "userNotFound": {
+    "message": "Pengguna tidak ditemukan"
+  },
+  "passwordWrong": {
+    "message": "Kata sandi salah"
+  },
+  "logoutConfirmCurrent": {
+    "message": "Pengguna saat ini"
+  }
+}

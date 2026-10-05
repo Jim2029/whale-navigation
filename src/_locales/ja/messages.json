@@ -1,0 +1,182 @@
+{
+  "appName": {
+    "message": "クジラナビ"
+  },
+  "appDesc": {
+    "message": "パーソナルブックマークナビゲーション。ローカル検索・マルチエンジン検索・カスタムお気に入りに対応"
+  },
+  "searchPlaceholder": {
+    "message": "URLや名前を検索..."
+  },
+  "engineLocal": {
+    "message": "ローカル"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "bingPlaceholder": {
+    "message": "Bing で検索..."
+  },
+  "googlePlaceholder": {
+    "message": "Google で検索..."
+  },
+  "searchBtnLocal": {
+    "message": "検索"
+  },
+  "viewAll": {
+    "message": "すべて"
+  },
+  "viewMine": {
+    "message": "マイ"
+  },
+  "adminBtn": {
+    "message": "管理"
+  },
+  "adminBtnTitle": {
+    "message": "管理者画面"
+  },
+  "themeToggleTitle": {
+    "message": "テーマ切替"
+  },
+  "fabTitle": {
+    "message": "URLを追加"
+  },
+  "notLoggedIn": {
+    "message": "未ログイン"
+  },
+  "sidebarSectionTitle": {
+    "message": "カテゴリ"
+  },
+  "noResults": {
+    "message": "「{query}」に一致するURLが見つかりません"
+  },
+  "searchResultsTitle": {
+    "message": "検索結果（{count}件）"
+  },
+  "loginToViewPersonal": {
+    "message": "個人URLを表示するにはログインしてください"
+  },
+  "goLogin": {
+    "message": "ログイン"
+  },
+  "linksCount": {
+    "message": "{count}件のURL"
+  },
+  "noLinks": {
+    "message": "URLがまだありません"
+  },
+  "emptyMine": {
+    "message": "まだURLを追加していません。右下の「＋」をクリックして追加しましょう"
+  },
+  "emptyAll": {
+    "message": "URLデータがまだありません"
+  },
+  "deleted": {
+    "message": "削除しました"
+  },
+  "addModalTitle": {
+    "message": "マイナビに追加"
+  },
+  "addTitleLabel": {
+    "message": "URLタイトル *"
+  },
+  "addTitlePlaceholder": {
+    "message": "例：マイブログ"
+  },
+  "addUrlLabel": {
+    "message": "URL *"
+  },
+  "addUrlPlaceholder": {
+    "message": "https://..."
+  },
+  "addDescLabel": {
+    "message": "説明（任意）"
+  },
+  "addDescPlaceholder": {
+    "message": "短い説明..."
+  },
+  "addCatLabel": {
+    "message": "カテゴリ *"
+  },
+  "cancelBtn": {
+    "message": "キャンセル"
+  },
+  "saveBtn": {
+    "message": "保存"
+  },
+  "loginTab": {
+    "message": "ログイン"
+  },
+  "registerTab": {
+    "message": "登録"
+  },
+  "usernameLabel": {
+    "message": "ユーザー名"
+  },
+  "passwordLabel": {
+    "message": "パスワード"
+  },
+  "usernamePlaceholder": {
+    "message": "ユーザー名を入力"
+  },
+  "passwordPlaceholder": {
+    "message": "パスワードを入力"
+  },
+  "logoutConfirm": {
+    "message": "ログアウトしてもよろしいですか？"
+  },
+  "welcomeBack": {
+    "message": "おかえりなさい、{name}さん"
+  },
+  "registeredAutoLogin": {
+    "message": "登録成功、自動ログインしました"
+  },
+  "loggedOut": {
+    "message": "ログアウトしました"
+  },
+  "needLogin": {
+    "message": "ログインしてください"
+  },
+  "needTitle": {
+    "message": "タイトルを入力してください"
+  },
+  "needUrl": {
+    "message": "URLを入力してください"
+  },
+  "needValidUrlPersonal": {
+    "message": "有効なアドレスを入力してください（http/https URL、file:/// ローカルページ、またはローカルファイルパス）"
+  },
+  "needValidUrl": {
+    "message": "有効なURLを入力してください（http/https で始まる）"
+  },
+  "addedToMyNav": {
+    "message": "マイナビに追加しました"
+  },
+  "usernameLenError": {
+    "message": "ユーザー名は3〜20文字にしてください"
+  },
+  "usernameCharsetError": {
+    "message": "ユーザー名は中国語・英字・数字・アンダースコアのみ使用可能です"
+  },
+  "passwordLenError": {
+    "message": "パスワードは6文字以上必要です"
+  },
+  "passwordMismatch": {
+    "message": "パスワードが一致しません"
+  },
+  "usernameExists": {
+    "message": "このユーザー名は既に登録されています"
+  },
+  "userNotFound": {
+    "message": "ユーザーが見つかりません"
+  },
+  "passwordWrong": {
+    "message": "パスワードが違います"
+  },
+  "logoutConfirmCurrent": {
+    "message": "現在のユーザー"
+  }
+}

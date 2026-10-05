@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="appName">鲸波导航</title>
+  <style>
+    /* ─── CSS Variables (Bright Theme) ─────────────────────── */
+    :root {
+      --bg-page: #f5f6fa;
+      --bg-card: #fff;
+      --bg-input: #fafbff;
+      --bg-hover: #f0f1ff;
+      --bg-sidebar: #fff;
+      --text-primary: #2d3436;
+      --text-secondary: #636e72;
+      --text-muted: #aaa;
+      --text-sidebar: #555;
+      --border-color: #eceef5;
+      --border-light: #f0f0f0;
+      --accent: #667eea;
+      --accent-gradient: linear-gradient(135deg, #667eea, #764ba2);
+      --header-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --header-text: #fff;
+      --header-search-bg: rgba(255,255,255,0.22);
+      --header-search-focus: rgba(255,255,255,0.35);
+      --header-search-placeholder: rgba(255,255,255,0.7);
+      --btn-icon-bg: rgba(255,255,255,0.18);
+      --btn-icon-hover: rgba(255,255,255,0.32);
+      --user-status-bg: rgba(255,255,255,0.15);
+      --user-status-hover: rgba(255,255,255,0.28);
+      --avatar-bg: rgba(255,255,255,0.4);
+      --scrollbar-thumb: #ddd;
+      --content-scrollbar: #d0d0d0;
+      --link-card-border-hover: #c7d0ff;
+      --link-card-action-bg: rgba(0,0,0,.08);
+      --link-card-action-hover: #ff7675;
+      --link-card-action-color: #636e72;
+      --fab-shadow: rgba(102,126,234,.5);
+      --modal-shadow: rgba(0,0,0,.2);
+      --modal-mask: rgba(0,0,0,.45);
+      --toast-bg: #2d3436;
+      --toast-text: #fff;
+      --search-empty-color: #ccc;
+      --empty-color: #bbb;
+      --divider: #f0f0f0;
+      --view-tab-text: rgba(255,255,255,.75);
+      --view-tab-active-bg: #fff;
+      --success: #00b894;
+      --danger: #d63031;
+    }
+
+    /* ─── Dark Theme ──────────────────────────────────────── */
+    [data-theme="dark"] {
+      --bg-page: #16213e;
+      --bg-card: #1e2a3a;
+      --bg-input: #1a2744;
+      --bg-hover: #2a3a5c;
+      --bg-sidebar: #1e2a3a;
+      --text-primary: #e0e0e0;
+      --text-secondary: #8899aa;
+      --text-muted: #556677;
+      --text-sidebar: #aabbcc;
+      --border-color: #2a3a5c;
+      --border-light: #2a3a5c;
+      --accent: #5c7cba;
+      --accent-gradient: linear-gradient(135deg, #5c7cba, #7c5cbf);
+      --header-gradient: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+      --header-text: #e0e0e0;
+      --header-search-bg: rgba(255,255,255,0.12);
+      --header-search-focus: rgba(255,255,255,0.22);
+      --header-search-placeholder: rgba(255,255,255,0.5);
+      --btn-icon-bg: rgba(255,255,255,0.1);
+      --btn-icon-hover: rgba(255,255,255,0.2);
+      --user-status-bg: rgba(255,255,255,0.08);
+      --user-status-hover: rgba(255,255,255,0.16);
+      --avatar-bg: rgba(255,255,255,0.2);
+      --scrollbar-thumb: #2a3a5c;
+      --content-scrollbar: #2a3a5c;
+      --link-card-border-hover: #3a4a6b;
+      --link-card-action-bg: rgba(255,255,255,0.08);
+      --link-card-action-hover: #e17055;
+      --link-card-action-color: #8899aa;
+      --fab-shadow: rgba(92,124,186,.4);
+      --modal-shadow: rgba(0,0,0,.4);
+      --modal-mask: rgba(0,0,0,.7);
+      --toast-bg: #e0e0e0;
+      --toast-text: #16213e;
+      --search-empty-color: #556677;
+      --empty-color: #556677;
+      --divider: #2a3a5c;
+      --view-tab-text: rgba(255,255,255,.55);
+      --view-tab-active-bg: rgba(255,255,255,0.15);
+      --success: #55efc4;
+      --danger: #e17055;
+    }
+
+    /* ─── 深海 Deep Ocean ─────────────────────────────── */
+    [data-theme="deep"] {
+      --bg-page: #f0f7ff;
+      --bg-card: #fff;
+      --bg-input: #f5faff;
+      --bg-hover: #e8f4ff;
+      --bg-sidebar: #fff;
+      --text-primary: #1a2b4a;
+      --text-secondary: #4a5e7a;
+      --text-muted: #8899aa;
+      --text-sidebar: #3a4e6a;
+      --border-color: #dce8f5;
+      --border-light: #e5eef8;
+      --accent: #0ea5e9;
+      --accent-gradient: linear-gradient(135deg, #0ea5e9, #6366f1);
+      --header-gradient: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      --header-text: #fff;
+      --header-search-bg: rgba(255,255,255,0.22);
+      --header-search-focus: rgba(255,255,255,0.35);
+      --header-search-placeholder: rgba(255,255,255,0.7);
+      --btn-icon-bg: rgba(255,255,255,0.15);
+      --btn-icon-hover: rgba(255,255,255,0.28);
+    }
+
+    /* ─── 竹林 Bamboo ─────────────────────────────────── */
+    [data-theme="bamboo"] {
+      --bg-page: #f4f9f4;
+      --bg-card: #fff;
+      --bg-input: #f8fcf8;
+      --bg-hover: #eaf5ea;
+      --bg-sidebar: #fff;
+      --text-primary: #1a3a2a;
+      --text-secondary: #4a6a5a;
+      --text-muted: #88a898;
+      --text-sidebar: #3a5a4a;
+      --border-color: #dceadc;
+      --border-light: #e5efe5;
+      --accent: #10b981;
+      --accent-gradient: linear-gradient(135deg, #10b981, #059669);
+      --header-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --header-text: #fff;
+      --header-search-bg: rgba(255,255,255,0.22);
+      --header-search-focus: rgba(255,255,255,0.35);
+      --header-search-placeholder: rgba(255,255,255,0.7);
+      --btn-icon-bg: rgba(255,255,255,0.15);
+      --btn-icon-hover: rgba(255,255,255,0.28);
+    }
+
+    /* ─── 晚霞 Sunset ─────────────────────────────────── */
+    [data-theme="sunset"] {
+      --bg-page: #fef5f0;
+      --bg-card: #fff;
+      --bg-input: #fff9f5;
+      --bg-hover: #fdeee5;
+      --bg-sidebar: #fff;
+      --text-primary: #4a1a2a;
+      --text-secondary: #7a4a5a;
+      --text-muted: #b898a8;
+      --text-sidebar: #6a3a4a;
+      --border-color: #f5dce5;
+      --border-light: #f8e5ee;
+      --accent: #f43f5e;
+      --accent-gradient: linear-gradient(135deg, #f43f5e, #fb923c);
+      --header-gradient: linear-gradient(135deg, #f43f5e 0%, #fb923c 100%);
+      --header-text: #fff;
+      --header-search-bg: rgba(255,255,255,0.22);
+      --header-search-focus: rgba(255,255,255,0.35);
+      --header-search-placeholder: rgba(255,255,255,0.7);
+      --btn-icon-bg: rgba(255,255,255,0.15);
+      --btn-icon-hover: rgba(255,255,255,0.28);
+    }
+
+    /* ─── 墨韵 Ink ────────────────────────────────────── */
+    [data-theme="ink"] {
+      --bg-page: #f8f8f6;
+      --bg-card: #fff;
+      --bg-input: #fafaf8;
+      --bg-hover: #f0f0ec;
+      --bg-sidebar: #fff;
+      --text-primary: #2a2a2a;
+      --text-secondary: #5a5a5a;
+      --text-muted: #999;
+      --text-sidebar: #4a4a4a;
+      --border-color: #e5e5e0;
+      --border-light: #ececea;
+      --accent: #374151;
+      --accent-gradient: linear-gradient(135deg, #374151, #6b7280);
+      --header-gradient: linear-gradient(135deg, #374151 0%, #6b7280 100%);
+      --header-text: #fff;
+      --header-search-bg: rgba(255,255,255,0.15);
+      --header-search-focus: rgba(255,255,255,0.25);
+      --header-search-placeholder: rgba(255,255,255,0.6);
+      --btn-icon-bg: rgba(255,255,255,0.12);
+      --btn-icon-hover: rgba(255,255,255,0.22);
+    }
+
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    html { font-size: 14px; }
+    body {
+      width: 100%; min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background .3s, color .3s;
+    }
+
+    /* ─── Header ────────────────────────────────────────── */
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--header-gradient);
+      color: var(--header-text);
+      flex-shrink: 0;
+      transition: background .3s;
+    }
+    .header-logo { display: flex; align-items: center; }
+    .header-logo .logo-img { width: 354px; height: 17px; object-fit: contain; display: block; }
+    .header-search {
+      flex: 1; max-width: 420px; margin: 0 24px;
+    }
+    .search-engine-tabs {
+      display: flex; gap: 2px; margin-bottom: 6px; padding: 0 2px;
+    }
+    .engine-tab {
+      padding: 3px 10px; border: none; border-radius: 4px;
+      font-size: 12px; cursor: pointer;
+      color: rgba(255,255,255,.65); background: transparent;
+      transition: background .18s, color .18s; white-space: nowrap;
+    }
+    .engine-tab:hover { background: rgba(255,255,255,.12); color: #fff; }
+    .engine-tab.active { background: rgba(255,255,255,.2); color: #fff; font-weight: 600; }
+    .search-row {
+      display: flex; align-items: center; gap: 8px;
+      position: relative;
+    }
+    .search-row input {
+      flex: 1; padding: 7px 14px 7px 34px;
+      border: 1px solid rgba(255,255,255,.25); border-radius: 4px;
+      background: var(--header-search-bg);
+      color: var(--header-text); font-size: 13px; outline: none;
+      transition: background .2s, border-color .2s;
+    }
+    .search-row input::placeholder { color: var(--header-search-placeholder); }
+    .search-row input:focus { background: var(--header-search-focus); border-color: rgba(255,255,255,.45); }
+    .header-search .search-icon {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      font-size: 13px; opacity: .7; pointer-events: none; z-index: 1;
+    }
+    .search-submit-btn {
+      flex-shrink: 0; padding: 7px 14px;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 4px;
+      background: rgba(255,255,255,.15); color: #fff;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: background .18s, border-color .18s; white-space: nowrap;
+    }
+    .search-submit-btn:hover { background: rgba(255,255,255,.28); border-color: rgba(255,255,255,.35); }
+    .header-actions { display: flex; gap: 8px; }
+    .btn-icon {
+      background: var(--btn-icon-bg); border: none; border-radius: 8px;
+      color: var(--header-text); padding: 6px 10px; font-size: 12px; cursor: pointer;
+      transition: background .2s; white-space: nowrap;
+    }
+    .btn-icon:hover { background: var(--btn-icon-hover); }
+    .btn-icon:disabled { opacity: .45; cursor: not-allowed; }
+
+    /* ─── User status bar ─────────────────────────────────── */
+    .user-status {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--user-status-bg); border-radius: 8px;
+      padding: 4px 10px; font-size: 12px; cursor: pointer;
+      transition: background .2s;
+    }
+    .user-status:hover { background: var(--user-status-hover); }
+    .user-status .avatar {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--avatar-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--header-text);
+    }
+    .user-status .uname { color: var(--header-text); max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .user-status .logout-hint { color: rgba(255,255,255,.6); font-size: 11px; }
+
+    /* ─── Main Layout ────────────────────────────────────── */
+    .main {
+      display: flex; flex: 1; overflow: hidden;
+      min-height: 0;
+      height: calc(100vh - 56px);
+    }
+
+    /* ─── Sidebar ────────────────────────────────────────── */
+    .sidebar {
+      width: 180px; flex-shrink: 0;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 12px 0;
+      height: 100%;
+      transition: background .3s, border-color .3s;
+    }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+    .sidebar-section-title {
+      font-size: 10px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: .8px;
+      padding: 4px 16px 6px;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 16px; cursor: pointer;
+      border-radius: 0; font-size: 13px; color: var(--text-sidebar);
+      transition: all .15s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-item:hover { background: var(--bg-hover); color: var(--accent); }
+    .sidebar-item.active {
+      background: var(--bg-hover); color: var(--accent); font-weight: 600;
+      border-left-color: var(--accent);
+    }
+    .sidebar-item .item-icon { font-size: 15px; width: 18px; text-align: center; }
+    .sidebar-item .item-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sidebar-item .item-count {
+      font-size: 10px; background: var(--border-color); color: var(--text-secondary);
+      border-radius: 10px; padding: 1px 6px; min-width: 18px; text-align: center;
+    }
+    .sidebar-item.active .item-count { background: rgba(102,126,234,.13); color: var(--accent); }
+    .sidebar-divider { height: 1px; background: var(--divider); margin: 6px 12px; }
+
+    /* ─── Content ────────────────────────────────────────── */
+    .content {
+      flex: 1; overflow-y: auto; padding: 24px 32px;
+      height: 100%;
+    }
+    .content::-webkit-scrollbar { width: 5px; }
+    .content::-webkit-scrollbar-thumb { background: var(--content-scrollbar); border-radius: 5px; }
+
+    /* Category Section */
+    .category-section { margin-bottom: 36px; scroll-margin-top: 10px; }
+    .category-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .category-title {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+    }
+    .category-title .cat-icon { font-size: 18px; }
+
+    /* Link Grid - 纯文本列表样式 */
+    .link-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+    }
+    .link-card {
+      background: var(--bg-card); border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer; transition: all .15s;
+      border: 1px solid var(--border-color);
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none; color: inherit;
+      position: relative;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .link-card:hover {
+      background: var(--bg-hover);
+      border-color: var(--link-card-border-hover);
+      color: var(--accent);
+    }
+    .link-card.dragging {
+      opacity: 0.4;
+      transform: scale(0.95);
+    }
+    .link-card.drag-over {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(102,126,234,.3);
+    }
+    .link-title {
+      font-size: 13px; font-weight: 500; color: inherit;
+      max-width: 160px;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .link-desc {
+      font-size: 11px; color: var(--text-muted);
+      overflow: hidden; text-overflow: ellipsis;
+      max-width: 120px;
+    }
+    .link-card-actions {
+      margin-left: 4px;
+      display: none; gap: 3px;
+    }
+    .link-card:hover .link-card-actions { display: flex; }
+    .btn-card-action {
+      width: 18px; height: 18px; border-radius: 4px; border: none;
+      background: var(--link-card-action-bg); font-size: 10px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--link-card-action-color); transition: all .15s;
+    }
+    .btn-card-action:hover { background: var(--link-card-action-hover); color: #fff; }
+    .user-badge {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: transparent;
+      border-radius: 6px 0 0 6px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center; padding: 48px 20px; color: var(--empty-color);
+    }
+    .empty-state .empty-icon { font-size: 40px; margin-bottom: 10px; }
+    .empty-state p { font-size: 13px; }
+
+    /* ─── FAB Add Button ─────────────────────────────────── */
+    .fab {
+      position: fixed; right: 20px; bottom: 20px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--accent-gradient);
+      color: var(--header-text); border: none; font-size: 22px;
+      cursor: pointer; box-shadow: 0 4px 14px var(--fab-shadow);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .2s, background .3s;
+      z-index: 100;
+    }
+    .fab:hover { transform: scale(1.1); }
+
+    /* ─── Modal ──────────────────────────────────────────── */
+    .modal-mask {
+      display: none; position: fixed; inset: 0;
+      background: var(--modal-mask); z-index: 200;
+      align-items: center; justify-content: center;
+    }
+    .modal-mask.show { display: flex; }
+    .modal {
+      background: var(--bg-card); border-radius: 16px; padding: 28px 28px 24px;
+      width: 380px; max-width: 96vw;
+      box-shadow: 0 20px 60px var(--modal-shadow);
+      animation: fadeInUp .2s ease;
+      transition: background .3s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-title {
+      font-size: 16px; font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px; color: var(--text-primary);
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 5px; display: block; }
+    .form-input, .form-select {
+      width: 100%; padding: 9px 12px; border: 1.5px solid var(--border-color);
+      border-radius: 8px; font-size: 13px; outline: none;
+      transition: border-color .2s; color: var(--text-primary);
+      background: var(--bg-input);
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--accent); background: var(--bg-card); }
+    .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+    .btn-primary {
+      padding: 9px 24px; background: var(--accent-gradient);
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .88; }
+    .btn-secondary {
+      padding: 9px 20px; background: var(--bg-page);
+      color: var(--text-secondary); border: none; border-radius: 8px;
+      font-size: 13px; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: var(--border-color); }
+
+    /* ─── Tabs (My / Admin) ──────────────────────────────── */
+    .view-tabs {
+      display: flex; gap: 2px; background: rgba(255,255,255,.2);
+      border-radius: 10px; padding: 3px;
+    }
+    .view-tab {
+      padding: 4px 12px; border: none; border-radius: 7px;
+      font-size: 12px; cursor: pointer; color: var(--view-tab-text);
+      background: transparent; transition: all .2s;
+    }
+    .view-tab.active { background: var(--view-tab-active-bg); color: var(--accent); font-weight: 700; }
+
+    /* ─── No-result tip ──────────────────────────────────── */
+    .search-empty {
+      text-align: center; padding: 60px 20px; color: var(--search-empty-color);
+    }
+    .search-empty .si { font-size: 36px; margin-bottom: 8px; }
+
+    /* ─── Auth Modal ─────────────────────────────────────── */
+    .auth-tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); }
+    .auth-tab {
+      padding: 8px 20px; border: none; background: none;
+      font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: all .15s;
+    }
+    .auth-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .auth-panel { display: none; }
+    .auth-panel.active { display: block; }
+    .auth-error { color: var(--danger); font-size: 12px; margin-top: 8px; min-height: 18px; }
+
+    /* ─── Toast ──────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--toast-bg); color: var(--toast-text); padding: 9px 20px;
+      border-radius: 20px; font-size: 13px; z-index: 999;
+      transition: transform .3s ease; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ══ Header ═══════════════════════════════════════════════ -->
+<header class="header">
+  <div class="header-logo">
+    <img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50">
+  </div>
+  <div class="header-search">
+    <div class="search-engine-tabs" id="engineTabs">
+      <button class="engine-tab active" data-engine="local">本站检索</button>
+      <button class="engine-tab" data-engine="bing">必应</button>
+      <button class="engine-tab" data-engine="google">Google</button>
+    </div>
+    <div class="search-row">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索网址或名称…" />
+      <button class="search-submit-btn" id="searchSubmitBtn" data-i18n="searchBtnLocal">本站检索</button>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="view-tabs">
+      <button class="view-tab active" data-view="all" data-i18n="viewAll">全部</button>
+      <button class="view-tab" data-view="mine" data-i18n="viewMine">我的</button>
+    </div>
+    <select id="langSelect" title="Language / 语言" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+      <option value="" disabled selected style="color:#888;">Language</option>
+      <option value="zh_CN" style="color:#222;">简体中文</option>
+      <option value="en" style="color:#222;">English</option>
+      <option value="ja" style="color:#222;">日本語</option>
+      <option value="ko" style="color:#222;">한국어</option>
+      <option value="es" style="color:#222;">Español</option>
+      <option value="ar" style="color:#222;">العربية</option>
+      <option value="id" style="color:#222;">Bahasa Indonesia</option>
+    </select>
+    <select id="themeSelect" title="配色" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+    </select>
+    <button class="btn-icon" id="openAdminBtn" data-i18n-title="adminBtnTitle" data-i18n="adminBtn" disabled>⚙️ 管理</button>
+    <div class="user-status" id="userStatusBtn">
+      <div class="avatar" id="userAvatar">?</div>
+      <span class="uname" id="userNameDisplay">未登录</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ Main ═══════════════════════════════════════════════════ -->
+<div class="main">
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar"></nav>
+
+  <!-- Content -->
+  <div class="content" id="content"></div>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fabBtn" title="添加网址">＋</button>
+
+<!-- Modal: 添加网址 -->
+<div class="modal-mask" id="addModal">
+  <div class="modal">
+    <div class="modal-title" data-i18n="addModalTitle">✨ 添加到我的导航</div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="addTitleLabel">网址标题 *</label>
+      <input class="form-input" id="addTitle" data-i18n-placeholder="addTitlePlaceholder" placeholder="例：我的博客" />
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="addUrlLabel">网址 URL *</label>
+      <input class="form-input" id="addUrl" data-i18n-placeholder="addUrlPlaceholder" placeholder="https://..." />
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="addDescLabel">描述（可选）</label>
+      <input class="form-input" id="addDesc" data-i18n-placeholder="addDescPlaceholder" placeholder="简短描述…" />
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="addCatLabel">所属分类 *</label>
+      <select class="form-select" id="addCategory"></select>
+    </div>
+    <div class="form-actions">
+      <button class="btn-secondary" id="cancelAdd" data-i18n="cancelBtn">取消</button>
+      <button class="btn-primary" id="confirmAdd" data-i18n="saveBtn">✓ 保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Auth Modal -->
+<div class="modal-mask" id="authModal">
+  <div class="modal">
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-auth="login" data-i18n="loginTab">登录</button>
+      <button class="auth-tab" data-auth="register" data-i18n="registerTab">注册</button>
+    </div>
+
+    <!-- Login -->
+    <div class="auth-panel active" id="authPanelLogin">
+      <div class="form-group">
+        <label class="form-label" data-i18n="usernameLabel">用户名</label>
+        <input class="form-input" id="loginUsername" data-i18n-placeholder="usernamePlaceholder" placeholder="请输入用户名" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="passwordLabel">密码</label>
+        <input class="form-input" id="loginPassword" type="password" data-i18n-placeholder="passwordPlaceholder" placeholder="请输入密码" autocomplete="current-password" />
+      </div>
+      <div class="auth-error" id="loginError"></div>
+      <div class="form-actions">
+        <button class="btn-secondary" id="cancelAuth" data-i18n="cancelBtn">取消</button>
+        <button class="btn-primary" id="doLogin" data-i18n="loginTab">登录</button>
+      </div>
+    </div>
+
+    <!-- Register -->
+    <div class="auth-panel" id="authPanelRegister">
+      <div class="form-group">
+        <label class="form-label" data-i18n="usernameLabel">用户名 *</label>
+        <input class="form-input" id="regUsername" placeholder="3-20个字符" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="passwordLabel">密码 *</label>
+        <input class="form-input" id="regPassword" type="password" placeholder="至少6位" autocomplete="new-password" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="passwordLabel">确认密码 *</label>
+        <input class="form-input" id="regPassword2" type="password" placeholder="再次输入密码" autocomplete="new-password" />
+      </div>
+      <div class="auth-error" id="registerError"></div>
+      <div class="form-actions">
+        <button class="btn-secondary" id="cancelAuth2" data-i18n="cancelBtn">取消</button>
+        <button class="btn-primary" id="doRegister" data-i18n="registerTab">注册</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../i18n.js"></script>
+<script src="../popup.js"></script>
+</body>
+</html>

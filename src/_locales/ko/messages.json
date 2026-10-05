@@ -1,0 +1,182 @@
+{
+  "appName": {
+    "message": "고래 내비게이션"
+  },
+  "appDesc": {
+    "message": "개인 북마크 내비게이터. 로컬 검색, 멀티 엔진 검색, 맞춤 즐겨찾기 지원"
+  },
+  "searchPlaceholder": {
+    "message": "URL 또는 이름 검색..."
+  },
+  "engineLocal": {
+    "message": "로컬"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "bingPlaceholder": {
+    "message": "Bing으로 검색..."
+  },
+  "googlePlaceholder": {
+    "message": "Google로 검색..."
+  },
+  "searchBtnLocal": {
+    "message": "검색"
+  },
+  "viewAll": {
+    "message": "전체"
+  },
+  "viewMine": {
+    "message": "내 항목"
+  },
+  "adminBtn": {
+    "message": "관리"
+  },
+  "adminBtnTitle": {
+    "message": "관리자 패널"
+  },
+  "themeToggleTitle": {
+    "message": "테마 전환"
+  },
+  "fabTitle": {
+    "message": "URL 추가"
+  },
+  "notLoggedIn": {
+    "message": "로그인 안 됨"
+  },
+  "sidebarSectionTitle": {
+    "message": "카테고리"
+  },
+  "noResults": {
+    "message": "\"{query}\"에 대한 URL을 찾을 수 없습니다"
+  },
+  "searchResultsTitle": {
+    "message": "검색 결과 ({count}건)"
+  },
+  "loginToViewPersonal": {
+    "message": "개인 URL을 보려면 로그인하세요"
+  },
+  "goLogin": {
+    "message": "로그인"
+  },
+  "linksCount": {
+    "message": "URL {count}개"
+  },
+  "noLinks": {
+    "message": "URL이 아직 없습니다"
+  },
+  "emptyMine": {
+    "message": "아직 추가한 URL이 없습니다. 오른쪽 하단의 \"+\"를 눌러 추가하세요"
+  },
+  "emptyAll": {
+    "message": "URL 데이터가 없습니다"
+  },
+  "deleted": {
+    "message": "삭제됨"
+  },
+  "addModalTitle": {
+    "message": "내 내비게이터에 추가"
+  },
+  "addTitleLabel": {
+    "message": "URL 제목 *"
+  },
+  "addTitlePlaceholder": {
+    "message": "예: 내 블로그"
+  },
+  "addUrlLabel": {
+    "message": "URL *"
+  },
+  "addUrlPlaceholder": {
+    "message": "https://..."
+  },
+  "addDescLabel": {
+    "message": "설명 (선택)"
+  },
+  "addDescPlaceholder": {
+    "message": "간단한 설명..."
+  },
+  "addCatLabel": {
+    "message": "카테고리 *"
+  },
+  "cancelBtn": {
+    "message": "취소"
+  },
+  "saveBtn": {
+    "message": "저장"
+  },
+  "loginTab": {
+    "message": "로그인"
+  },
+  "registerTab": {
+    "message": "회원가입"
+  },
+  "usernameLabel": {
+    "message": "사용자 이름"
+  },
+  "passwordLabel": {
+    "message": "비밀번호"
+  },
+  "usernamePlaceholder": {
+    "message": "사용자 이름 입력"
+  },
+  "passwordPlaceholder": {
+    "message": "비밀번호 입력"
+  },
+  "logoutConfirm": {
+    "message": "정말 로그아웃하시겠습니까?"
+  },
+  "welcomeBack": {
+    "message": "다시 오신 것을 환영합니다, {name}님"
+  },
+  "registeredAutoLogin": {
+    "message": "가입 성공, 자동 로그인되었습니다"
+  },
+  "loggedOut": {
+    "message": "로그아웃되었습니다"
+  },
+  "needLogin": {
+    "message": "먼저 로그인하세요"
+  },
+  "needTitle": {
+    "message": "제목을 입력하세요"
+  },
+  "needUrl": {
+    "message": "URL을 입력하세요"
+  },
+  "needValidUrlPersonal": {
+    "message": "유효한 주소를 입력하세요 (http/https URL, file:/// 로컬 페이지, 또는 로컬 파일 경로)"
+  },
+  "needValidUrl": {
+    "message": "유효한 URL을 입력하세요 (http/https로 시작)"
+  },
+  "addedToMyNav": {
+    "message": "내 내비게이터에 추가되었습니다"
+  },
+  "usernameLenError": {
+    "message": "사용자 이름은 3-20자여야 합니다"
+  },
+  "usernameCharsetError": {
+    "message": "사용자 이름은 한글, 영문, 숫자, 밑줄만 사용 가능합니다"
+  },
+  "passwordLenError": {
+    "message": "비밀번호는 최소 6자 이상이어야 합니다"
+  },
+  "passwordMismatch": {
+    "message": "비밀번호가 일치하지 않습니다"
+  },
+  "usernameExists": {
+    "message": "이미 등록된 사용자 이름입니다"
+  },
+  "userNotFound": {
+    "message": "사용자를 찾을 수 없습니다"
+  },
+  "passwordWrong": {
+    "message": "비밀번호가 틀렸습니다"
+  },
+  "logoutConfirmCurrent": {
+    "message": "현재 사용자"
+  }
+}
