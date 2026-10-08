@@ -878,11 +878,12 @@ async function saveEditLink() {
       }
     }
   } else {
-    // 新增模式：去重检测（分类内去重，只与目标分类下的现有网址比较）
+    // 新增模式：去重检测（分类内去重，URL+标题 联合比较）
     const normUrl = normalizeUrl(url);
+    const dedupKey = normUrl + "||" + title.trim();
     const isDuplicate = catId === PERSONAL_CAT_ID
-      ? userLinksData.some(l => l.categoryId === PERSONAL_CAT_ID && normalizeUrl(l.url) === normUrl)
-      : adminData.links.some(l => l.categoryId === catId && normalizeUrl(l.url) === normUrl);
+      ? userLinksData.some(l => l.categoryId === PERSONAL_CAT_ID && normalizeUrl(l.url) + "||" + (l.title||"").trim() === dedupKey)
+      : adminData.links.some(l => l.categoryId === catId && normalizeUrl(l.url) + "||" + (l.title||"").trim() === dedupKey);
     if (isDuplicate) {
       showToast("⚠️ 该分类下已存在相同网址，无需重复添加");
       return;
@@ -925,7 +926,7 @@ function parseBatchLines() {
   const raw = document.getElementById("batchData").value;
   const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
   return lines.map(line => {
-    const parts = line.split(/[,\t]/).map(p => p.trim());
+    const parts = line.split(/[,，\t]/).map(p => p.trim());
     // 清洗 URL：去掉 @url: 前缀、反引号、markdown 格式
     const cleanUrl = (u) => (u || "")
       .replace(/^@url:/i, "")      // 去掉 @url: 前缀
@@ -986,25 +987,25 @@ async function importBatch() {
   await loadAdminData();
   await loadUserLinks();
 
-  // 按分类构建去重集合（分类内去重：只与同一分类下的现有网址比较）
-  const urlSetByCat = {};
-  const getUrlSet = (catId) => {
-    if (!urlSetByCat[catId]) {
+  // 按分类构建去重集合（分类内去重：URL+标题 联合比较，同 URL 不同标题可共存）
+  const keySetByCat = {};
+  const getKeySet = (catId) => {
+    if (!keySetByCat[catId]) {
       const s = new Set();
       if (catId === PERSONAL_CAT_ID) {
         // 个人网址：只比较当前用户该分类下的网址
         userLinksData
           .filter(l => l.categoryId === PERSONAL_CAT_ID)
-          .forEach(l => s.add(normalizeUrl(l.url)));
+          .forEach(l => s.add(normalizeUrl(l.url) + "||" + (l.title || "").trim()));
       } else {
         // 公共分类：只比较该分类下的网址
         adminData.links
           .filter(l => l.categoryId === catId)
-          .forEach(l => s.add(normalizeUrl(l.url)));
+          .forEach(l => s.add(normalizeUrl(l.url) + "||" + (l.title || "").trim()));
       }
-      urlSetByCat[catId] = s;
+      keySetByCat[catId] = s;
     }
-    return urlSetByCat[catId];
+    return keySetByCat[catId];
   };
 
   let imported = 0;
@@ -1022,14 +1023,15 @@ async function importBatch() {
     if (!isValidUrlForCat(item.url, targetCatId)) continue;
     
     const normUrl = normalizeUrl(item.url);
-    const urlSet = getUrlSet(targetCatId);
+    const keySet = getKeySet(targetCatId);
+    const dedupKey = normUrl + "||" + (item.title || "").trim();
     
-    // 去重检测：该分类下已有相同 URL 则跳过
-    if (urlSet.has(normUrl)) {
+    // 去重检测：该分类下已有相同 URL+标题 才跳过；同 URL 不同标题允许共存
+    if (keySet.has(dedupKey)) {
       skipped++;
       continue;
     }
-    urlSet.add(normUrl);  // 本次批次内同一分类也去重
+    keySet.add(dedupKey);  // 本次批次内同一分类也去重
     
     const linkObj = {
       id: "lk_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),

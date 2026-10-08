@@ -1,6 +1,8 @@
 # 🐋 鲸波导航 / Whale Navigation
 
-**一站式网址导航浏览器扩展**（Chrome / Edge 双版本）
+**一站式网址导航浏览器扩展**（Chrome / Edge / Firefox）
+
+当前版本：**v1.3.1**
 
 ---
 
@@ -35,11 +37,17 @@
 ### 🚀 安装方式
 
 **Chrome / Edge 用户**：
-1. 下载本仓库 `nav-extension-chrome-edge.zip`
+1. 下载本仓库 `nav-extension-chrome-edge-v1.3.1.zip`
 2. 解压到任意文件夹
 3. 打开浏览器扩展管理页（`chrome://extensions` 或 `edge://extensions`）
 4. 开启「开发者模式」
 5. 点击「加载已解压的扩展程序」，选择解压后的文件夹
+
+**Firefox 用户**：
+1. 下载 `nav-extension-firefox-v1.3.1.zip`
+2. 打开 Firefox，进入 `about:addons`
+3. 点击 ⚙️ 齿轮图标 → 「从文件安装附加组件…」
+4. 选择下载的 zip 文件
 
 ### 📁 目录结构
 
@@ -87,11 +95,17 @@ Whale Navigation is a fully local bookmark navigator for Chrome and Edge. It tur
 ### 🚀 Installation
 
 **For Chrome / Edge users:**
-1. Download `nav-extension-chrome-edge.zip` from this repository
+1. Download `nav-extension-chrome-edge-v1.3.1.zip` from this repository
 2. Extract it to any folder
 3. Open `chrome://extensions` or `edge://extensions`
 4. Enable **Developer mode**
 5. Click **Load unpacked** and select the extracted folder
+
+**For Firefox users:**
+1. Download `nav-extension-firefox-v1.3.1.zip`
+2. Open Firefox and go to `about:addons`
+3. Click the ⚙️ gear icon → **Install Add-on From File...**
+4. Select the downloaded zip file
 
 ### 📜 License
 

@@ -238,11 +238,10 @@ function getLinksForView(catId) {
       .map(l => ({ ...l, _source: "user" }));
   }
 
-  // 其他分类也可能有用户添加的网址
+  // 其他分类也可能有用户添加的网址（catId 为空=全部/搜索时，含个人网址）
   if (currentUser) {
     const userCatLinks = userLinksData
       .filter(l => !catId || l.categoryId === catId)
-      .filter(l => l.categoryId !== PERSONAL_CAT_ID)
       .map(l => ({ ...l, _source: "user" }));
     adminLinks = [...adminLinks, ...userCatLinks];
   }
