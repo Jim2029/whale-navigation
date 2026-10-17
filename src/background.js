@@ -4,13 +4,19 @@
 const NAV_PAGE = chrome.runtime.getURL("pages/popup.html");
 
 chrome.action.onClicked.addListener(async () => {
-  const tabs = await chrome.tabs.query({ url: NAV_PAGE });
-  if (tabs.length > 0) {
-    await chrome.tabs.update(tabs[0].id, { active: true });
-    await chrome.windows.update(tabs[0].windowId, { focused: true });
-  } else {
-    chrome.tabs.create({ url: NAV_PAGE });
+  const { navTabId } = await chrome.storage.local.get("navTabId");
+  if (navTabId != null) {
+    try {
+      const tab = await chrome.tabs.get(navTabId);
+      if (tab && tab.id != null) {
+        await chrome.tabs.update(navTabId, { active: true });
+        await chrome.windows.update(tab.windowId, { focused: true });
+        return;
+      }
+    } catch (e) { /* 标签已关闭，重新创建 */ }
   }
+  const tab = await chrome.tabs.create({ url: NAV_PAGE });
+  await chrome.storage.local.set({ navTabId: tab.id });
 });
 
 // 从 data/adminData.json 加载预置数据

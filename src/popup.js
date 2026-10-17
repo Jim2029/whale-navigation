@@ -622,13 +622,19 @@ function bindEvents() {
   document.getElementById("openAdminBtn").addEventListener("click", async () => {
     if (!currentUser) { showToast(_t("needLogin")); return; }
     const adminUrl = chrome.runtime.getURL("pages/admin.html");
-    const tabs = await chrome.tabs.query({ url: adminUrl });
-    if (tabs.length > 0) {
-      await chrome.tabs.update(tabs[0].id, { active: true });
-      await chrome.windows.update(tabs[0].windowId, { focused: true });
-    } else {
-      chrome.tabs.create({ url: adminUrl, active: true });
+    const { adminTabId } = await chrome.storage.local.get("adminTabId");
+    if (adminTabId != null) {
+      try {
+        const tab = await chrome.tabs.get(adminTabId);
+        if (tab && tab.id != null) {
+          await chrome.tabs.update(adminTabId, { active: true });
+          await chrome.windows.update(tab.windowId, { focused: true });
+          return;
+        }
+      } catch (e) { /* 标签已关闭，重新创建 */ }
     }
+    const tab = await chrome.tabs.create({ url: adminUrl, active: true });
+    await chrome.storage.local.set({ adminTabId: tab.id });
   });
 
   bindThemeSelect();

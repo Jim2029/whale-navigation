@@ -325,13 +325,19 @@ function renderAdminHeader() {
       e.preventDefault();
       const url = chrome.runtime.getURL("pages/popup.html");
       // 复用已有导航页标签，避免重复开标签
-      const tabs = await chrome.tabs.query({ url });
-      if (tabs.length > 0) {
-        await chrome.tabs.update(tabs[0].id, { active: true });
-        await chrome.windows.update(tabs[0].windowId, { focused: true });
-      } else {
-        chrome.tabs.create({ url, active: false });
+      const { navTabId } = await chrome.storage.local.get("navTabId");
+      if (navTabId != null) {
+        try {
+          const tab = await chrome.tabs.get(navTabId);
+          if (tab && tab.id != null) {
+            await chrome.tabs.update(navTabId, { active: true });
+            await chrome.windows.update(tab.windowId, { focused: true });
+            return;
+          }
+        } catch (e) { /* 标签已关闭，重新创建 */ }
       }
+      const tab = await chrome.tabs.create({ url, active: false });
+      await chrome.storage.local.set({ navTabId: tab.id });
     });
   }
 
@@ -640,21 +646,25 @@ async function renderLinksTable() {
   const kw = (document.getElementById("filterKeyword").value || "").trim().toLowerCase();
   const visFilter = document.getElementById("filterVisibility").value;
 
+  // 始终读取当前用户的个人网址（"全部"筛选时需合并显示、搜索）
+  let personalLinks = [];
+  if (currentUser) {
+    const key = "userLinks_" + currentUser.username;
+    const res = await chrome.storage.local.get(key);
+    userLinksData = res[key] || [];
+    personalLinks = userLinksData.filter(l => l.categoryId === PERSONAL_CAT_ID);
+  }
+
   let links;
   if (catFilter === PERSONAL_CAT_ID) {
-    // 筛选"个人网址"时：从 storage 实时读取当前用户的个人网址（确保最新）
-    if (!currentUser) {
-      links = [];
-    } else {
-      const key = "userLinks_" + currentUser.username;
-      const res = await chrome.storage.local.get(key);
-      userLinksData = res[key] || [];
-      links = userLinksData.filter(l => l.categoryId === PERSONAL_CAT_ID);
-    }
+    // 筛选"个人网址"：只显示个人网址
+    links = personalLinks;
+  } else if (catFilter) {
+    // 筛选具体公共分类：仅该分类的公共网址
+    links = adminData.links.filter(l => l.categoryId === catFilter);
   } else {
-    // 其他情况：显示公共分类（排除个人网址）
-    links = adminData.links.filter(l => l.categoryId !== PERSONAL_CAT_ID);
-    if (catFilter) links = links.filter(l => l.categoryId === catFilter);
+    // "全部"：公共网址 + 个人网址（确保搜索能命中个人网址）
+    links = adminData.links.filter(l => l.categoryId !== PERSONAL_CAT_ID).concat(personalLinks);
   }
   
   if (kw) links = links.filter(l =>
