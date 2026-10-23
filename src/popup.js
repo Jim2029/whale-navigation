@@ -883,9 +883,10 @@ function openAddModal(prefill) {
   const cats = getVisibleCategories();
   const sel = document.getElementById("addCategory");
   sel.innerHTML = cats.map(c =>
-    `<option value="${c.id}">${c.icon || ""} ${escHtml(c.name)}</option>`
+    `<option value="${c.id}">${c.icon || ""} ${escHtml(_t("catName_" + c.id, {}, c.name))}</option>`
   ).join("");
-  if (activeCatId) sel.value = activeCatId;
+  // 默认选中"个人网址"分类（个人网址优先收藏到个人分类，用户可自行修改）
+  sel.value = PERSONAL_CAT_ID;
 
   document.getElementById("addTitle").value = (prefill && prefill.title) ? prefill.title : "";
   document.getElementById("addUrl").value = (prefill && prefill.url) ? prefill.url : "";

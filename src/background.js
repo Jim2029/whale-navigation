@@ -61,13 +61,43 @@ chrome.action.onClicked.addListener(async () => {
   await openNavPage(null, false);
 });
 
-// 右键菜单：收藏到导航
-chrome.runtime.onInstalled.addListener(() => {
+// 右键菜单标题（跟随插件内切换的语言）
+const CONTEXT_MENU_TITLES = {
+  zh_CN: "收藏到鲸波导航",
+  en: "Save to Whale Navigation",
+  ja: "くじらナビに保存",
+  ko: "웨일 내비게이션에 저장",
+  es: "Guardar en Navegación Ballena",
+  ar: "حفظ في ملاحة الحوت",
+  id: "Simpan ke Navigasi Paus"
+};
+
+function getContextMenuTitle(lang) {
+  return CONTEXT_MENU_TITLES[lang] || CONTEXT_MENU_TITLES.zh_CN;
+}
+
+// 更新右键菜单标题（语言切换后调用）
+async function updateContextMenuTitle(lang) {
+  try {
+    await chrome.contextMenus.update("save-to-nav", { title: getContextMenuTitle(lang) });
+  } catch (e) { /* 菜单不存在则忽略 */ }
+}
+
+// 右键菜单：收藏到导航（安装时创建，标题跟随插件语言）
+chrome.runtime.onInstalled.addListener(async () => {
+  const { uiLanguage } = await chrome.storage.local.get("uiLanguage");
   chrome.contextMenus.create({
     id: "save-to-nav",
-    title: chrome.i18n.getMessage("contextMenuTitle"),
+    title: getContextMenuTitle(uiLanguage || "zh_CN"),
     contexts: ["page", "link", "selection"]
   });
+});
+
+// 语言切换时同步更新右键菜单标题
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "local" && changes.uiLanguage && changes.uiLanguage.newValue) {
+    updateContextMenuTitle(changes.uiLanguage.newValue);
+  }
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
