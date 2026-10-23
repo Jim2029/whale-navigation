@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "현재 사용자"
+  },
+  "contextMenuTitle": {
+    "message": "웨일 내비게이션에 저장"
+  },
+  "commandSaveToNav": {
+    "message": "현재 페이지를 내비게이션에 저장"
   }
 }

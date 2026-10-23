@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "Usuario actual"
+  },
+  "contextMenuTitle": {
+    "message": "Guardar en Navegación Ballena"
+  },
+  "commandSaveToNav": {
+    "message": "Guardar página actual en navegación"
   }
 }

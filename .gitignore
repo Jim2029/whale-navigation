@@ -1,6 +1,6 @@
 node_modules/
 .DS_Store
 *.zip
-!nav-extension-chrome-v1.3.2.zip
-!nav-extension-edge-v1.3.2.zip
-!nav-extension-firefox-v1.3.2.zip
+!nav-extension-chrome-v1.4.0.zip
+!nav-extension-edge-v1.4.0.zip
+!nav-extension-firefox-v1.4.0.zip

@@ -520,7 +520,7 @@
 <!-- ══ Header ═══════════════════════════════════════════════ -->
 <header class="header">
   <div class="header-logo">
-    <img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50">
+    <img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50" style="cursor:pointer;" title="回首页">
   </div>
   <div class="header-search">
     <div class="search-engine-tabs" id="engineTabs">
@@ -581,7 +581,10 @@
     </div>
     <div class="form-group">
       <label class="form-label" data-i18n="addUrlLabel">网址 URL *</label>
-      <input class="form-input" id="addUrl" data-i18n-placeholder="addUrlPlaceholder" placeholder="https://..." />
+      <div style="display:flex;gap:8px;">
+        <input class="form-input" id="addUrl" data-i18n-placeholder="addUrlPlaceholder" placeholder="https://..." style="flex:1;min-width:0;" />
+        <button class="btn-secondary" id="toggleUrlBtn" type="button" data-i18n="bookmarkDomain" style="flex-shrink:0;white-space:nowrap;padding:0 12px;">收藏域名</button>
+      </div>
     </div>
     <div class="form-group">
       <label class="form-label" data-i18n="addDescLabel">描述（可选）</label>

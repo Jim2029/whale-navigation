@@ -1,9 +1,14 @@
 // background.js - 初始化管理员预置数据 + 插件图标点击行为
 
-// 点击插件图标时，打开导航主页（新标签页）；若已打开则直接聚焦
+// 导航主页地址
 const NAV_PAGE = chrome.runtime.getURL("pages/popup.html");
 
-chrome.action.onClicked.addListener(async () => {
+// 打开导航主页（新标签页）；若已打开则直接聚焦。
+// pendingLink：可选，收藏来源的 { title, url, favicon }；autoBookmark：是否让导航页自动弹出收藏弹窗
+async function openNavPage(pendingLink, autoBookmark) {
+  if (pendingLink && pendingLink.url) {
+    await chrome.storage.local.set({ _pendingLink: pendingLink, _autoBookmark: !!autoBookmark });
+  }
   const { navTabId } = await chrome.storage.local.get("navTabId");
   if (navTabId != null) {
     try {
@@ -17,6 +22,67 @@ chrome.action.onClicked.addListener(async () => {
   }
   const tab = await chrome.tabs.create({ url: NAV_PAGE });
   await chrome.storage.local.set({ navTabId: tab.id });
+}
+
+// 从标签页读取网站标准名称（og:site_name / application-name）
+async function extractSiteNameFromTab(tabId) {
+  try {
+    const results = await chrome.scripting.executeScript({
+      target: { tabId },
+      func: () => {
+        const og = document.querySelector('meta[property="og:site_name"]');
+        if (og && og.content && og.content.trim()) return og.content.trim();
+        const app = document.querySelector('meta[name="application-name"]');
+        if (app && app.content && app.content.trim()) return app.content.trim();
+        return '';
+      }
+    });
+    if (results && results[0] && results[0].result) return results[0].result;
+  } catch (e) { /* 忽略：无权限或页面不可访问 */ }
+  return '';
+}
+
+// 捕获当前活动标签页（若非扩展页面本身）
+async function captureCurrentTab() {
+  try {
+    const [curTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const extUrl = chrome.runtime.getURL("");
+    if (curTab && curTab.url && !curTab.url.startsWith(extUrl)) {
+      const siteName = await extractSiteNameFromTab(curTab.id);
+      return { title: curTab.title || "", url: curTab.url, favicon: curTab.favIconUrl || "", siteName };
+    }
+  } catch (e) { /* 忽略：无标签页或权限不足 */ }
+  return null;
+}
+
+// 点击插件图标：打开导航主页（清除可能残留的收藏标记，避免误弹注册/收藏框）
+chrome.action.onClicked.addListener(async () => {
+  await chrome.storage.local.remove(["_autoBookmark", "_pendingLink"]);
+  await openNavPage(null, false);
+});
+
+// 右键菜单：收藏到导航
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: "save-to-nav",
+    title: chrome.i18n.getMessage("contextMenuTitle"),
+    contexts: ["page", "link", "selection"]
+  });
+});
+
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  if (info.menuItemId !== "save-to-nav") return;
+  const url = info.linkUrl || info.pageUrl;
+  const title = info.selectionText || tab.title || "";
+  const siteName = await extractSiteNameFromTab(tab.id);
+  await openNavPage({ title, url, favicon: tab.favIconUrl || "", siteName }, true);
+});
+
+// 快捷键：收藏当前页到导航
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== "save-to-nav") return;
+  const pending = await captureCurrentTab();
+  if (pending) await openNavPage(pending, true);
 });
 
 // 从 data/adminData.json 加载预置数据

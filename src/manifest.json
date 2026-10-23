@@ -3,10 +3,21 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "zh_CN",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "permissions": [
-    "storage"
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "scripting"
   ],
+  "commands": {
+    "save-to-nav": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D"
+      },
+      "description": "__MSG_commandSaveToNav__"
+    }
+  },
   "action": {
     "default_icon": {
       "16": "icons/icon16.png",

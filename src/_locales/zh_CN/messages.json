@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "当前用户"
+  },
+  "contextMenuTitle": {
+    "message": "收藏到鲸波导航"
+  },
+  "commandSaveToNav": {
+    "message": "收藏当前页到导航"
   }
 }

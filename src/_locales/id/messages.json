@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "Pengguna saat ini"
+  },
+  "contextMenuTitle": {
+    "message": "Simpan ke Navigasi Paus"
+  },
+  "commandSaveToNav": {
+    "message": "Simpan halaman saat ini ke navigasi"
   }
 }

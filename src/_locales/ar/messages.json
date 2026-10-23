@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "المستخدم الحالي"
+  },
+  "contextMenuTitle": {
+    "message": "حفظ في ملاحة الحوت"
+  },
+  "commandSaveToNav": {
+    "message": "حفظ الصفحة الحالية في الملاحة"
   }
 }

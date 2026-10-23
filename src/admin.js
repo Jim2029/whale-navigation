@@ -318,27 +318,38 @@ async function handleAdminRegister() {
 }
 
 function renderAdminHeader() {
+  // 回首页：复用已有导航页标签，避免重复开标签
+  const goHome = async () => {
+    const url = chrome.runtime.getURL("pages/popup.html");
+    const { navTabId } = await chrome.storage.local.get("navTabId");
+    if (navTabId != null) {
+      try {
+        const tab = await chrome.tabs.get(navTabId);
+        if (tab && tab.id != null) {
+          await chrome.tabs.update(navTabId, { active: true });
+          await chrome.windows.update(tab.windowId, { focused: true });
+          return;
+        }
+      } catch (e) { /* 标签已关闭，重新创建 */ }
+    }
+    const tab = await chrome.tabs.create({ url, active: false });
+    await chrome.storage.local.set({ navTabId: tab.id });
+  };
+
   const homeLink = document.getElementById("homeLink");
   if (homeLink) {
     homeLink.onclick = null;
     homeLink.addEventListener("click", async (e) => {
       e.preventDefault();
-      const url = chrome.runtime.getURL("pages/popup.html");
-      // 复用已有导航页标签，避免重复开标签
-      const { navTabId } = await chrome.storage.local.get("navTabId");
-      if (navTabId != null) {
-        try {
-          const tab = await chrome.tabs.get(navTabId);
-          if (tab && tab.id != null) {
-            await chrome.tabs.update(navTabId, { active: true });
-            await chrome.windows.update(tab.windowId, { focused: true });
-            return;
-          }
-        } catch (e) { /* 标签已关闭，重新创建 */ }
-      }
-      const tab = await chrome.tabs.create({ url, active: false });
-      await chrome.storage.local.set({ navTabId: tab.id });
+      await goHome();
     });
+  }
+
+  // 左上角 logo 点击也回首页
+  const logo = document.getElementById("mainLogo");
+  if (logo) {
+    logo.onclick = null;
+    logo.addEventListener("click", () => { goHome(); });
   }
 
   const badge = document.getElementById("adminBadge");

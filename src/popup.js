@@ -49,6 +49,10 @@ let currentUser = null;  // { username, createdAt }
 let currentView = "all";
 let searchQuery = "";
 let activeCatId = null;
+let addFromBookmark = false;  // 标记"收藏当前页"流程，用于区分保存成功提示
+let originalPageUrl = "";      // 收藏弹窗中 URL 输入框的原始页面地址（供"收藏页面"切换回）
+let originalPageTitle = "";    // 收藏弹窗中标题输入框的原始页面标题（供"收藏页面"切换回）
+let originalSiteName = "";     // 网站标准名称（og:site_name，切换"收藏域名"时用作标题）
 const PERSONAL_CAT_ID = "cat_personal";
 let currentEngine = "local";
 
@@ -71,6 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderEngineTabs();
   updateSearchPlaceholder();
   updateLogoByLang();
+  bindLogoHome();
 
   // 监听语言变化（后台切语言后首页自动同步）
   chrome.storage.onChanged.addListener((changes, area) => {
@@ -93,6 +98,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (area === "local" && changes.userAvatar) {
       renderUserStatus();
     }
+    // 监听右键菜单/快捷键收藏请求（导航页已打开时自动弹出收藏窗口）
+    if (area === "local" && changes._autoBookmark && changes._autoBookmark.newValue) {
+      autoOpenBookmark();
+    }
     // 监听个人网址变化（后台导入/删除后自动刷新）
     if (area === "local") {
       for (const key in changes) {
@@ -111,7 +120,57 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderContent();
   bindEvents();
   bindLangSwitcher();
+  autoOpenBookmark();
 });
+
+// 右键菜单/快捷键进入时：已登录则弹出预填收藏框，未登录则引导注册
+async function autoOpenBookmark() {
+  try {
+    const res = await chrome.storage.local.get("_autoBookmark");
+    if (!res._autoBookmark) return;
+    // 一次性消费标记（无论登录与否），避免残留导致下次打开导航页误弹框
+    await chrome.storage.local.remove("_autoBookmark");
+    const p = await chrome.storage.local.get("_pendingLink");
+    const pending = p._pendingLink;
+    if (!pending || !pending.url) {
+      await chrome.storage.local.remove("_pendingLink");
+      return;
+    }
+    if (!currentUser) {
+      // 未登录：先提示，用户确认后再弹注册/登录窗口
+      if (confirm("收藏网址功能需要注册/登录")) {
+        openAuthModal();
+        switchAuthTab("register");
+        // 保留 _pendingLink，登录/注册成功后衔接
+      } else {
+        // 取消：清除待收藏标记，停留在导航首页
+        clearPendingBookmark();
+      }
+      return;
+    }
+    addFromBookmark = true;
+    openAddModal({ title: pending.title, url: pending.url, desc: "", siteName: pending.siteName });
+  } catch (e) { /* 忽略 */ }
+}
+
+// 登录/注册成功后：若有待收藏的链接，自动弹出预填收藏框
+async function continueBookmarkAfterLogin() {
+  try {
+    const p = await chrome.storage.local.get("_pendingLink");
+    const pending = p._pendingLink;
+    if (pending && pending.url && currentUser) {
+      addFromBookmark = true;
+      openAddModal({ title: pending.title, url: pending.url, desc: "", siteName: pending.siteName });
+    }
+  } catch (e) { /* 忽略 */ }
+}
+
+// 取消收藏流程时清除待处理标记
+async function clearPendingBookmark() {
+  try {
+    await chrome.storage.local.remove(["_autoBookmark", "_pendingLink"]);
+  } catch (e) { /* 忽略 */ }
+}
 
 // ─── Language Switcher ─────────────────────────────────────
 // 语言 → logo 直接按语言代码取文件 logo-{lang}.png
@@ -121,6 +180,32 @@ function updateLogoByLang() {
   // 简体中文用新版 logo
   const logoFile = `logo-${cur}.png`;
   if (img) img.src = `../icons/${logoFile}`;
+}
+
+// 左上角 logo 点击 → 回首页（重置到默认视图，不刷新页面，避免 logo 语言闪烁）
+function bindLogoHome() {
+  const logo = document.getElementById("mainLogo");
+  if (!logo) return;
+  logo.style.cursor = "pointer";
+  logo.addEventListener("click", () => {
+    goHome();
+  });
+}
+
+// 回首页：重置到默认状态（全部视图、全部分类、清空搜索），不刷新页面
+function goHome() {
+  searchQuery = "";
+  const searchInputEl = document.getElementById("searchInput");
+  if (searchInputEl) searchInputEl.value = "";
+  currentView = "all";
+  activeCatId = null;
+  document.querySelectorAll(".view-tab").forEach(t => {
+    t.classList.toggle("active", t.dataset.view === "all");
+  });
+  renderSidebar();
+  renderContent();
+  const content = document.getElementById("content");
+  if (content) content.scrollTop = 0;
 }
 
 function bindLangSwitcher() {
@@ -653,8 +738,10 @@ function bindEvents() {
   // FAB -> open add modal (需要登录)
   document.getElementById("fabBtn").addEventListener("click", () => {
     if (!currentUser) { openAuthModal(); return; }
+    addFromBookmark = false;
     openAddModal();
   });
+  document.getElementById("toggleUrlBtn").addEventListener("click", toggleUrlScope);
   document.getElementById("cancelAdd").addEventListener("click", closeAddModal);
   document.getElementById("confirmAdd").addEventListener("click", saveUserLink);
   document.getElementById("addModal").addEventListener("click", (e) => {
@@ -693,10 +780,10 @@ function bindAuthEvents() {
   document.querySelectorAll(".auth-tab").forEach(tab => {
     tab.addEventListener("click", () => switchAuthTab(tab.dataset.auth));
   });
-  document.getElementById("cancelAuth").addEventListener("click", closeAuthModal);
-  document.getElementById("cancelAuth2").addEventListener("click", closeAuthModal);
+  document.getElementById("cancelAuth").addEventListener("click", () => { closeAuthModal(); clearPendingBookmark(); });
+  document.getElementById("cancelAuth2").addEventListener("click", () => { closeAuthModal(); clearPendingBookmark(); });
   document.getElementById("authModal").addEventListener("click", (e) => {
-    if (e.target === document.getElementById("authModal")) closeAuthModal();
+    if (e.target === document.getElementById("authModal")) { closeAuthModal(); clearPendingBookmark(); }
   });
   document.getElementById("doLogin").addEventListener("click", doLogin);
   document.getElementById("doRegister").addEventListener("click", doRegister);
@@ -733,6 +820,7 @@ async function doLogin() {
   renderSidebar();
   renderContent();
   showToast("✅ 欢迎回来，" + currentUser.username);
+  continueBookmarkAfterLogin();
 }
 
 async function doRegister() {
@@ -775,6 +863,7 @@ async function doRegister() {
   renderSidebar();
   renderContent();
   showToast("✅ 注册成功，已自动登录");
+  continueBookmarkAfterLogin();
 }
 
 async function doLogout() {
@@ -788,7 +877,7 @@ async function doLogout() {
 }
 
 // ─── Add user link modal ─────────────────────────────────────
-function openAddModal() {
+function openAddModal(prefill) {
   if (!currentUser) { openAuthModal(); return; }
 
   const cats = getVisibleCategories();
@@ -798,15 +887,85 @@ function openAddModal() {
   ).join("");
   if (activeCatId) sel.value = activeCatId;
 
-  document.getElementById("addTitle").value = "";
-  document.getElementById("addUrl").value = "";
-  document.getElementById("addDesc").value = "";
+  document.getElementById("addTitle").value = (prefill && prefill.title) ? prefill.title : "";
+  document.getElementById("addUrl").value = (prefill && prefill.url) ? prefill.url : "";
+  document.getElementById("addDesc").value = (prefill && prefill.desc) ? prefill.desc : "";
+  originalSiteName = (prefill && prefill.siteName) ? prefill.siteName : "";
+  resetUrlToggle();
   document.getElementById("addModal").classList.add("show");
   document.getElementById("addTitle").focus();
+  if (prefill && prefill.title) document.getElementById("addTitle").select();
 }
 
 function closeAddModal() {
   document.getElementById("addModal").classList.remove("show");
+}
+
+// 重置 URL 切换按钮为"收藏域名"状态（打开弹窗时调用）
+function resetUrlToggle() {
+  originalPageUrl = "";
+  originalPageTitle = "";
+  const btn = document.getElementById("toggleUrlBtn");
+  if (!btn) return;
+  btn.dataset.mode = "domain";
+  btn.textContent = _t("bookmarkDomain");
+}
+
+// 从网址提取域名（去掉 www. 前缀，作为兜底）
+function getSiteName(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch (e) {
+    return "";
+  }
+}
+
+// 从页面标题提取标准网站名称（按「标题 - 网站名」格式取最后一段）
+function extractSiteName(title) {
+  if (!title) return "";
+  const seps = [" - ", " | ", " — ", " – ", " · ", " :: ", "｜", "—", "–", "_", "-"];
+  for (const sep of seps) {
+    const idx = title.lastIndexOf(sep);
+    if (idx > 0) {
+      const site = title.slice(idx + sep.length).trim();
+      if (site && site.length <= 20) return site;
+    }
+  }
+  return "";
+}
+
+// 在"页面 URL"与"网站域名"之间切换（标题同步切换为页面标题/网站名称）
+function toggleUrlScope() {
+  const urlInput = document.getElementById("addUrl");
+  const titleInput = document.getElementById("addTitle");
+  const btn = document.getElementById("toggleUrlBtn");
+  const currentUrl = urlInput.value.trim();
+
+  if (btn.dataset.mode !== "page") {
+    // 当前是页面 URL，切换为网站域名
+    if (!/^https?:\/\//i.test(currentUrl)) {
+      showToast("仅 http/https 网址支持收藏域名");
+      return;
+    }
+    try {
+      const u = new URL(currentUrl);
+      originalPageUrl = currentUrl;        // 记住页面 URL，供切回
+      originalPageTitle = titleInput.value; // 记住页面标题，供切回
+      urlInput.value = u.origin + "/";     // 网站根地址
+      // 优先用 og:site_name 标准网站名，其次从标题提取，最后回退为域名
+      titleInput.value = originalSiteName || extractSiteName(originalPageTitle) || getSiteName(currentUrl);
+      btn.dataset.mode = "page";
+      btn.textContent = _t("bookmarkPage");
+    } catch (e) {
+      showToast("无法解析该网址的域名");
+    }
+  } else {
+    // 当前是网站域名，切换回页面 URL + 页面标题
+    urlInput.value = originalPageUrl;
+    titleInput.value = originalPageTitle;
+    btn.dataset.mode = "domain";
+    btn.textContent = _t("bookmarkDomain");
+  }
 }
 
 async function saveUserLink() {
@@ -828,18 +987,32 @@ async function saveUserLink() {
     return;
   }
 
-  userLinksData.push({
-    id: "ul_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
-    categoryId: catId,
-    title, url: normalizeUrl(url), desc,
-    createdAt: Date.now()
-  });
-  await saveUserLinks();
+  const normUrl = normalizeUrl(url);
+
+  if (catId === PERSONAL_CAT_ID) {
+    // 个人网址分类：按当前用户隔离存储
+    userLinksData.push({
+      id: "ul_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+      categoryId: catId, title, url: normUrl, desc,
+      createdAt: Date.now()
+    });
+    await saveUserLinks();
+  } else {
+    // 其他分类：全局共享，存入 adminData.links（所有登录用户可见）
+    adminData.links.push({
+      id: "lk_" + Date.now(),
+      categoryId: catId, title, url: normUrl, desc, hidden: false
+    });
+    await chrome.storage.local.set({ adminData });
+  }
+
+  await chrome.storage.local.remove("_pendingLink");
 
   closeAddModal();
   renderSidebar();
   renderContent();
-  showToast("✅ 已添加到我的导航");
+  showToast(addFromBookmark ? _t("bookmarkSaved") : "✅ 已添加到我的导航");
+  addFromBookmark = false;
 }
 
 // ─── Utils ──────────────────────────────────────────────────

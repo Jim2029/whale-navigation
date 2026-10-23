@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "現在のユーザー"
+  },
+  "contextMenuTitle": {
+    "message": "くじらナビに保存"
+  },
+  "commandSaveToNav": {
+    "message": "現在のページをナビに保存"
   }
 }

@@ -178,5 +178,11 @@
   },
   "logoutConfirmCurrent": {
     "message": "Current user"
+  },
+  "contextMenuTitle": {
+    "message": "Save to Whale Navigation"
+  },
+  "commandSaveToNav": {
+    "message": "Save current page to navigation"
   }
 }
