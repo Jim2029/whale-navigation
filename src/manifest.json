@@ -13,7 +13,7 @@
   "commands": {
     "save-to-nav": {
       "suggested_key": {
-        "default": "Ctrl+Alt+S"
+        "default": "Ctrl+Shift+K"
       },
       "description": "__MSG_commandSaveToNav__"
     }
