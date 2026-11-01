@@ -102,13 +102,13 @@ function initLangSelect() {
   const sel = document.getElementById("langSelect");
   if (!sel) return;
   const langs = (window.LANGS || (typeof LANGS !== "undefined" ? LANGS : []));
-  const prompt = `<option value="" disabled selected style="color:#888;">Language</option>`;
-  sel.innerHTML = prompt + langs.map(l => `<option value="${l.code}">${l.label}</option>`).join("");
+  renderLangOptions(sel, langs);
   // 不自动设 sel.value，让下拉框默认显示 "Language"
   sel.addEventListener("change", async () => {
     const code = sel.value;
     if (typeof setLanguage === "function") await setLanguage(code);
     _forceLTR();
+    renderLangOptions(sel, langs);
     updateLogoByLang();
     renderThemeOptions();  // 重新渲染配色下拉（同步翻译）
     if (typeof applyI18n === "function") applyI18n();
@@ -116,6 +116,11 @@ function initLangSelect() {
     renderAll();
     renderAdminHeader();
   });
+}
+
+function renderLangOptions(sel, langs) {
+  const prompt = `<option value="" disabled selected style="color:#888;">${_t("language_label")}</option>`;
+  sel.innerHTML = prompt + langs.map(l => `<option value="${l.code}">${l.label}</option>`).join("");
 }
 
 // ─── Init ────────────────────────────────────────────────────
@@ -139,26 +144,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  await loadUserLinks();  // 加载当前用户的个人网址
-  
-  // 迁移旧数据：把 adminData.links 中 categoryId=cat_personal 的旧数据迁移到 userLinksData
-  const oldPersonalLinks = adminData.links.filter(l => l.categoryId === PERSONAL_CAT_ID);
-  if (oldPersonalLinks.length > 0) {
-    // 加入到 userLinksData（去重）
-    const existingUrls = new Set(userLinksData.map(l => l.url));
-    oldPersonalLinks.forEach(l => {
-      if (!existingUrls.has(l.url)) {
-        userLinksData.push({ ...l });
-        existingUrls.add(l.url);
-      }
-    });
-    // 从全局 adminData.links 中删除
-    adminData.links = adminData.links.filter(l => l.categoryId !== PERSONAL_CAT_ID);
-    await saveUserLinks();
-    await saveAdminData();
-    console.log(`已迁移 ${oldPersonalLinks.length} 条旧个人网址数据到用户隔离存储`);
-  }
-  
   await initAdmin();
 
   // 监听语言/头像变化（前台切语言后后台自动同步）
@@ -169,6 +154,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         initI18n().then(() => {
           applyI18n();
           _forceLTR();
+          const langSelect = document.getElementById("langSelect");
+          if (langSelect) renderLangOptions(langSelect, window.LANGS || []);
           updateLogoByLang();
           if (typeof renderThemeOptions === "function") renderThemeOptions();
           if (currentUser) { renderAll(); renderAdminHeader(); }
@@ -183,7 +170,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function initAdmin() {
   await loadAdminData();
+  await loadUserLinks();
+  await migrateLegacyPersonalLinks();
   renderAll();
+  bindAdminLinkEvents();
   bindNavEvents();
   bindCategoryEvents();
   bindLinksEvents();
@@ -191,6 +181,27 @@ async function initAdmin() {
   bindEditModal();
   bindAuthEvents();
   renderAdminHeader();
+}
+
+async function migrateLegacyPersonalLinks() {
+  if (!currentUser || !adminData.links) return;
+
+  const oldPersonalLinks = adminData.links.filter(l => l.categoryId === PERSONAL_CAT_ID);
+  if (oldPersonalLinks.length === 0) return;
+
+  const existingUrls = new Set(userLinksData.map(l => l.url));
+  let migrated = 0;
+  oldPersonalLinks.forEach(l => {
+    if (!existingUrls.has(l.url)) {
+      userLinksData.push({ ...l });
+      existingUrls.add(l.url);
+      migrated++;
+    }
+  });
+
+  adminData.links = adminData.links.filter(l => l.categoryId !== PERSONAL_CAT_ID);
+  await Promise.all([saveUserLinks(), saveAdminData()]);
+  console.log(`已迁移 ${migrated} 条旧个人网址数据到用户隔离存储`);
 }
 
 // ─── Login Page ──────────────────────────────────────────────
@@ -208,10 +219,10 @@ function showLoginPage() {
         <div style="font-size:36px;margin-bottom:12px;">🔐</div>
         <h2 style="font-size:18px;margin-bottom:20px;color:var(--text-primary);" data-i18n="login_title">请先登录</h2>
         <div style="margin-bottom:14px;">
-          <input id="adminLoginUser" class="form-input" data-i18n-placeholder="login_username_ph" placeholder="用户名" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
+          <input id="adminLoginUser" class="form-input" data-i18n-placeholder="login_username_ph" placeholder="" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
         </div>
         <div style="margin-bottom:14px;">
-          <input id="adminLoginPass" class="form-input" type="password" data-i18n-placeholder="login_password_ph" placeholder="密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
+          <input id="adminLoginPass" class="form-input" type="password" data-i18n-placeholder="login_password_ph" placeholder="" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
         </div>
         <div id="adminLoginError" style="color:var(--danger);font-size:12px;min-height:20px;margin-bottom:8px;"></div>
         <button id="adminLoginBtn" class="btn btn-primary" style="width:100%;padding:10px;font-size:14px;font-weight:600;" data-i18n="login_btn">登 录</button>
@@ -221,13 +232,13 @@ function showLoginPage() {
         <div style="font-size:36px;margin-bottom:12px;">📝</div>
         <h2 style="font-size:18px;margin-bottom:20px;color:var(--text-primary);" data-i18n="register_title">注册账号</h2>
         <div style="margin-bottom:14px;">
-          <input id="adminRegUser" class="form-input" data-i18n-placeholder="register_username_ph" placeholder="用户名（3-20字符）" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
+          <input id="adminRegUser" class="form-input" data-i18n-placeholder="register_username_ph" placeholder="" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
         </div>
         <div style="margin-bottom:14px;">
-          <input id="adminRegPass" class="form-input" type="password" data-i18n-placeholder="register_password_ph" placeholder="密码（至少6位）" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
+          <input id="adminRegPass" class="form-input" type="password" data-i18n-placeholder="register_password_ph" placeholder="" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
         </div>
         <div style="margin-bottom:14px;">
-          <input id="adminRegPass2" class="form-input" type="password" data-i18n-placeholder="register_password2_ph" placeholder="确认密码" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
+          <input id="adminRegPass2" class="form-input" type="password" data-i18n-placeholder="register_password2_ph" placeholder="" style="width:100%;padding:10px 14px;border:1.5px solid var(--border-color);border-radius:8px;font-size:14px;outline:none;background:var(--bg-input);color:var(--text-primary);" />
         </div>
         <div id="adminRegError" style="color:var(--danger);font-size:12px;min-height:20px;margin-bottom:8px;"></div>
         <button id="adminRegBtn" class="btn btn-primary" style="width:100%;padding:10px;font-size:14px;font-weight:600;" data-i18n="register_btn">注 册</button>
@@ -296,7 +307,7 @@ async function handleAdminRegister() {
   const errEl = document.getElementById("adminRegError");
 
   if (!username || username.length < 3 || username.length > 20) { errEl.textContent = _t("usernameLenError"); return; }
-  if (/[^a-zA-Z0-9_一-鿿]/.test(username)) { errEl.textContent = _t("usernameCharsetError"); return; }
+  if (/[^a-zA-Z0-9_\p{Script=Han}]/u.test(username)) { errEl.textContent = _t("usernameCharsetError"); return; }
   if (!password || password.length < 6) { errEl.textContent = _t("passwordLenError"); return; }
   if (password !== password2) { errEl.textContent = _t("passwordMismatch"); return; }
 
@@ -404,6 +415,26 @@ function bindNavEvents() {
       document.getElementById("panel-" + item.dataset.panel).classList.add("active");
     });
   });
+  bindTutorialNav();
+}
+
+// ─── 教程章节切换（顶部导航栏）────────────────────────────────
+function bindTutorialNav() {
+  const panel = document.getElementById("panel-tutorial");
+  if (!panel || panel.dataset.tutorialBound === "1") return;
+  panel.dataset.tutorialBound = "1";
+  panel.addEventListener("click", function (event) {
+    const item = event.target.closest(".tut-nav-item");
+    if (!item || !panel.contains(item)) return;
+    const tutorial = item.closest(".tutorial");
+    if (!tutorial) return;
+    tutorial.querySelectorAll(".tut-nav-item").forEach(node => node.classList.remove("active"));
+    item.classList.add("active");
+    tutorial.querySelectorAll(".tut-pane").forEach(node => node.classList.remove("active"));
+    const pane = tutorial.querySelector("#tut-" + item.dataset.tut);
+    if (pane) pane.classList.add("active");
+    panel.scrollIntoView({ block: "start" });
+  });
 }
 
 // ─── Render All ──────────────────────────────────────────────
@@ -429,7 +460,7 @@ function renderOverview() {
   document.getElementById("statRow").innerHTML = `
     <div class="stat-card"><div class="stat-num">${catCount}</div><div class="stat-label">${_t("stat_cat_count")}</div></div>
     <div class="stat-card"><div class="stat-num">${visibleLinks}</div><div class="stat-label">${_t("stat_visible")}</div></div>
-    <div class="stat-card"><div class="stat-num" style="color:${hiddenLinks > 0 ? '#e17055' : 'var(--text-muted)'}">${hiddenLinks}</div><div cla
+    <div class="stat-card"><div class="stat-num" style="color:${hiddenLinks > 0 ? '#e17055' : 'var(--text-muted)'}">${hiddenLinks}</div><div class="stat-label">${_t("stat_hidden")}</div></div>
   `;
 
   const visibleData = adminData.links.filter(l => !l.hidden);
@@ -442,8 +473,8 @@ function renderOverview() {
     const cat = adminData.categories.find(c => c.id === link.categoryId);
     return `<tr>
       <td>${escHtml(link.title)}</td>
-      <td class="url-cell"><a href="javascript:void(0)" onclick="adminOpenLink(this.dataset.url)" data-url="${escAttr(link.url)}">${escHtml(link.url)}</a></td>
-      <td>${cat ? (cat.icon || "") + " " + escHtml(_catName(cat)) : "—"}</td>
+      <td class="url-cell"><a href="#" class="admin-link" data-url="${escAttr(link.url)}">${escHtml(link.url)}</a></td>
+      <td>${cat ? escHtml(cat.icon || "") + " " + escHtml(_catName(cat)) : "—"}</td>
       <td>${escHtml(link.desc || "—")}</td>
     </tr>`;
   }).join("");
@@ -453,6 +484,21 @@ function renderOverview() {
       <thead><tr><th>${_t("th_name")}</th><th>${_t("th_url")}</th><th>${_t("th_category")}</th><th>${_t("th_desc")}</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
+}
+
+function bindAdminLinkEvents() {
+  const containers = ["overviewTable", "linksTable"]
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  containers.forEach(container => {
+    container.onclick = (event) => {
+      const link = event.target.closest(".admin-link");
+      if (!link || !container.contains(link)) return;
+      event.preventDefault();
+      adminOpenLink(link.dataset.url);
+    };
+  });
 }
 
 // ─── Categories ──────────────────────────────────────────────
@@ -486,7 +532,7 @@ function renderCatChips() {
   }
   container.innerHTML = adminData.categories.map((cat, idx) => `
     <div class="cat-chip" data-id="${cat.id}">
-      <span class="chip-name">${cat.icon || "📁"} ${escHtml(_catName(cat))}</span>
+      <span class="chip-name">${escHtml(cat.icon || "📁")} ${escHtml(_catName(cat))}</span>
       <button class="chip-btn chip-top"   data-id="${cat.id}" data-i18n-title="admin_cat_top" ${idx === 0 ? "disabled style='opacity:.25;cursor:default;'" : ""}>⏫</button>
       <button class="chip-btn chip-up"    data-id="${cat.id}" data-i18n-title="admin_cat_up" ${idx === 0 ? "disabled style='opacity:.25;cursor:default;'" : ""}>⬆</button>
       <button class="chip-btn chip-down"  data-id="${cat.id}" data-i18n-title="admin_cat_down" ${idx === adminData.categories.length - 1 ? "disabled style='opacity:.25;cursor:default;'" : ""}>⬇</button>
@@ -614,10 +660,10 @@ function bindLinksEvents() {
 async function batchDeleteLinks() {
   const checkedBoxes = document.querySelectorAll(".link-checkbox:checked");
   if (checkedBoxes.length === 0) {
-    showToast(_t("admin_batch_no_selection", "请先勾选要删除的网址"));
+    showToast(_t("admin_batch_no_selection"));
     return;
   }
-  if (!confirm(_t("admin_batch_delete_confirm", { count: checkedBoxes.length }, `确定要删除选中的 ${checkedBoxes.length} 个网址吗？此操作不可恢复。`))) return;
+  if (!confirm(_t("admin_batch_delete_confirm", { count: checkedBoxes.length }))) return;
 
   const idsToDelete = Array.from(checkedBoxes).map(cb => cb.dataset.id);
   
@@ -632,7 +678,7 @@ async function batchDeleteLinks() {
   if (personalDeleted > 0) await saveUserLinks();
   
   renderAll();
-  showToast(_t("admin_batch_deleted", { count: idsToDelete.length }, `已删除 ${idsToDelete.length} 个网址`));
+  showToast(_t("admin_batch_deleted", { count: idsToDelete.length }));
 }
 
 function populateCatSelects() {
@@ -645,7 +691,7 @@ function populateCatSelects() {
       ? `<option value="" data-i18n="admin_all_cats">${_t("admin_all_cats")}</option>`
       : "";
     el.innerHTML = allOpt + adminData.categories.map(c =>
-      `<option value="${c.id}">${c.icon || ""} ${escHtml(_catName(c))}</option>`
+      `<option value="${c.id}">${escHtml(c.icon || "")} ${escHtml(_catName(c))}</option>`
     ).join("");
     if (prevVal) el.value = prevVal;
   });
@@ -694,7 +740,7 @@ async function renderLinksTable() {
     const isHidden = !!link.hidden;
     return `<tr data-id="${link.id}" draggable="true" class="${isHidden ? 'row-hidden' : ''}">
       <td><input type="checkbox" class="link-checkbox" data-id="${link.id}" style="margin-right:6px;cursor:pointer;" /><span class="drag-handle" style="cursor:grab;color:var(--text-muted);margin-right:6px;font-size:14px;" data-i18n-title="admin_drag_title">⠿</span>${escHtml(link.title)} ${isHidden ? `<span style="color:var(--danger);font-size:11px;">[${_t("admin_hidden_tag")}]</span>` : ''}</td>
-      <td class="url-cell" style="max-width:220px;"><a href="javascript:void(0)" onclick="adminOpenLink(this.dataset.url)" data-url="${escAttr(link.url)}" title="${escAttr(link.url)}" style="color:var(--url-color);">${escHtml(link.url)}</a></td>
+      <td class="url-cell" style="max-width:220px;"><a href="#" class="admin-link" data-url="${escAttr(link.url)}" title="${escAttr(link.url)}" style="color:var(--url-color);">${escHtml(link.url)}</a></td>
       <td>${cat ? escHtml(_catName(cat)) : `<span style="color:var(--text-muted)">${_t("admin_no_category")}</span>`}</td>
       <td>${escHtml(link.desc || "—")}</td>
       <td style="width:320px;white-space:nowrap;">
@@ -884,18 +930,36 @@ async function saveEditLink() {
   }
 
   url = normalizeUrl(url);
+  const wasEditing = Boolean(editingLinkId);
 
-  if (editingLinkId) {
+  if (wasEditing) {
     // 编辑模式：先在公共分类中查找，再在个人网址中查找
     const idxAdmin = adminData.links.findIndex(l => l.id === editingLinkId);
     if (idxAdmin > -1) {
-      adminData.links[idxAdmin] = { ...adminData.links[idxAdmin], title, url, desc, categoryId: catId };
-      saveAdminData();
+      const existing = adminData.links[idxAdmin];
+      if (catId === PERSONAL_CAT_ID) {
+        adminData.links.splice(idxAdmin, 1);
+        userLinksData.push({ ...existing, title, url, desc, categoryId: catId, hidden: false });
+        await Promise.all([saveAdminData(), saveUserLinks()]);
+      } else {
+        adminData.links[idxAdmin] = { ...existing, title, url, desc, categoryId: catId };
+        await saveAdminData();
+      }
     } else {
       const idxUser = userLinksData.findIndex(l => l.id === editingLinkId);
       if (idxUser > -1) {
-        userLinksData[idxUser] = { ...userLinksData[idxUser], title, url, desc, categoryId: catId };
-        await saveUserLinks();
+        const existing = userLinksData[idxUser];
+        if (catId === PERSONAL_CAT_ID) {
+          userLinksData[idxUser] = { ...existing, title, url, desc, categoryId: catId };
+          await saveUserLinks();
+        } else {
+          userLinksData.splice(idxUser, 1);
+          adminData.links.push({ ...existing, title, url, desc, categoryId: catId, hidden: !!existing.hidden });
+          await Promise.all([saveUserLinks(), saveAdminData()]);
+        }
+      } else {
+        showToast(_t("admin_link_not_found"));
+        return;
       }
     }
   } else {
@@ -906,7 +970,7 @@ async function saveEditLink() {
       ? userLinksData.some(l => l.categoryId === PERSONAL_CAT_ID && normalizeUrl(l.url) + "||" + (l.title||"").trim() === dedupKey)
       : adminData.links.some(l => l.categoryId === catId && normalizeUrl(l.url) + "||" + (l.title||"").trim() === dedupKey);
     if (isDuplicate) {
-      showToast("⚠️ 该分类下已存在相同网址，无需重复添加");
+      showToast("⚠️ " + _t("admin_duplicate_link"));
       return;
     }
     
@@ -923,12 +987,13 @@ async function saveEditLink() {
         id: "lk_" + Date.now(),
         categoryId: catId, title, url: normUrl, desc, hidden: false
       });
+      await saveAdminData();
     }
   }
 
   renderAll();
   closeEditModal();
-  showToast(editingLinkId ? _t("admin_updated") : _t("admin_added"));
+  showToast(wasEditing ? _t("admin_updated") : _t("admin_added"));
 }
 
 // ─── Batch Import ─────────────────────────────────────────────
@@ -945,21 +1010,87 @@ function bindBatchEvents() {
 
 function parseBatchLines() {
   const raw = document.getElementById("batchData").value;
-  const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
+  const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
   return lines.map(line => {
-    const parts = line.split(/[,，\t]/).map(p => p.trim());
+    const parts = parseBatchLine(line).map(p => p.trim());
     // 清洗 URL：去掉 @url: 前缀、反引号、markdown 格式
     const cleanUrl = (u) => (u || "")
       .replace(/^@url:/i, "")      // 去掉 @url: 前缀
       .replace(/`+/g, "")           // 去掉所有反引号
       .trim();
-    // 新格式："分类,标题,网址"（3列）
-    // 旧格式："标题,网址"（2列）
-    if (parts.length >= 3) {
-      return { category: parts[0] || "", title: parts[1] || "", url: cleanUrl(parts[2]) };
+
+    const isUrlCandidate = (value) =>
+      /^(?:https?|file):\/\//i.test(value || "") ||
+      /^[A-Za-z]:[\\/]/.test(value || "") ||
+      /^\/(?!\/)/.test(value || "");
+
+    // 优先定位网址列，兼容旧版未转义标题中的逗号。
+    const urlIndex = parts.findIndex((part, index) => index > 0 && isUrlCandidate(part));
+    if (urlIndex === 1) {
+      return {
+        category: "",
+        title: parts[0] || "",
+        url: cleanUrl(parts[1]),
+        desc: parts.slice(2).join("，")
+      };
     }
-    return { category: "", title: parts[0] || "", url: cleanUrl(parts[1]), desc: parts[2] || "" };
+    if (urlIndex > 1) {
+      return {
+        category: parts[0] || "",
+        title: parts.slice(1, urlIndex).join(","),
+        url: cleanUrl(parts[urlIndex]),
+        desc: parts.slice(urlIndex + 1).join("，")
+      };
+    }
+
+    return { category: "", title: parts[0] || "", url: cleanUrl(parts[1]), desc: "" };
   }).filter(item => item.title && item.url);
+}
+
+function parseBatchLine(line) {
+  let delimiter = ",";
+  let quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (quoted && line[i + 1] === '"') {
+        i++;
+      } else {
+        quoted = !quoted;
+      }
+    } else if ((ch === "\t" || ch === "，") && !quoted) {
+      delimiter = "\t";
+      if (ch === "，") delimiter = "，";
+      break;
+    }
+  }
+
+  const fields = [];
+  let value = "";
+  quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (quoted && line[i + 1] === '"') {
+        value += '"';
+        i++;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (ch === delimiter && !quoted) {
+      fields.push(value);
+      value = "";
+    } else {
+      value += ch;
+    }
+  }
+  fields.push(value);
+  return fields;
+}
+
+function escapeBatchField(value) {
+  const text = String(value == null ? "" : value).replace(/\r?\n/g, " ");
+  return /[",]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
 function previewBatch() {
@@ -1084,7 +1215,7 @@ async function importBatch() {
   
   // 提示导入结果（含去重信息）
   if (skipped > 0) {
-    showToast(`✅ 导入 ${imported} 条，跳过重复 ${skipped} 条`);
+    showToast(_t("admin_import_skipped", { imported: imported, skipped: skipped }));
   } else {
     showToast(_t("admin_imported", { count: imported }));
   }
@@ -1160,9 +1291,9 @@ function exportLinks() {
   const lines = links.map(link => {
     const cat = adminData.categories.find(c => c.id === link.categoryId);
     const catName = cat ? cat.name : "";
-    return `${catName},${link.title},${link.url}`;
+    return [catName, link.title, link.url].map(escapeBatchField).join(",");
   });
-  const content = lines.join("\n");
+  const content = "\uFEFF" + lines.join("\n");
 
   let filename = _t("admin_export_filename_base");
   if (catId) {
@@ -1325,9 +1456,7 @@ async function renderAvatarGrid() {
   
   grid.innerHTML = AVATAR_LIST.map(f => {
     const selected = (f === current) ? "border:3px solid var(--accent,#667eea);" : "border:2px solid var(--border-color,#ddd);";
-    return `<img src="../icons/avatars/${f}" data-avatar="${f}" style="width:60px;height:60px;border-radius:50%;cursor:pointer;${selected}transition:transform .2s;" 
-      onmouseover="this.style.transform='scale(1.1)'" 
-      onmouseout="this.style.transform='scale(1)'">`;
+    return `<img class="avatar-option" src="../icons/avatars/${f}" data-avatar="${f}" style="width:60px;height:60px;border-radius:50%;cursor:pointer;${selected}transition:transform .2s;">`;
   }).join("");
   
   grid.querySelectorAll("img").forEach(img => {
@@ -1335,7 +1464,7 @@ async function renderAvatarGrid() {
       const avatar = img.dataset.avatar;
       await chrome.storage.local.set({ userAvatar: avatar });
       renderAvatarGrid();
-      showToast(_t("admin_avatar_saved", "头像已更新"));
+      showToast(_t("admin_avatar_saved"));
     });
   });
 }

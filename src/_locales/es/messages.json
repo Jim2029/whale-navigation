@@ -44,6 +44,15 @@
   "fabTitle": {
     "message": "Añadir URL"
   },
+  "bookmarkSaved": {
+    "message": "Marcado"
+  },
+  "bookmarkDomain": {
+    "message": "Guardar dominio"
+  },
+  "bookmarkPage": {
+    "message": "Guardar página"
+  },
   "notLoggedIn": {
     "message": "No has iniciado sesión"
   },
@@ -58,6 +67,9 @@
   },
   "loginToViewPersonal": {
     "message": "Inicia sesión para ver tus URLs personales"
+  },
+  "personalLoginHint": {
+    "message": "Inicia sesión arriba a la derecha para guardar tus enlaces"
   },
   "goLogin": {
     "message": "Iniciar sesión"
@@ -179,10 +191,526 @@
   "logoutConfirmCurrent": {
     "message": "Usuario actual"
   },
+  "catName_cat_01": {
+    "message": "Motores de búsqueda"
+  },
+  "catName_cat_personal": {
+    "message": "Personal"
+  },
+  "catName_cat_03": {
+    "message": "Sitios favoritos"
+  },
+  "catName_cat_04": {
+    "message": "Plataformas educativas"
+  },
+  "catName_cat_05": {
+    "message": "Aprendizaje de idiomas"
+  },
+  "catName_cat_06": {
+    "message": "Sitios de directorio"
+  },
+  "catName_cat_07": {
+    "message": "Multimedia"
+  },
+  "catName_cat_08": {
+    "message": "Herramientas"
+  },
+  "catName_cat_09": {
+    "message": "Habilidades profesionales"
+  },
+  "catName_cat_10": {
+    "message": "Investigación académica"
+  },
+  "catName_cat_11": {
+    "message": "Libros electrónicos"
+  },
+  "catName_cat_12": {
+    "message": "Humanidades"
+  },
+  "catName_cat_13": {
+    "message": "Ciencia y medicina"
+  },
+  "catName_cat_14": {
+    "message": "Entretenimiento"
+  },
+  "catName_cat_15": {
+    "message": "Cursos online"
+  },
+  "catName_cat_16": {
+    "message": "Recursos de IA"
+  },
+  "catName_cat_17": {
+    "message": "Recursos K12"
+  },
+  "admin_title": {
+    "message": "Navegación Ballena - Administración"
+  },
+  "admin_home": {
+    "message": "Inicio"
+  },
+  "admin_badge_default": {
+    "message": "Admin"
+  },
+  "admin_logout": {
+    "message": "Salir"
+  },
+  "admin_user_logout": {
+    "message": "{name} | Salir"
+  },
+  "admin_overview": {
+    "message": "Resumen"
+  },
+  "admin_categories": {
+    "message": "Categorías"
+  },
+  "admin_links": {
+    "message": "Enlaces"
+  },
+  "admin_batch_import": {
+    "message": "Importar"
+  },
+  "admin_batch_export": {
+    "message": "Exportar"
+  },
+  "admin_about": {
+    "message": "Acerca de"
+  },
+  "admin_tutorial": {
+    "message": "Tutorial"
+  },
+  "admin_add_cat_title": {
+    "message": "Añadir categoría"
+  },
+  "admin_cat_name_label": {
+    "message": "Nombre de categoría *"
+  },
+  "admin_cat_name_placeholder": {
+    "message": "ej. Recursos de aprendizaje"
+  },
+  "admin_cat_icon_label": {
+    "message": "Emoji de icono"
+  },
+  "admin_cat_icon_placeholder": {
+    "message": "📚"
+  },
+  "admin_add_cat_btn": {
+    "message": "Añadir categoría"
+  },
+  "admin_current_cats": {
+    "message": "Categorías actuales"
+  },
+  "admin_no_cats": {
+    "message": "Sin categorías, añade una"
+  },
+  "admin_add_link_btn": {
+    "message": "Añadir enlace"
+  },
+  "admin_batch_bar_hint": {
+    "message": "Marca enlaces para operaciones en lote:"
+  },
+  "admin_batch_show": {
+    "message": "Mostrar en lote"
+  },
+  "admin_batch_hide": {
+    "message": "Ocultar en lote"
+  },
+  "admin_all_cats": {
+    "message": "Todas las categorías"
+  },
+  "admin_all_status": {
+    "message": "Todos los estados"
+  },
+  "admin_status_visible": {
+    "message": "Solo visibles"
+  },
+  "admin_status_hidden": {
+    "message": "Solo ocultos"
+  },
+  "admin_search_placeholder": {
+    "message": "Buscar título/URL..."
+  },
+  "admin_batch_paste_title": {
+    "message": "Pega datos (uno por línea)"
+  },
+  "admin_batch_target_cat": {
+    "message": "Categoría destino"
+  },
+  "admin_batch_placeholder": {
+    "message": "Categoría,Título,URL\nej.\nSitios habituales,Baidu,https://www.baidu.com\nBuscadores,Google,https://www.google.com\nTambién se admite el formato de dos columnas Título,URL usando la categoría de destino."
+  },
+  "admin_batch_format_hint": {
+    "message": "Formato: <code>Categoría,Título,URL</code>. Deja la categoría vacía para usar la categoría de destino seleccionada. También se admite <code>Título,URL</code> en dos columnas. Las comas y comillas se procesan automáticamente y se puede usar Tab.<br/>Las URL públicas deben empezar por <code>http://</code> o <code>https://</code>; los enlaces personales también admiten rutas locales."
+  },
+  "admin_preview_btn": {
+    "message": "Vista previa"
+  },
+  "admin_import_btn": {
+    "message": "Importar"
+  },
+  "admin_export_title": {
+    "message": "Exportar enlaces a archivo de texto"
+  },
+  "admin_export_select_cat": {
+    "message": "Seleccionar categoría"
+  },
+  "admin_export_format_hint": {
+    "message": "Formato de exportación: <code>Categoría,Título,URL</code>. Los campos con comas o comillas se entrecomillan automáticamente y se pueden importar directamente."
+  },
+  "admin_export_btn": {
+    "message": "Exportar como .txt"
+  },
+  "admin_about_title": {
+    "message": "Navegación Ballena V1.4.3"
+  },
+  "admin_about_desc": {
+    "message": "Copyright (C) 2026 Autor: jingbo<br/>Este programa es software libre: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU (GPL) publicada por la Free Software Foundation, ya sea la versión 3 o cualquier versión posterior.<br/>Este programa se ejecuta completamente de forma local, sin componentes ni funciones remotas;<br/>Las URL que introduce se guardan solo en su propio ordenador.<br/>Todos los datos se guardan solo en su propio navegador, sin cifrado. Evite guardar URL confidenciales en un ordenador compartido y proteja su cuenta de Windows.<br/>Siga la cuenta oficial de WeChat Banpoyun para actualizaciones del programa o de las URL;<br/>Correo de contacto: njunion@126.com"
+  },
+  "admin_about_qr_label": {
+    "message": "WeChat del autor"
+  },
+  "admin_edit_modal_title": {
+    "message": "Editar enlace"
+  },
+  "admin_add_modal_title": {
+    "message": "Añadir enlace"
+  },
+  "admin_title_label": {
+    "message": "Título *"
+  },
+  "admin_url_label": {
+    "message": "URL *"
+  },
+  "admin_desc_label": {
+    "message": "Descripción"
+  },
+  "admin_cat_label": {
+    "message": "Categoría"
+  },
+  "th_name": {
+    "message": "Nombre"
+  },
+  "th_url": {
+    "message": "URL"
+  },
+  "th_category": {
+    "message": "Categoría"
+  },
+  "th_desc": {
+    "message": "Descripción"
+  },
+  "th_actions": {
+    "message": "Acciones"
+  },
+  "th_status": {
+    "message": "Estado"
+  },
+  "th_title": {
+    "message": "Título"
+  },
+  "stat_cat_count": {
+    "message": "Categorías"
+  },
+  "stat_visible": {
+    "message": "Enlaces visibles"
+  },
+  "stat_hidden": {
+    "message": "Ocultos"
+  },
+  "login_title": {
+    "message": "Inicia sesión"
+  },
+  "login_username_ph": {
+    "message": "Usuario"
+  },
+  "login_password_ph": {
+    "message": "Contraseña"
+  },
+  "login_btn": {
+    "message": "Entrar"
+  },
+  "login_no_account": {
+    "message": "¿Sin cuenta?"
+  },
+  "login_go_register": {
+    "message": "Registrarse"
+  },
+  "register_title": {
+    "message": "Crear cuenta"
+  },
+  "register_username_ph": {
+    "message": "Usuario (3-20 caracteres)"
+  },
+  "register_password_ph": {
+    "message": "Contraseña (mín. 6 caracteres)"
+  },
+  "register_password2_ph": {
+    "message": "Confirmar contraseña"
+  },
+  "register_btn": {
+    "message": "Registrarse"
+  },
+  "register_have_account": {
+    "message": "¿Ya tienes cuenta?"
+  },
+  "register_go_login": {
+    "message": "Iniciar sesión"
+  },
+  "admin_need_username_password": {
+    "message": "Introduce usuario y contraseña"
+  },
+  "admin_need_cat_name": {
+    "message": "Introduce el nombre de la categoría"
+  },
+  "admin_cat_added": {
+    "message": "✅ Categoría añadida"
+  },
+  "admin_cat_name_empty": {
+    "message": "El nombre de la categoría no puede estar vacío"
+  },
+  "admin_cat_updated": {
+    "message": "✅ Nombre de categoría actualizado"
+  },
+  "admin_cat_deleted": {
+    "message": "Categoría eliminada"
+  },
+  "admin_sorted": {
+    "message": "✅ Orden actualizado"
+  },
+  "admin_hidden": {
+    "message": "Oculto"
+  },
+  "admin_visible": {
+    "message": "Visible"
+  },
+  "admin_select_first": {
+    "message": "Marca primero los enlaces a operar"
+  },
+  "admin_link_deleted": {
+    "message": "Enlace eliminado"
+  },
+  "admin_updated": {
+    "message": "✅ Actualizado"
+  },
+  "admin_added": {
+    "message": "✅ Añadido"
+  },
+  "admin_select_cat": {
+    "message": "Selecciona la categoría destino"
+  },
+  "admin_no_valid_import": {
+    "message": "No hay datos válidos para importar"
+  },
+  "admin_imported": {
+    "message": "✅ {count} enlaces importados"
+  },
+  "admin_no_export": {
+    "message": "No hay enlaces visibles para exportar en esta categoría"
+  },
+  "admin_exported": {
+    "message": "✅ {count} enlaces exportados a {filename}"
+  },
+  "admin_no_preview_data": {
+    "message": "Sin datos válidos, revisa el formato"
+  },
+  "admin_logout_confirm": {
+    "message": "¿Seguro que quieres cerrar sesión?"
+  },
+  "admin_delete_cat_with_links": {
+    "message": "¿Eliminar categoría \"{name}\"? {count} enlaces perderán su categoría."
+  },
+  "admin_delete_cat": {
+    "message": "¿Eliminar categoría \"{name}\"?"
+  },
+  "admin_batch_confirm": {
+    "message": "¿Seguro que quieres {action} los {count} enlaces seleccionados?"
+  },
+  "admin_batch_action_show": {
+    "message": "mostrar"
+  },
+  "admin_batch_action_hide": {
+    "message": "ocultar"
+  },
+  "admin_delete_link": {
+    "message": "¿Eliminar \"{title}\"?"
+  },
+  "admin_empty_overview": {
+    "message": "Sin datos de enlaces. Añade en \"Enlaces\"."
+  },
+  "admin_empty_links": {
+    "message": "Sin enlaces coincidentes"
+  },
+  "admin_no_visible_export": {
+    "message": "Sin enlaces visibles en esta categoría"
+  },
+  "admin_hidden_tag": {
+    "message": "[oculto]"
+  },
+  "admin_no_category": {
+    "message": "Sin categoría"
+  },
+  "admin_action_show": {
+    "message": "Mostrar"
+  },
+  "admin_action_hide": {
+    "message": "Ocultar"
+  },
+  "admin_drag_title": {
+    "message": "Arrastra para ordenar"
+  },
+  "admin_move_first": {
+    "message": "Mover al inicio"
+  },
+  "admin_move_up": {
+    "message": "Subir"
+  },
+  "admin_move_down": {
+    "message": "Bajar"
+  },
+  "admin_move_last": {
+    "message": "Mover al final"
+  },
+  "admin_cat_top": {
+    "message": "Al inicio"
+  },
+  "admin_cat_up": {
+    "message": "Subir"
+  },
+  "admin_cat_down": {
+    "message": "Bajar"
+  },
+  "admin_cat_bottom": {
+    "message": "Al final"
+  },
+  "admin_cat_edit": {
+    "message": "Renombrar"
+  },
+  "admin_cat_del": {
+    "message": "Eliminar categoría"
+  },
+  "admin_save_short": {
+    "message": "Guardar"
+  },
+  "admin_preview_title": {
+    "message": "Vista previa ({count} elementos)"
+  },
+  "admin_export_preview_title": {
+    "message": "Vista previa de exportación: {name} ({count} elementos)"
+  },
+  "admin_export_records_hint": {
+    "message": "{count} registros se exportarán como .txt con formato <code>Categoría,Título,URL</code>."
+  },
+  "admin_unknown_cat": {
+    "message": "Categoría desconocida"
+  },
+  "admin_export_filename_base": {
+    "message": "nav_links"
+  },
+  "admin_addr_format_err": {
+    "message": "❌ Formato de dirección inválido"
+  },
+  "admin_url_format_err": {
+    "message": "❌ Formato de URL inválido"
+  },
+  "admin_avatar_title": {
+    "message": "Configuración de avatar"
+  },
+  "admin_avatar_subtitle": {
+    "message": "Elige tu avatar"
+  },
+  "admin_avatar_hint": {
+    "message": "Se aplica al instante. Tu avatar aparecerá en la esquina superior derecha."
+  },
+  "admin_avatar_saved": {
+    "message": "Avatar actualizado"
+  },
+  "theme_bright": {
+    "message": "Amanecer"
+  },
+  "theme_deep": {
+    "message": "Océano"
+  },
+  "theme_bamboo": {
+    "message": "Bambú"
+  },
+  "theme_sunset": {
+    "message": "Atardecer"
+  },
+  "theme_ink": {
+    "message": "Tinta"
+  },
+  "theme_dark": {
+    "message": "Oscuro"
+  },
+  "admin_batch_delete": {
+    "message": "Eliminar por lotes"
+  },
+  "admin_batch_delete_confirm": {
+    "message": "¿Eliminar {count} enlaces seleccionados? Esto no se puede deshacer."
+  },
+  "admin_batch_no_selection": {
+    "message": "Seleccione primero los enlaces a eliminar"
+  },
+  "admin_batch_deleted": {
+    "message": "{count} enlaces eliminados"
+  },
+  "theme_label": {
+    "message": "Tema"
+  },
+  "language_label": {
+    "message": "Idioma"
+  },
+  "logoHomeTitle": {
+    "message": "Volver al inicio"
+  },
+  "regUsernamePlaceholder": {
+    "message": "3–20 caracteres"
+  },
+  "regPasswordPlaceholder": {
+    "message": "Al menos 6 caracteres"
+  },
+  "regPasswordConfirmPlaceholder": {
+    "message": "Vuelve a escribir la contraseña"
+  },
+  "bookmarkNeedLogin": {
+    "message": "Regístrate o inicia sesión para guardar marcadores"
+  },
+  "bookmarkDomainHttpOnly": {
+    "message": "Solo las URL http/https pueden guardarse como dominio"
+  },
+  "bookmarkDomainParseFailed": {
+    "message": "No se pudo analizar el dominio de la URL"
+  },
+  "admin_link_not_found": {
+    "message": "No se encontró el enlace que se iba a editar"
+  },
+  "admin_duplicate_link": {
+    "message": "Este enlace ya existe en la categoría seleccionada"
+  },
+  "admin_import_skipped": {
+    "message": "✅ Importados {imported}; omitidos {skipped} duplicados"
+  },
+  "tutorial_intro": {
+    "message": "Esta guía explica las funciones principales solo con texto y tablas. Se recomienda establecer esta página como inicio del navegador."
+  },
+  "tutorial_intl_html": {
+    "message": "<nav class='tut-nav'><button class='tut-nav-item active' data-tut='intl-start'>1. Primeros pasos</button><button class='tut-nav-item' data-tut='intl-ui'>2. Interfaz</button><button class='tut-nav-item' data-tut='intl-usage'>3. Uso básico</button><button class='tut-nav-item' data-tut='intl-admin'>4. Administración</button><button class='tut-nav-item' data-tut='intl-feature'>5. Funciones</button><button class='tut-nav-item' data-tut='intl-faq'>6. FAQ</button><button class='tut-nav-item' data-tut='intl-appendix'>7. Apéndice</button></nav><div class='tut-pane active' id='tut-intl-start'><h4>1. Primeros pasos</h4><p>Instala la extensión gratis desde las tiendas oficiales de Chrome, Edge o Firefox. Se recomienda usar esta página como inicio del navegador.</p><div class='tut-tip'><b>Configurar la página de inicio</b><br>Chrome: abre <code>chrome://settings/</code>, entra en Al iniciar y elige Abrir una página específica. Edge y Firefox ofrecen la misma opción en su configuración de inicio. Copia la dirección de la extensión desde la barra de direcciones, por ejemplo <code>chrome-extension://…/pages/popup.html</code>.</div></div><div class='tut-pane' id='tut-intl-ui'><h4>2. Interfaz y búsqueda</h4><div class='table-wrap'><table><tr><th>Área</th><th>Descripción</th></tr><tr><td>Barra superior</td><td>Inicio, búsqueda local, Bing, Google, Todos/Mis enlaces, idioma, tema, administración y cuenta.</td></tr><tr><td>Categorías</td><td>Accede a una categoría. Sus nombres e iconos siguen el idioma seleccionado.</td></tr><tr><td>Tarjetas</td><td>Abren enlaces y permiten ordenar, mover entre categorías o eliminar arrastrando.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-usage'><h4>3. Guardar enlaces</h4><div class='table-wrap'><table><tr><th>Método</th><th>Funcionamiento</th></tr><tr><td>Desde la página</td><td>Pulsa el botón más, escribe título, URL y descripción opcional, elige una categoría y guarda.</td></tr><tr><td>Menú contextual</td><td>Haz clic derecho en una página y elige Guardar en Whale Navigation. Se abre un formulario ya completado.</td></tr><tr><td>Atajo</td><td>Pulsa <code>Ctrl+Shift+K</code>. Puedes cambiarlo en los atajos de la extensión.</td></tr><tr><td>Página o dominio</td><td>Cambia entre guardar la página actual o la página principal con el nombre detectado del sitio.</td></tr><tr><td>Duplicados</td><td>Las URL se normalizan y los duplicados existentes se omiten.</td></tr></table></div><h4>4. Enlaces personales y arrastre</h4><div class='table-wrap'><table><tr><th>Función</th><th>Descripción</th></tr><tr><td>Enlaces personales</td><td>Inicia sesión para guardar enlaces privados. Las cuentas están aisladas y Mis enlaces solo muestra la cuenta actual.</td></tr><tr><td>Archivos locales</td><td>Solo Enlaces personales admite <code>file://</code> o rutas locales. Activa Permitir acceso a URL de archivo en los detalles de la extensión dentro de <code>chrome://extensions</code>.</td></tr><tr><td>Ordenar</td><td>Arrastra una tarjeta a otra posición dentro de la misma categoría.</td></tr><tr><td>Mover categoría</td><td>Arrastra a otra categoría, incluido el movimiento entre Enlaces personales y categorías públicas.</td></tr><tr><td>Eliminar</td><td>Durante el arrastre aparece la zona Eliminar enlace. Suelta allí y confirma.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-admin'><h4>5. Panel de administración</h4><p>Incluye resumen, categorías, enlaces, importación y exportación masiva, avatares, esta guía y Acerca de. El administrador puede añadir, editar, eliminar u ocultar enlaces y filtrarlos por categoría y palabra clave.</p><h4>6. Importación y exportación masiva</h4><div class='table-wrap'><table><tr><th>Formato</th><th>Descripción</th></tr><tr><td><code>Categoría,Título,URL</code></td><td>Formato recomendado, un enlace por línea. Una categoría desconocida usa la categoría de destino seleccionada.</td></tr><tr><td><code>Título,URL</code></td><td>Formato de dos columnas que usa la categoría de destino seleccionada.</td></tr><tr><td>Exportar</td><td>Exporta TXT UTF-8 por categoría con categoría, título y URL para importarlo en otro equipo.</td></tr></table></div><div class='tut-tip'><b>Ejemplos</b><br><code>Sitios frecuentes,Baidu,https://www.baidu.com</code><br><code>Buscadores,Google,https://www.google.com</code></div></div><div class='tut-pane' id='tut-intl-feature'><h4>7. Temas, idiomas y privacidad</h4><p>Hay siete idiomas y seis temas: Amanecer, Océano, Bambú, Atardecer, Tinta y Oscuro. Esta guía cambia con el idioma.</p><ul><li>Funciona localmente sin componentes remotos, analítica ni rastreadores.</li><li>Los enlaces permanecen en el navegador y no se suben a un servidor.</li><li>La navegación no requiere cuenta; iniciar sesión habilita los enlaces personales.</li></ul></div><div class='tut-pane' id='tut-intl-faq'><h4>8. Preguntas frecuentes</h4><div class='table-wrap'><table><tr><th>Pregunta</th><th>Respuesta</th></tr><tr><td>¿Por qué se abre una página completa?</td><td>Ofrece más espacio. Configúrala como inicio para acceder rápidamente.</td></tr><tr><td>¿Por qué pide iniciar sesión?</td><td>Tras registrarte o iniciar sesión, el formulario completado continúa automáticamente.</td></tr><tr><td>El atajo no responde.</td><td>Comprueba conflictos del sistema y cámbialo en la administración de extensiones.</td></tr><tr><td>¿Cómo migro los datos?</td><td>Exporta TXT por categoría e impórtalo en el nuevo equipo.</td></tr><tr><td>¿Qué ocurre al desinstalar?</td><td>Se borran los datos locales; exporta una copia antes.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-appendix'><h4>9. Apéndice</h4><div class='table-wrap'><table><tr><th>Elemento</th><th>Detalles</th></tr><tr><td>Nombre</td><td>Whale Navigation</td></tr><tr><td>Arquitectura</td><td>Extensión Manifest V3, sin backend ni código remoto</td></tr><tr><td>Atajo</td><td><code>Ctrl+Shift+K</code></td></tr><tr><td>Licencia</td><td>GNU GPL versión 3 o posterior</td></tr></table></div></div>"
+  },
   "contextMenuTitle": {
     "message": "Guardar en Navegación Ballena"
   },
   "commandSaveToNav": {
     "message": "Guardar página actual en navegación"
+  },
+  "defaultCategory": {
+    "message": "Predeterminada"
+  },
+  "dropDeleteHint": {
+    "message": "Suelta aquí para eliminar"
+  },
+  "dropDeleteActive": {
+    "message": "Suelta para eliminar"
+  },
+  "dropDeleteNeedLogin": {
+    "message": "Inicia sesión para eliminar"
   }
 }

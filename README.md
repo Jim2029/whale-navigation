@@ -2,7 +2,7 @@
 
 **一站式网址导航浏览器扩展**（Chrome / Edge / Firefox）
 
-当前版本：**v1.4.1**
+当前版本：**v1.4.3**
 
 ---
 
@@ -12,7 +12,7 @@
 
 ## 简体中文
 
-鲸波导航是一款本地运行的网址导航扩展，把浏览器新标签页变成整齐好用的导航台。内置 17 大类、2000 余条精选网址，支持搜索、分类浏览、个人私有收藏与多语言界面。
+鲸波导航是一款本地运行的网址导航扩展，把浏览器新标签页变成整齐好用的导航台。内置 17 大类、1462 条精选网址，支持搜索、分类浏览、个人私有收藏与多语言界面。
 
 ### ✨ 核心功能
 
@@ -48,14 +48,14 @@
 ### 🚀 安装方式
 
 **Chrome / Edge 用户**：
-1. 下载本仓库 `nav-extension-chrome-v1.4.1.zip`
+1. 下载本仓库 `nav-extension-chrome-v1.4.3.zip`
 2. 解压到任意文件夹
 3. 打开浏览器扩展管理页（`chrome://extensions` 或 `edge://extensions`）
 4. 开启「开发者模式」
 5. 点击「加载已解压的扩展程序」，选择解压后的文件夹
 
 **Firefox 用户**：
-1. 下载 `nav-extension-firefox-v1.4.1.zip`
+1. 下载 `nav-extension-firefox-v1.4.3.zip`
 2. 打开 Firefox，进入 `about:addons`
 3. 点击 ⚙️ 齿轮图标 → 「从文件安装附加组件…」
 4. 选择下载的 zip 文件
@@ -82,7 +82,7 @@
 
 ## 🐋 English
 
-Whale Navigation is a fully local bookmark navigator for Chrome and Edge. It turns your new tab into a clean, well-organized navigation page with 17 curated categories, 2000+ quality links, private personal bookmarks, 7 interface languages and 6 color themes.
+Whale Navigation is a fully local bookmark navigator for Chrome and Edge. It turns your new tab into a clean, well-organized navigation page with 17 curated categories, 1,462 quality links, private personal bookmarks, 7 interface languages and 6 color themes.
 
 ### ✨ Features
 
@@ -107,14 +107,14 @@ Whale Navigation is a fully local bookmark navigator for Chrome and Edge. It tur
 ### 🚀 Installation
 
 **For Chrome / Edge users:**
-1. Download `nav-extension-chrome-v1.4.1.zip` from this repository
+1. Download `nav-extension-chrome-v1.4.3.zip` from this repository
 2. Extract it to any folder
 3. Open `chrome://extensions` or `edge://extensions`
 4. Enable **Developer mode**
 5. Click **Load unpacked** and select the extracted folder
 
 **For Firefox users:**
-1. Download `nav-extension-firefox-v1.4.1.zip`
+1. Download `nav-extension-firefox-v1.4.3.zip`
 2. Open Firefox and go to `about:addons`
 3. Click the ⚙️ gear icon → **Install Add-on From File...**
 4. Select the downloaded zip file

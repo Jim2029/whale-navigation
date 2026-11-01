@@ -188,17 +188,53 @@
     .about-qrcode img { width: 150px; height: 150px; border-radius: 10px; object-fit: cover;
       box-shadow: 0 4px 16px rgba(0,0,0,.12); display: block; }
     .about-qrcode .qr-label { margin-top: 8px; font-size: 13px; color: var(--about-text); }
+
+    /* ── 使用教程 ── */
+    .tutorial { max-width: 980px; }
+    .tutorial-intro { background: var(--bg-card); border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent); border-radius: 10px; padding: 14px 18px;
+      margin-bottom: 14px; font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+    .tut-nav { display: flex; flex-wrap: wrap; gap: 6px; background: var(--bg-card);
+      border: 1px solid var(--border-color); border-radius: 10px; padding: 8px;
+      margin-bottom: 14px; position: sticky; top: 0; z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: background .3s, border-color .3s; }
+    .tut-nav-item { border: none; background: transparent; color: var(--text-secondary);
+      font-family: inherit; font-size: 13px; padding: 8px 15px; border-radius: 8px;
+      cursor: pointer; white-space: nowrap; transition: all .15s; }
+    .tut-nav-item:hover { background: var(--bg-hover); color: var(--accent); }
+    .tut-nav-item.active { background: var(--accent-gradient); color: #fff; font-weight: 600; }
+    .tut-pane { display: none; background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 10px; padding: 2px 20px 18px; transition: background .3s, border-color .3s; }
+    .tut-pane.active { display: block; }
+    .tutorial h4 { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 16px 0 6px; }
+    .tutorial p { font-size: 13px; color: var(--text-secondary); line-height: 1.85; margin: 6px 0; }
+    .tutorial ul, .tutorial ol { margin: 6px 0 6px 22px; }
+    .tutorial li { font-size: 13px; color: var(--text-secondary); line-height: 1.85; }
+    .tutorial code { background: var(--bg-hover); color: var(--accent);
+      padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+    .tutorial .tut-tip { background: rgba(253,203,110,.16); border-left: 3px solid #fdcb6e;
+      border-radius: 6px; padding: 9px 14px; margin: 10px 0; font-size: 12.5px; line-height: 1.8;
+      color: var(--text-secondary); }
+    .tutorial .tut-tip b { color: #e17055; }
+    .tutorial table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5px; }
+    .tutorial .table-wrap { margin: 10px 0; overflow-x: auto; }
+    .tutorial .table-wrap table { margin: 0; min-width: 680px; }
+    .tutorial th, .tutorial td { border: 1px solid var(--border-color); padding: 7px 10px;
+      text-align: left; color: var(--text-secondary); }
+    .tutorial th { background: var(--table-header-bg); font-weight: 600; color: var(--text-secondary); }
+    .avatar-option:hover { transform: scale(1.1); }
+    [data-lang-scope][hidden] { display: none !important; }
   </style>
 </head>
 <body>
 
 <header class="admin-header">
-  <h1><img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50" style="cursor:pointer;" title="回首页"></h1>
+  <h1><img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50" style="cursor:pointer;" title="回首页" data-i18n-alt="appName" data-i18n-title="logoHomeTitle"></h1>
   <div class="header-right">
     <a class="home-link" id="homeLink" href="#">🏠 <span data-i18n="admin_home">回首页</span></a>
     <span class="badge" id="adminBadge">🔐 <span data-i18n="admin_badge_default">管理员</span></span>
-    <select id="langSelect" title="Language"></select>
-    <select id="themeSelect" title="配色" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+    <select id="langSelect" title="Language" data-i18n-title="language_label"></select>
+    <select id="themeSelect" title="配色" data-i18n-title="theme_label" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
     </select>
   </div>
 </header>
@@ -211,6 +247,7 @@
     <div class="admin-nav-item" data-panel="batch">📋 <span data-i18n="admin_batch_import">批量导入</span></div>
     <div class="admin-nav-item" data-panel="export">📤 <span data-i18n="admin_batch_export">批量导出</span></div>
     <div class="admin-nav-item" data-panel="avatar">👤 <span data-i18n="admin_avatar_title">头像设置</span></div>
+    <div class="admin-nav-item" data-panel="tutorial">📖 <span data-i18n="admin_tutorial">使用教程</span></div>
     <div class="admin-nav-item" data-panel="about">ℹ️ <span data-i18n="admin_about">关于...</span></div>
   </nav>
 
@@ -290,11 +327,8 @@
           <label class="form-label" data-i18n="admin_batch_target_cat">目标分类</label>
           <select class="form-select" id="batchCat" style="width:240px;margin-bottom:10px;"></select>
         </div>
-        <textarea class="batch-textarea" id="batchData" placeholder="标题,网址,描述（描述可选）&#10;例如：&#10;百度,https://www.baidu.com,国内最大搜索引擎&#10;GitHub,https://github.com" data-i18n-placeholder="admin_batch_placeholder"></textarea>
-        <div class="format-hint" data-i18n-html="admin_batch_format_hint">
-          格式：<code>标题,网址,描述（可选）</code>，每行一条，支持英文逗号或Tab分隔。<br/>
-          网址必须以 <code>http://</code> 或 <code>https://</code> 开头。
-        </div>
+        <textarea class="batch-textarea" id="batchData" placeholder="" data-i18n-placeholder="admin_batch_placeholder"></textarea>
+        <div class="format-hint" data-i18n-html="admin_batch_format_hint"></div>
         <div class="form-actions">
           <button class="btn btn-secondary" id="previewBatchBtn">👁 <span data-i18n="admin_preview_btn">预览</span></button>
           <button class="btn btn-primary" id="importBatchBtn">⬆️ <span data-i18n="admin_import_btn">导入</span></button>
@@ -315,9 +349,7 @@
             <option value="" data-i18n="admin_all_cats">全部分类</option>
           </select>
         </div>
-        <div class="format-hint" style="margin-bottom:14px;" data-i18n-html="admin_export_format_hint">
-          导出格式：<code>标题,网址</code>，每行一条，与批量导入格式一致。可直接用于批量导入。
-        </div>
+        <div class="format-hint" style="margin-bottom:14px;" data-i18n-html="admin_export_format_hint"></div>
         <div class="form-actions">
           <button class="btn btn-secondary" id="previewExportBtn">👁 <span data-i18n="admin_preview_btn">预览</span></button>
           <button class="btn btn-primary" id="exportBtn">📥 <span data-i18n="admin_export_btn">导出为 .txt</span></button>
@@ -336,9 +368,7 @@
         <div id="avatarGrid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:16px 0;">
           <!-- 头像选项由 JS 动态生成 -->
         </div>
-        <div style="margin-top:12px;font-size:12px;color:var(--text-muted);" data-i18n="admin_avatar_hint">
-          选择后立即生效，首页右上角会显示你的头像。
-        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--text-muted);" data-i18n="admin_avatar_hint"></div>
       </div>
     </div>
 
@@ -348,20 +378,244 @@
       </div>
       <div class="about-panel" style="text-align:center;">
         <div class="about-header" style="justify-content:center;">
-          <img class="about-logo" src="../icons/logo-circle.png" alt="鲸波导航" width="72" height="72" onerror="this.style.display='none'">
-          <div class="about-title" data-i18n="admin_about_title">鲸波导航 V1.4.1</div>
+          <img class="about-logo" src="../icons/logo-circle.png" alt="鲸波导航" data-i18n-alt="appName" width="72" height="72">
+          <div class="about-title" data-i18n="admin_about_title">鲸波导航 V1.4.3</div>
         </div>
         <div class="about-body" style="text-align:center;">
-          <div class="about-desc" data-i18n-html="admin_about_desc" style="text-align:center;">
-            Copyright (C) 2026 作者：jingbo<br/>
-            本程序是自由软件：您可以根据自由软件基金会发布的 GNU 通用公共许可证（GPL）第 3 版或更高版本的条款，重新分发和/或修改它。<br/>
-            本程序纯本地运行，无任何远程组件或功能；<br/>
-            您录入的网址仅保存在您自己的电脑上。<br/>
-            本插件所有数据仅保存在你自己电脑的浏览器中，未加密存储。请避免在共用电脑上保存敏感网址，并妥善保管你的 Windows 账号。<br/>
-            程序或网址更新请关注微信公众号「半坡云」获取；<br/>
-            交流邮箱：njunion@126.com
-          </div>
+          <div class="about-desc" data-i18n-html="admin_about_desc" style="text-align:center;"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- ── 使用教程 ── -->
+    <div class="panel-section" id="panel-tutorial">
+      <div class="section-header">
+        <div class="section-title">📖 <span data-i18n="admin_tutorial">使用教程</span></div>
+      </div>
+
+      <div class="tutorial" data-lang-scope="zh_CN">
+        <div class="tutorial-intro">
+          <b>建议：</b>把鲸波导航设为浏览器首页。这样每次打开浏览器就直接进入导航台，不必再点工具栏图标 —— 设置方法见「一、开始使用」第 3 节。
+        </div>
+
+        <nav class="tut-nav">
+          <button class="tut-nav-item active" data-tut="start">一、开始使用</button>
+          <button class="tut-nav-item" data-tut="ui">二、界面介绍</button>
+          <button class="tut-nav-item" data-tut="usage">三、基本用法</button>
+          <button class="tut-nav-item" data-tut="admin">四、后台管理</button>
+          <button class="tut-nav-item" data-tut="feature">五、特色功能</button>
+          <button class="tut-nav-item" data-tut="faq">六、常见问题</button>
+          <button class="tut-nav-item" data-tut="appendix">七、附录</button>
+        </nav>
+
+        <div class="tut-panes">
+        <div class="tut-pane active" id="tut-start">
+
+          <h4>1.1 安装扩展</h4>
+          <p>三种浏览器(chrome/edge/Firefox等)都可以通过各自的官方扩展商店安装，均为免费。</p>
+          <h4>1.2 建议：把扩展设为浏览器首页</h4>
+          <div class="tut-tip"><b>★ 使用建议</b><br>
+            安装后把鲸波导航设为浏览器首页，打开浏览器即进入导航台，省去一次点击；新标签页可以在当前页打开，导航页不占用标签；常用网站固定在导航台上，形成自己的「浏览器启动页」。</div>
+
+          <h4>1.3 设置为浏览器首页</h4>
+          <p><b>Chrome：</b></p>
+          <ol>
+            <li>地址栏输入 <code>chrome://settings/</code> 回车</li>
+            <li>左侧点击「启动时」</li>
+            <li>选择「打开特定页面」</li>
+            <li>点「添加新页面」，粘贴扩展地址（见下）后点「添加」</li>
+          </ol>
+          <div class="tut-tip"><b>扩展地址怎么取？</b><br>
+            先点击一次浏览器工具栏的鲸波图标，在打开的导航页地址栏里复制完整地址（形如
+            <code>chrome-extension://…/pages/popup.html</code>），再粘贴到上面的输入框。</div>
+          <p><b>Edge：</b>地址栏输入 <code>edge://settings/</code> → 左侧「外观」→「主页」→ 选「自定义」后粘贴同一地址。</p>
+          <p><b>Firefox：</b>菜单 →「设置」→「主页」→ 在「主页和新建标签页」选「自定义网址」后粘贴。</p>
+          <p>设置完成后关闭浏览器再打开，若直接显示导航页即成功。</p>
+        </div>
+
+        <div class="tut-pane" id="tut-ui">
+
+          <h4>2.1 顶部工具栏</h4>
+          <table>
+            <tr><th style="width:88px">位置</th><th>说明</th></tr>
+            <tr><td>鲸波 Logo</td><td>点击返回首页（重置视图，不刷新页面）</td></tr>
+            <tr><td>搜索框</td><td>支持「本站检索 / 必应 / Google」三种方式，一键切换</td></tr>
+            <tr><td>全部 / 我的</td><td>「全部」显示预置 + 个人网址；「我的」只显示你自己添加的</td></tr>
+            <tr><td>Language</td><td>切换界面语言，共 7 种</td></tr>
+            <tr><td>Theme</td><td>切换主题配色，共 6 套（晨曦、深海、竹林、晚霞、墨韵、暗夜）</td></tr>
+            <tr><td>管理</td><td>进入管理员后台（需登录）</td></tr>
+            <tr><td>头像 + 用户名</td><td>该区域可注册 / 登录 / 退出登录</td></tr>
+          </table>
+
+          <h4>2.2 左侧分类栏</h4>
+          <p>共 17 个分类，点击即跳转到对应区域。分类依次为：🔍 搜索引擎、⭐ 个人网址、🌐 常用网站、🎓 教育平台、🗣️ 外语学习、🧭 导航网站、🎬 多媒体类、🛠️ 工具网站、💼 职业技能、🔬 学术科研、📚 电子书籍、📜 文史经地、⚗️ 理工农医、🎮 休闲娱乐、📺 网课资源、🤖 AI资源、🎒 K12资源。</p>
+          <p>全部 17 个分类共内置 1462 条精选网址，开箱即用。</p>
+
+          <h4>2.3 右侧内容区</h4>
+          <p>网址以卡片形式排列，点击卡片即在新标签页打开（导航页保留不被覆盖）。</p>
+        </div>
+
+        <div class="tut-pane" id="tut-usage">
+
+          <h4>3.1 浏览与搜索</h4>
+          <ul>
+            <li>点击左侧分类快速定位</li>
+            <li>本站检索：在搜索框输入关键词，只在已收录的网址中查找，按回车执行</li>
+            <li>必应 / Google：点搜索框上方的引擎标签切换，直接跳转搜索引擎</li>
+          </ul>
+
+          <h4>3.2 添加自己的网址</h4>
+          <p><b>方式一：右下角「＋」按钮</b></p>
+          <ol>
+            <li>点击页面右下角的圆形「＋」</li>
+            <li>填写标题、网址、描述（可选）</li>
+            <li>「所属分类」默认已是「⭐ 个人网址」，可下拉修改</li>
+            <li>点「✓ 保存」</li>
+          </ol>
+          <p><b>方式二：右键收藏（推荐）</b> —— 在任意网页右键 →「收藏到鲸波导航」→ 自动跳转到导航页并弹出已预填标题、网址的保存窗口 → 选择分类后保存。</p>
+          <p><b>方式三：快捷键收藏</b> —— 停留在目标网页，按 <code>Ctrl+Shift+K</code>，同样会弹出预填好的保存窗口。</p>
+          <div class="tut-tip"><b>快捷键冲突？</b><br>
+            可在扩展管理页点击「快捷键」自行修改。<code>Ctrl+Shift+K</code> 是本扩展的默认键。</div>
+
+          <h4>3.3 「收藏域名」与「收藏页面」切换</h4>
+          <p>从右键菜单或快捷键收藏时，URL 输入框右侧有切换按钮。默认「收藏域名」：</p>
+          <p>点击后网址变为网站根地址，标题同时变为网站名称，按钮文字变为「收藏页面」：</p>
+          <table>
+            <tr><th style="width:86px">按钮状态</th><th>URL</th><th>标题</th><th style="width:150px">适用场景</th></tr>
+            <tr><td>收藏域名</td><td>网站根地址，如 <code>https://example.com/</code></td><td>网站名称</td><td>收藏网站本身，作为入口</td></tr>
+            <tr><td>收藏页面</td><td>当前页面完整地址</td><td>当前页面标题</td><td>收藏具体文章 / 页面</td></tr>
+          </table>
+          <p>网站名称优先读取页面声明的 <code>og:site_name</code>；识别不到时从页面标题按「标题 - 网站名」格式提取；最后回退为域名。</p>
+
+          <h4>3.4 注册与个人网址</h4>
+          <p>未登录也能使用全部预置导航。注册登录后可获得专属「⭐ 个人网址」栏目。</p>
+          <ol>
+            <li>点击右上角头像区域</li>
+            <li>切换到「注册」标签</li>
+            <li>用户名 3-20 个字符（支持中文、字母、数字、下划线），密码至少 6 位</li>
+            <li>注册成功后自动登录</li>
+          </ol>
+          <p>登录后把顶部视图切到「我的」，就只显示你自己收藏的网址：</p>
+          <div class="tut-tip"><b>数据隔离</b><br>
+            「个人网址」只有你自己可见，不同账号严格隔离；收藏到其他分类的网址则全局共享。</div>
+          <p><b>本地文件：</b>只有「个人网址」分类允许保存 <code>file://</code> 地址或本地文件路径。首次使用前，请在 <code>chrome://extensions</code> 中打开「鲸波导航」的详情并启用「允许访问文件网址」；公共分类仍只允许 http/https。</p>
+
+          <h4>3.5 拖拽排序</h4>
+          <p>按住网址卡片拖到同分类的其他卡片上可调整顺序；拖到另一个分类栏目或左侧分类名称上，可将网址移动到该分类，包括个人网址与公共分类之间的互相移动。拖动时页面底部会出现「删除网址」区域，拖到那里并确认即可删除该网址。</p>
+
+          <h4>3.6 个性化设置</h4>
+          <ul>
+            <li><b>主题配色</b>：工具栏「Theme」，6 套主题一键切换</li>
+            <li><b>界面语言</b>：工具栏「Language」，7 种语言即时切换</li>
+            <li><b>个人头像</b>：本后台「头像设置」，48 款任选</li>
+          </ul>
+        </div>
+
+        <div class="tut-pane" id="tut-admin">
+          <p>本后台共 8 个面板，默认打开「数据概览」：</p>
+          <ul>
+            <li><b>数据概览</b>：统计分类与网址数量，展示全部网址列表</li>
+            <li><b>分类管理</b>：添加 / 删除 / 重命名分类，支持自定义 Emoji 图标</li>
+            <li><b>网址管理</b>：添加 / 编辑 / 删除 / 隐藏网址，支持按分类和关键词筛选</li>
+            <li><b>批量导入</b>：粘贴多行数据一次性导入，先预览再确认</li>
+            <li><b>批量导出</b>：按分类导出为 .txt，格式与导入一致</li>
+            <li><b>头像设置</b>：48 款头像任选</li>
+            <li><b>使用教程</b>：就是你正在看的这一页</li>
+            <li><b>关于</b>：版本信息、许可协议与联系方式</li>
+          </ul>
+
+          <h4>4.1 分类管理</h4>
+
+          <h4>4.2 网址管理</h4>
+
+          <h4>4.3 批量导入格式</h4>
+          <p>每行一条，推荐格式为「分类,标题,网址」；分类留空时使用上方选择的目标分类。</p>
+          <div class="tut-tip"><b>格式</b><br>
+            <code>分类,标题,网址</code><br>
+            示例：<br>
+            常用网站,百度,https://www.baidu.com<br>
+            搜索引擎,Google,https://www.google.com<br>
+            也支持两列：<code>标题,网址</code>（使用上方目标分类）</div>
+
+          <h4>4.4 批量导出与迁移</h4>
+          <p>选择分类后点「导出为 .txt」。导出格式为「分类,标题,网址」每行一条；标题中的逗号和引号会自动转义，可直接用于另一台电脑的批量导入。</p>
+
+          <h4>4.5 头像设置</h4>
+        </div>
+
+        <div class="tut-pane" id="tut-feature">
+          <h4>5.1 收藏网址：一条捷径搞定</h4>
+          <p>不必先打开导航页再手动填网址 —— 在任意网页右键或按 <code>Ctrl+Shift+K</code>，标题与网址自动预填，选个分类保存即可。三种入口：右键菜单、快捷键、页面内添加。</p>
+
+          <h4>5.2 网站名称智能识别</h4>
+          <p>切换到「收藏域名」时，标题自动变为网站标准名称，而非冰冷的域名。识别顺序：<code>og:site_name</code> → 页面标题「标题 - 网站名」提取 → 域名回退。</p>
+
+          <h4>5.3 分类体系统一</h4>
+          <p>书签与导航共用同一套分类体系，收藏即入库，避免「书签在一处、导航在另一处」的割裂。</p>
+
+          <h4>5.4 登录衔接体验</h4>
+          <p>未登录时点右键收藏，会先提示「收藏网址功能需要注册/登录」；确认后进入注册，注册成功自动衔接并弹出待收藏的网址窗口。</p>
+
+          <h4>5.5 多语言与多主题</h4>
+          <p>7 种语言（简体中文 / English / 日本語 / 한국어 / Español / العربية / Bahasa Indonesia）与 6 套配色，界面文字、分类名称同步切换。</p>
+
+          <h4>5.6 批量导入导出</h4>
+          <p>支持 TXT 批量导入（自动归档、自动跳过重复）与按分类导出，换电脑一键迁移。</p>
+
+          <h4>5.7 纯本地运行，隐私无忧</h4>
+          <ul>
+            <li>完全本地运行，无远程组件、统计代码或跟踪器</li>
+            <li>所有数据仅保存在你自己的浏览器中</li>
+            <li>不收集、不上传、不出售任何个人信息</li>
+            <li>无需注册即可使用全部导航功能，注册仅为启用「个人网址」</li>
+          </ul>
+        </div>
+
+        <div class="tut-pane" id="tut-faq">
+          <h4>Q1：点图标为什么打开新标签页，而不是小弹窗？</h4>
+          <p>这是设计如此：整页空间更大、功能更完整。若希望打开浏览器即见导航台，请按 1.3 节设为首页。</p>
+
+          <h4>Q2：右键收藏后为什么先跳到导航页？</h4>
+          <p>收藏需要选分类并保存，因此会跳转到导航页并弹出预填好的窗口，选分类保存即可。</p>
+
+          <h4>Q3：提示「收藏网址功能需要注册/登录」怎么办？</h4>
+          <p>点「确定」进入注册，成功后会自动接续弹出收藏窗口；点「取消」则停留导航页，收藏不保存。</p>
+
+          <h4>Q4：我的个人网址别人能看到吗？</h4>
+          <p>不能。「个人网址」按账号严格隔离，其他账号完全不可见。</p>
+
+          <h4>Q5：收藏的网址会与预置网址重复吗？</h4>
+          <p>同一分类内按「网址 + 标题」联合比对，自动跳过重复项。</p>
+
+          <h4>Q6：如何迁移到另一台电脑？</h4>
+          <p>在「批量导出」按分类导出 .txt，在新电脑的「批量导入」中粘贴导入即可。</p>
+
+          <h4>Q7：快捷键没反应？</h4>
+          <p>检查是否被系统或其他软件占用（扩展管理页「快捷键」可改），以及浏览器是否允许扩展快捷键。</p>
+
+          <h4>Q8：如何卸载？</h4>
+          <p>在扩展管理页找到「鲸波导航」→「移除」。卸载会清除本地保存的全部数据，请提前导出备份。</p>
+        </div>
+
+        <div class="tut-pane" id="tut-appendix">
+          <table>
+            <tr><th style="width:96px">项目</th><th>内容</th></tr>
+            <tr><td>名称</td><td>鲸波导航（Whale Navigation）</td></tr>
+            <tr><td>版本</td><td>V1.4.3</td></tr>
+            <tr><td>技术架构</td><td>纯前端浏览器扩展（Manifest V3），无后端、无远程代码</td></tr>
+            <tr><td>权限</td><td>storage（数据存储）、activeTab（用户触发时读取当前页）、contextMenus（右键菜单）、scripting（读取网站名）</td></tr>
+            <tr><td>数据存储</td><td>全部保存在本机浏览器存储中，不上传服务器</td></tr>
+            <tr><td>界面语言</td><td>简体中文、English、日本語、한국어、Español、العربية、Bahasa Indonesia</td></tr>
+            <tr><td>开源许可</td><td>GNU 通用公共许可证（GPL）第 3 版或更高版本</td></tr>
+          </table>
+          <p>快捷键：<code>Ctrl+Shift+K</code> — 收藏当前页面到导航</p>
+        </div>
+        </div><!-- /tut-panes -->
+      </div>
+
+      <div class="tutorial" data-lang-scope="non-zh_CN">
+        <div class="tutorial-intro" data-i18n="tutorial_intro"></div>
+        <div data-i18n-html="tutorial_intl_html"></div>
       </div>
     </div>
 

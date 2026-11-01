@@ -44,6 +44,15 @@
   "fabTitle": {
     "message": "Tambah URL"
   },
+  "bookmarkSaved": {
+    "message": "Ditandai"
+  },
+  "bookmarkDomain": {
+    "message": "Simpan domain"
+  },
+  "bookmarkPage": {
+    "message": "Simpan halaman"
+  },
   "notLoggedIn": {
     "message": "Belum login"
   },
@@ -58,6 +67,9 @@
   },
   "loginToViewPersonal": {
     "message": "Silakan login dulu untuk melihat URL pribadi"
+  },
+  "personalLoginHint": {
+    "message": "Masuk di pojok kanan atas untuk menyimpan tautan Anda"
   },
   "goLogin": {
     "message": "Login"
@@ -179,10 +191,526 @@
   "logoutConfirmCurrent": {
     "message": "Pengguna saat ini"
   },
+  "catName_cat_01": {
+    "message": "Mesin Pencarian"
+  },
+  "catName_cat_personal": {
+    "message": "Pribadi"
+  },
+  "catName_cat_03": {
+    "message": "Situs Favorit"
+  },
+  "catName_cat_04": {
+    "message": "Platform Edukasi"
+  },
+  "catName_cat_05": {
+    "message": "Belajar Bahasa"
+  },
+  "catName_cat_06": {
+    "message": "Situs Direktori"
+  },
+  "catName_cat_07": {
+    "message": "Multimedia"
+  },
+  "catName_cat_08": {
+    "message": "Alat"
+  },
+  "catName_cat_09": {
+    "message": "Keahlian Profesional"
+  },
+  "catName_cat_10": {
+    "message": "Riset Akademik"
+  },
+  "catName_cat_11": {
+    "message": "Buku Elektronik"
+  },
+  "catName_cat_12": {
+    "message": "Humaniora"
+  },
+  "catName_cat_13": {
+    "message": "Sains & Kedokteran"
+  },
+  "catName_cat_14": {
+    "message": "Hiburan"
+  },
+  "catName_cat_15": {
+    "message": "Kursus Online"
+  },
+  "catName_cat_16": {
+    "message": "Sumber AI"
+  },
+  "catName_cat_17": {
+    "message": "Sumber K12"
+  },
+  "admin_title": {
+    "message": "Navigasi Paus - Admin"
+  },
+  "admin_home": {
+    "message": "Beranda"
+  },
+  "admin_badge_default": {
+    "message": "Admin"
+  },
+  "admin_logout": {
+    "message": "Keluar"
+  },
+  "admin_user_logout": {
+    "message": "{name} | Keluar"
+  },
+  "admin_overview": {
+    "message": "Ringkasan"
+  },
+  "admin_categories": {
+    "message": "Kategori"
+  },
+  "admin_links": {
+    "message": "Tautan"
+  },
+  "admin_batch_import": {
+    "message": "Impor"
+  },
+  "admin_batch_export": {
+    "message": "Ekspor"
+  },
+  "admin_about": {
+    "message": "Tentang"
+  },
+  "admin_tutorial": {
+    "message": "Panduan"
+  },
+  "admin_add_cat_title": {
+    "message": "Tambah kategori baru"
+  },
+  "admin_cat_name_label": {
+    "message": "Nama kategori *"
+  },
+  "admin_cat_name_placeholder": {
+    "message": "mis. Materi belajar"
+  },
+  "admin_cat_icon_label": {
+    "message": "Emoji ikon"
+  },
+  "admin_cat_icon_placeholder": {
+    "message": "📚"
+  },
+  "admin_add_cat_btn": {
+    "message": "Tambah kategori"
+  },
+  "admin_current_cats": {
+    "message": "Kategori saat ini"
+  },
+  "admin_no_cats": {
+    "message": "Belum ada kategori, silakan tambahkan"
+  },
+  "admin_add_link_btn": {
+    "message": "Tambah tautan"
+  },
+  "admin_batch_bar_hint": {
+    "message": "Centang tautan untuk operasi massal:"
+  },
+  "admin_batch_show": {
+    "message": "Tampilkan massal"
+  },
+  "admin_batch_hide": {
+    "message": "Sembunyikan massal"
+  },
+  "admin_all_cats": {
+    "message": "Semua kategori"
+  },
+  "admin_all_status": {
+    "message": "Semua status"
+  },
+  "admin_status_visible": {
+    "message": "Terlihat saja"
+  },
+  "admin_status_hidden": {
+    "message": "Tersembunyi saja"
+  },
+  "admin_search_placeholder": {
+    "message": "Cari judul/URL..."
+  },
+  "admin_batch_paste_title": {
+    "message": "Tempel data (satu per baris)"
+  },
+  "admin_batch_target_cat": {
+    "message": "Kategori tujuan"
+  },
+  "admin_batch_placeholder": {
+    "message": "Kategori,Judul,URL\nmis.\nSitus umum,Baidu,https://www.baidu.com\nMesin pencari,Google,https://www.google.com\nFormat dua kolom Judul,URL juga didukung dengan kategori tujuan yang dipilih."
+  },
+  "admin_batch_format_hint": {
+    "message": "Format: <code>Kategori,Judul,URL</code>. Kosongkan kategori untuk memakai kategori tujuan yang dipilih. Format dua kolom <code>Judul,URL</code> juga didukung. Koma dan tanda kutip diproses otomatis dan Tab juga didukung.<br/>URL kategori publik harus diawali <code>http://</code> atau <code>https://</code>; tautan pribadi juga mendukung jalur file lokal."
+  },
+  "admin_preview_btn": {
+    "message": "Pratinjau"
+  },
+  "admin_import_btn": {
+    "message": "Impor"
+  },
+  "admin_export_title": {
+    "message": "Ekspor tautan ke file teks"
+  },
+  "admin_export_select_cat": {
+    "message": "Pilih kategori"
+  },
+  "admin_export_format_hint": {
+    "message": "Format ekspor: <code>Kategori,Judul,URL</code>. Kolom yang berisi koma atau tanda kutip akan diberi tanda kutip otomatis dan dapat langsung diimpor."
+  },
+  "admin_export_btn": {
+    "message": "Ekspor sebagai .txt"
+  },
+  "admin_about_title": {
+    "message": "Navigasi Paus V1.4.3"
+  },
+  "admin_about_desc": {
+    "message": "Copyright (C) 2026 Penulis: jingbo<br/>Program ini adalah perangkat lunak bebas: Anda dapat mendistribusikan ulang dan/atau memodifikasinya di bawah ketentuan Lisensi Publik Umum GNU (GPL) yang diterbitkan oleh Free Software Foundation, versi 3 atau versi yang lebih baru.<br/>Program ini berjalan sepenuhnya lokal, tanpa komponen atau fungsi jarak jauh;<br/>URL yang Anda masukkan hanya disimpan di komputer Anda sendiri.<br/>Semua data hanya disimpan di browser Anda sendiri, tanpa enkripsi. Hindari menyimpan URL sensitif di komputer bersama, dan jaga keamanan akun Windows Anda.<br/>Ikuti akun resmi WeChat Banpoyun untuk pembaruan program atau URL;<br/>Email kontak: njunion@126.com"
+  },
+  "admin_about_qr_label": {
+    "message": "WeChat penulis"
+  },
+  "admin_edit_modal_title": {
+    "message": "Edit tautan"
+  },
+  "admin_add_modal_title": {
+    "message": "Tambah tautan"
+  },
+  "admin_title_label": {
+    "message": "Judul *"
+  },
+  "admin_url_label": {
+    "message": "URL *"
+  },
+  "admin_desc_label": {
+    "message": "Deskripsi"
+  },
+  "admin_cat_label": {
+    "message": "Kategori"
+  },
+  "th_name": {
+    "message": "Nama"
+  },
+  "th_url": {
+    "message": "URL"
+  },
+  "th_category": {
+    "message": "Kategori"
+  },
+  "th_desc": {
+    "message": "Deskripsi"
+  },
+  "th_actions": {
+    "message": "Aksi"
+  },
+  "th_status": {
+    "message": "Status"
+  },
+  "th_title": {
+    "message": "Judul"
+  },
+  "stat_cat_count": {
+    "message": "Jumlah kategori"
+  },
+  "stat_visible": {
+    "message": "Tautan terlihat"
+  },
+  "stat_hidden": {
+    "message": "Tersembunyi"
+  },
+  "login_title": {
+    "message": "Silakan login"
+  },
+  "login_username_ph": {
+    "message": "Nama pengguna"
+  },
+  "login_password_ph": {
+    "message": "Kata sandi"
+  },
+  "login_btn": {
+    "message": "Masuk"
+  },
+  "login_no_account": {
+    "message": "Belum punya akun?"
+  },
+  "login_go_register": {
+    "message": "Daftar"
+  },
+  "register_title": {
+    "message": "Daftar akun"
+  },
+  "register_username_ph": {
+    "message": "Nama pengguna (3-20 karakter)"
+  },
+  "register_password_ph": {
+    "message": "Kata sandi (min. 6 karakter)"
+  },
+  "register_password2_ph": {
+    "message": "Konfirmasi kata sandi"
+  },
+  "register_btn": {
+    "message": "Daftar"
+  },
+  "register_have_account": {
+    "message": "Sudah punya akun?"
+  },
+  "register_go_login": {
+    "message": "Masuk"
+  },
+  "admin_need_username_password": {
+    "message": "Silakan masukkan nama pengguna dan kata sandi"
+  },
+  "admin_need_cat_name": {
+    "message": "Silakan masukkan nama kategori"
+  },
+  "admin_cat_added": {
+    "message": "✅ Kategori ditambahkan"
+  },
+  "admin_cat_name_empty": {
+    "message": "Nama kategori tidak boleh kosong"
+  },
+  "admin_cat_updated": {
+    "message": "✅ Nama kategori diperbarui"
+  },
+  "admin_cat_deleted": {
+    "message": "Kategori dihapus"
+  },
+  "admin_sorted": {
+    "message": "✅ Urutan diperbarui"
+  },
+  "admin_hidden": {
+    "message": "Disembunyikan"
+  },
+  "admin_visible": {
+    "message": "Ditampilkan"
+  },
+  "admin_select_first": {
+    "message": "Centang dulu tautan yang akan dioperasikan"
+  },
+  "admin_link_deleted": {
+    "message": "Tautan dihapus"
+  },
+  "admin_updated": {
+    "message": "✅ Diperbarui"
+  },
+  "admin_added": {
+    "message": "✅ Ditambahkan"
+  },
+  "admin_select_cat": {
+    "message": "Silakan pilih kategori tujuan"
+  },
+  "admin_no_valid_import": {
+    "message": "Tidak ada data valid untuk diimpor"
+  },
+  "admin_imported": {
+    "message": "✅ {count} tautan berhasil diimpor"
+  },
+  "admin_no_export": {
+    "message": "Tidak ada tautan terlihat untuk diekspor di kategori ini"
+  },
+  "admin_exported": {
+    "message": "✅ {count} tautan diekspor ke {filename}"
+  },
+  "admin_no_preview_data": {
+    "message": "Tidak ada data valid, silakan periksa format"
+  },
+  "admin_logout_confirm": {
+    "message": "Yakin ingin keluar?"
+  },
+  "admin_delete_cat_with_links": {
+    "message": "Hapus kategori \"{name}\"? {count} tautan di dalamnya akan kehilangan kategori."
+  },
+  "admin_delete_cat": {
+    "message": "Hapus kategori \"{name}\"?"
+  },
+  "admin_batch_confirm": {
+    "message": "Yakin ingin {action} {count} tautan terpilih?"
+  },
+  "admin_batch_action_show": {
+    "message": "menampilkan"
+  },
+  "admin_batch_action_hide": {
+    "message": "menyembunyikan"
+  },
+  "admin_delete_link": {
+    "message": "Hapus \"{title}\"?"
+  },
+  "admin_empty_overview": {
+    "message": "Belum ada data tautan. Tambahkan di \"Tautan\"."
+  },
+  "admin_empty_links": {
+    "message": "Tidak ada tautan yang cocok"
+  },
+  "admin_no_visible_export": {
+    "message": "Tidak ada tautan terlihat di kategori ini"
+  },
+  "admin_hidden_tag": {
+    "message": "[tersembunyi]"
+  },
+  "admin_no_category": {
+    "message": "Tanpa kategori"
+  },
+  "admin_action_show": {
+    "message": "Tampilkan"
+  },
+  "admin_action_hide": {
+    "message": "Sembunyikan"
+  },
+  "admin_drag_title": {
+    "message": "Tarik untuk mengurutkan"
+  },
+  "admin_move_first": {
+    "message": "Pindah ke atas"
+  },
+  "admin_move_up": {
+    "message": "Naik satu"
+  },
+  "admin_move_down": {
+    "message": "Turun satu"
+  },
+  "admin_move_last": {
+    "message": "Pindah ke bawah"
+  },
+  "admin_cat_top": {
+    "message": "Ke atas"
+  },
+  "admin_cat_up": {
+    "message": "Naik"
+  },
+  "admin_cat_down": {
+    "message": "Turun"
+  },
+  "admin_cat_bottom": {
+    "message": "Ke bawah"
+  },
+  "admin_cat_edit": {
+    "message": "Ganti nama"
+  },
+  "admin_cat_del": {
+    "message": "Hapus kategori"
+  },
+  "admin_save_short": {
+    "message": "Simpan"
+  },
+  "admin_preview_title": {
+    "message": "Pratinjau ({count} item)"
+  },
+  "admin_export_preview_title": {
+    "message": "Pratinjau ekspor: {name} ({count} item)"
+  },
+  "admin_export_records_hint": {
+    "message": "{count} rekaman akan diekspor sebagai file .txt format <code>Kategori,Judul,URL</code>."
+  },
+  "admin_unknown_cat": {
+    "message": "Kategori tidak diketahui"
+  },
+  "admin_export_filename_base": {
+    "message": "nav_links"
+  },
+  "admin_addr_format_err": {
+    "message": "❌ Format alamat salah"
+  },
+  "admin_url_format_err": {
+    "message": "❌ Format URL salah"
+  },
+  "admin_avatar_title": {
+    "message": "Pengaturan Avatar"
+  },
+  "admin_avatar_subtitle": {
+    "message": "Pilih avatar Anda"
+  },
+  "admin_avatar_hint": {
+    "message": "Berlaku langsung. Avatar akan tampil di pojok kanan atas."
+  },
+  "admin_avatar_saved": {
+    "message": "Avatar diperbarui"
+  },
+  "theme_bright": {
+    "message": "Fajar"
+  },
+  "theme_deep": {
+    "message": "Samudra"
+  },
+  "theme_bamboo": {
+    "message": "Bambu"
+  },
+  "theme_sunset": {
+    "message": "Senja"
+  },
+  "theme_ink": {
+    "message": "Tinta"
+  },
+  "theme_dark": {
+    "message": "Gelap"
+  },
+  "admin_batch_delete": {
+    "message": "Hapus Massal"
+  },
+  "admin_batch_delete_confirm": {
+    "message": "Hapus {count} tautan terpilih? Tindakan ini tidak dapat dibatalkan."
+  },
+  "admin_batch_no_selection": {
+    "message": "Pilih tautan yang akan dihapus terlebih dahulu"
+  },
+  "admin_batch_deleted": {
+    "message": "{count} tautan dihapus"
+  },
+  "theme_label": {
+    "message": "Tema"
+  },
+  "language_label": {
+    "message": "Bahasa"
+  },
+  "logoHomeTitle": {
+    "message": "Kembali ke beranda"
+  },
+  "regUsernamePlaceholder": {
+    "message": "3–20 karakter"
+  },
+  "regPasswordPlaceholder": {
+    "message": "Minimal 6 karakter"
+  },
+  "regPasswordConfirmPlaceholder": {
+    "message": "Masukkan ulang kata sandi"
+  },
+  "bookmarkNeedLogin": {
+    "message": "Daftar atau masuk untuk menyimpan bookmark"
+  },
+  "bookmarkDomainHttpOnly": {
+    "message": "Hanya URL http/https yang dapat disimpan sebagai domain"
+  },
+  "bookmarkDomainParseFailed": {
+    "message": "Domain URL tidak dapat diurai"
+  },
+  "admin_link_not_found": {
+    "message": "Tautan yang akan diedit tidak ditemukan"
+  },
+  "admin_duplicate_link": {
+    "message": "Tautan ini sudah ada di kategori yang dipilih"
+  },
+  "admin_import_skipped": {
+    "message": "✅ {imported} diimpor; {skipped} duplikat dilewati"
+  },
+  "tutorial_intro": {
+    "message": "Panduan ini menjelaskan fitur utama hanya dengan teks dan tabel. Disarankan menjadikan halaman ini sebagai beranda browser."
+  },
+  "tutorial_intl_html": {
+    "message": "<nav class='tut-nav'><button class='tut-nav-item active' data-tut='intl-start'>1. Memulai</button><button class='tut-nav-item' data-tut='intl-ui'>2. Antarmuka</button><button class='tut-nav-item' data-tut='intl-usage'>3. Penggunaan dasar</button><button class='tut-nav-item' data-tut='intl-admin'>4. Admin</button><button class='tut-nav-item' data-tut='intl-feature'>5. Fitur</button><button class='tut-nav-item' data-tut='intl-faq'>6. FAQ</button><button class='tut-nav-item' data-tut='intl-appendix'>7. Lampiran</button></nav><div class='tut-pane active' id='tut-intl-start'><h4>1. Memulai</h4><p>Pasang secara gratis dari toko resmi Chrome, Edge, atau Firefox. Disarankan menjadikan halaman navigasi sebagai beranda browser.</p><div class='tut-tip'><b>Mengatur beranda</b><br>Di Chrome buka <code>chrome://settings/</code>, pilih Saat startup lalu Buka halaman tertentu. Edge dan Firefox menyediakan opsi serupa pada pengaturan beranda atau startup. Salin alamat ekstensi dari bilah alamat, misalnya <code>chrome-extension://…/pages/popup.html</code>.</div></div><div class='tut-pane' id='tut-intl-ui'><h4>2. Antarmuka dan pencarian</h4><div class='table-wrap'><table><tr><th>Area</th><th>Keterangan</th></tr><tr><td>Bilah atas</td><td>Beranda, pencarian lokal, Bing, Google, Semua/Tautan saya, bahasa, tema, admin, dan akun.</td></tr><tr><td>Kategori kiri</td><td>Langsung menuju kategori. Nama dan ikon mengikuti bahasa yang dipilih.</td></tr><tr><td>Kartu tautan</td><td>Membuka tautan serta mendukung pengurutan, perpindahan kategori, dan penghapusan dengan tarik.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-usage'><h4>3. Menyimpan tautan</h4><div class='table-wrap'><table><tr><th>Metode</th><th>Cara kerja</th></tr><tr><td>Dari halaman</td><td>Klik tombol tambah, isi judul, URL, dan deskripsi opsional, lalu pilih kategori dan simpan.</td></tr><tr><td>Menu klik kanan</td><td>Klik kanan halaman dan pilih Simpan ke Whale Navigation. Dialog simpan yang sudah terisi akan terbuka.</td></tr><tr><td>Pintasan</td><td>Tekan <code>Ctrl+Shift+K</code>. Pintasan dapat diubah di pengaturan ekstensi.</td></tr><tr><td>Halaman atau domain</td><td>Beralih antara menyimpan halaman saat ini atau beranda situs dengan nama situs yang terdeteksi.</td></tr><tr><td>Duplikat</td><td>URL dinormalisasi dan tautan duplikat yang sudah ada dilewati.</td></tr></table></div><h4>4. Tautan pribadi dan tarik-lepas</h4><div class='table-wrap'><table><tr><th>Fitur</th><th>Keterangan</th></tr><tr><td>Tautan pribadi</td><td>Masuk untuk menyimpan tautan privat. Akun terisolasi dan Tautan saya hanya menampilkan akun aktif.</td></tr><tr><td>File lokal</td><td>Hanya Tautan pribadi yang mengizinkan <code>file://</code> atau jalur lokal. Aktifkan Izinkan akses ke URL file pada detail ekstensi di <code>chrome://extensions</code>.</td></tr><tr><td>Urutkan</td><td>Tarik kartu ke posisi lain dalam kategori yang sama.</td></tr><tr><td>Pindah kategori</td><td>Tarik ke bagian kategori lain atau nama kategori di kiri, termasuk antara tautan pribadi dan kategori publik.</td></tr><tr><td>Hapus</td><td>Area Hapus tautan muncul saat menarik kartu. Letakkan di sana lalu konfirmasi.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-admin'><h4>5. Panel admin</h4><p>Panel mencakup ringkasan, kategori, tautan, impor massal, ekspor massal, avatar, panduan ini, dan Tentang. Admin dapat menambah, mengedit, menghapus, menyembunyikan, serta memfilter tautan berdasarkan kategori dan kata kunci.</p><h4>6. Impor dan ekspor massal</h4><div class='table-wrap'><table><tr><th>Format</th><th>Keterangan</th></tr><tr><td><code>Kategori,Judul,URL</code></td><td>Format yang disarankan, satu tautan per baris. Kategori yang tidak dikenal memakai kategori tujuan yang dipilih.</td></tr><tr><td><code>Judul,URL</code></td><td>Format dua kolom dan memakai kategori tujuan yang dipilih.</td></tr><tr><td>Ekspor</td><td>Mengekspor TXT UTF-8 per kategori dengan kategori, judul, dan URL untuk diimpor di komputer lain.</td></tr></table></div><div class='tut-tip'><b>Contoh</b><br><code>Situs populer,Baidu,https://www.baidu.com</code><br><code>Mesin pencari,Google,https://www.google.com</code></div></div><div class='tut-pane' id='tut-intl-feature'><h4>7. Tema, bahasa, dan privasi</h4><p>Tersedia tujuh bahasa dan enam tema: Fajar, Samudra, Bambu, Senja, Tinta, Gelap. Panduan ini ikut berubah saat bahasa diganti.</p><ul><li>Berjalan lokal tanpa komponen jarak jauh, analitik, atau pelacak.</li><li>Data tautan hanya tersimpan di browser dan tidak diunggah ke server.</li><li>Navigasi dapat digunakan tanpa akun; masuk untuk mengaktifkan tautan pribadi.</li></ul></div><div class='tut-pane' id='tut-intl-faq'><h4>8. Pertanyaan umum</h4><div class='table-wrap'><table><tr><th>Pertanyaan</th><th>Jawaban</th></tr><tr><td>Mengapa ikon membuka halaman penuh?</td><td>Agar ruang lebih luas. Jadikan beranda untuk akses cepat.</td></tr><tr><td>Mengapa diminta masuk?</td><td>Setelah mendaftar atau masuk, dialog simpan yang sudah terisi akan dilanjutkan.</td></tr><tr><td>Pintasan tidak bekerja.</td><td>Periksa konflik sistem atau aplikasi lain dan ubah melalui pengelolaan ekstensi.</td></tr><tr><td>Bagaimana memindahkan data?</td><td>Ekspor TXT per kategori lalu impor di komputer baru.</td></tr><tr><td>Apa yang terjadi saat dilepas?</td><td>Data lokal dihapus, jadi ekspor cadangan terlebih dahulu.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-appendix'><h4>9. Lampiran</h4><div class='table-wrap'><table><tr><th>Item</th><th>Detail</th></tr><tr><td>Nama</td><td>Whale Navigation</td></tr><tr><td>Arsitektur</td><td>Ekstensi Manifest V3 tanpa backend atau kode jarak jauh</td></tr><tr><td>Pintasan</td><td><code>Ctrl+Shift+K</code></td></tr><tr><td>Lisensi</td><td>GNU GPL versi 3 atau lebih baru</td></tr></table></div></div>"
+  },
   "contextMenuTitle": {
     "message": "Simpan ke Navigasi Paus"
   },
   "commandSaveToNav": {
     "message": "Simpan halaman saat ini ke navigasi"
+  },
+  "defaultCategory": {
+    "message": "Umum"
+  },
+  "dropDeleteHint": {
+    "message": "Letakkan di sini untuk menghapus"
+  },
+  "dropDeleteActive": {
+    "message": "Lepaskan untuk menghapus"
+  },
+  "dropDeleteNeedLogin": {
+    "message": "Masuk untuk menghapus"
   }
 }

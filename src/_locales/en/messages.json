@@ -44,6 +44,15 @@
   "fabTitle": {
     "message": "Add URL"
   },
+  "bookmarkSaved": {
+    "message": "Bookmarked"
+  },
+  "bookmarkDomain": {
+    "message": "Bookmark domain"
+  },
+  "bookmarkPage": {
+    "message": "Bookmark page"
+  },
   "notLoggedIn": {
     "message": "Not logged in"
   },
@@ -58,6 +67,9 @@
   },
   "loginToViewPersonal": {
     "message": "Please log in to view your personal URLs"
+  },
+  "personalLoginHint": {
+    "message": "Log in at the top-right to add your own links"
   },
   "goLogin": {
     "message": "Log in"
@@ -179,10 +191,526 @@
   "logoutConfirmCurrent": {
     "message": "Current user"
   },
+  "catName_cat_01": {
+    "message": "Search Engines"
+  },
+  "catName_cat_personal": {
+    "message": "Personal"
+  },
+  "catName_cat_03": {
+    "message": "Favorites"
+  },
+  "catName_cat_04": {
+    "message": "Education"
+  },
+  "catName_cat_05": {
+    "message": "Language Learning"
+  },
+  "catName_cat_06": {
+    "message": "Directory Sites"
+  },
+  "catName_cat_07": {
+    "message": "Multimedia"
+  },
+  "catName_cat_08": {
+    "message": "Tools"
+  },
+  "catName_cat_09": {
+    "message": "Career Skills"
+  },
+  "catName_cat_10": {
+    "message": "Academic Research"
+  },
+  "catName_cat_11": {
+    "message": "E-books"
+  },
+  "catName_cat_12": {
+    "message": "Humanities"
+  },
+  "catName_cat_13": {
+    "message": "STEM & Medicine"
+  },
+  "catName_cat_14": {
+    "message": "Entertainment"
+  },
+  "catName_cat_15": {
+    "message": "Online Courses"
+  },
+  "catName_cat_16": {
+    "message": "AI Resources"
+  },
+  "catName_cat_17": {
+    "message": "K12 Resources"
+  },
+  "admin_title": {
+    "message": "Whale Navigation - Admin"
+  },
+  "admin_home": {
+    "message": "Home"
+  },
+  "admin_badge_default": {
+    "message": "Admin"
+  },
+  "admin_logout": {
+    "message": "Logout"
+  },
+  "admin_user_logout": {
+    "message": "{name} | Logout"
+  },
+  "admin_overview": {
+    "message": "Overview"
+  },
+  "admin_categories": {
+    "message": "Categories"
+  },
+  "admin_links": {
+    "message": "Links"
+  },
+  "admin_batch_import": {
+    "message": "Import"
+  },
+  "admin_batch_export": {
+    "message": "Export"
+  },
+  "admin_about": {
+    "message": "About"
+  },
+  "admin_tutorial": {
+    "message": "Tutorial"
+  },
+  "admin_add_cat_title": {
+    "message": "Add new category"
+  },
+  "admin_cat_name_label": {
+    "message": "Category name *"
+  },
+  "admin_cat_name_placeholder": {
+    "message": "e.g. Learning resources"
+  },
+  "admin_cat_icon_label": {
+    "message": "Icon Emoji"
+  },
+  "admin_cat_icon_placeholder": {
+    "message": "📚"
+  },
+  "admin_add_cat_btn": {
+    "message": "Add category"
+  },
+  "admin_current_cats": {
+    "message": "Current categories"
+  },
+  "admin_no_cats": {
+    "message": "No categories yet, please add one"
+  },
+  "admin_add_link_btn": {
+    "message": "Add link"
+  },
+  "admin_batch_bar_hint": {
+    "message": "Check links to batch-operate:"
+  },
+  "admin_batch_show": {
+    "message": "Show batch"
+  },
+  "admin_batch_hide": {
+    "message": "Hide batch"
+  },
+  "admin_all_cats": {
+    "message": "All categories"
+  },
+  "admin_all_status": {
+    "message": "All status"
+  },
+  "admin_status_visible": {
+    "message": "Visible only"
+  },
+  "admin_status_hidden": {
+    "message": "Hidden only"
+  },
+  "admin_search_placeholder": {
+    "message": "Search title/URL..."
+  },
+  "admin_batch_paste_title": {
+    "message": "Paste data (one per line)"
+  },
+  "admin_batch_target_cat": {
+    "message": "Target category"
+  },
+  "admin_batch_placeholder": {
+    "message": "Category,Title,URL\ne.g.\nCommon Sites,Baidu,https://www.baidu.com\nSearch,Google,https://www.google.com\nThe two-column Title,URL form uses the target category above."
+  },
+  "admin_batch_format_hint": {
+    "message": "Format: <code>Category,Title,URL</code>. Leave the category blank to use the selected target category. The two-column <code>Title,URL</code> form is also supported. Commas and double quotes are escaped automatically; Tab separation is supported.<br/>Public-category URLs must start with <code>http://</code> or <code>https://</code>; personal links may also use local file paths."
+  },
+  "admin_preview_btn": {
+    "message": "Preview"
+  },
+  "admin_import_btn": {
+    "message": "Import"
+  },
+  "admin_export_title": {
+    "message": "Export links to text file"
+  },
+  "admin_export_select_cat": {
+    "message": "Select category"
+  },
+  "admin_export_format_hint": {
+    "message": "Export format: <code>Category,Title,URL</code>. Fields containing commas or quotes are quoted automatically and can be imported directly."
+  },
+  "admin_export_btn": {
+    "message": "Export as .txt"
+  },
+  "admin_about_title": {
+    "message": "Whale Navigation V1.4.3"
+  },
+  "admin_about_desc": {
+    "message": "Copyright (C) 2026 Author: jingbo<br/>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License (GPL) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.<br/>This program runs entirely locally, with no remote components or functionality;<br/>The URLs you enter are stored only on your own computer.<br/>All data is stored only in your own browser, without encryption. Avoid saving sensitive URLs on a shared computer, and keep your Windows account secure.<br/>Follow the WeChat Official Account Banpoyun for program or URL updates;<br/>Contact email: njunion@126.com"
+  },
+  "admin_about_qr_label": {
+    "message": "Author's WeChat"
+  },
+  "admin_edit_modal_title": {
+    "message": "Edit link"
+  },
+  "admin_add_modal_title": {
+    "message": "Add link"
+  },
+  "admin_title_label": {
+    "message": "Title *"
+  },
+  "admin_url_label": {
+    "message": "URL *"
+  },
+  "admin_desc_label": {
+    "message": "Description"
+  },
+  "admin_cat_label": {
+    "message": "Category"
+  },
+  "th_name": {
+    "message": "Name"
+  },
+  "th_url": {
+    "message": "URL"
+  },
+  "th_category": {
+    "message": "Category"
+  },
+  "th_desc": {
+    "message": "Description"
+  },
+  "th_actions": {
+    "message": "Actions"
+  },
+  "th_status": {
+    "message": "Status"
+  },
+  "th_title": {
+    "message": "Title"
+  },
+  "stat_cat_count": {
+    "message": "Categories"
+  },
+  "stat_visible": {
+    "message": "Visible links"
+  },
+  "stat_hidden": {
+    "message": "Hidden"
+  },
+  "login_title": {
+    "message": "Please log in"
+  },
+  "login_username_ph": {
+    "message": "Username"
+  },
+  "login_password_ph": {
+    "message": "Password"
+  },
+  "login_btn": {
+    "message": "Log in"
+  },
+  "login_no_account": {
+    "message": "No account?"
+  },
+  "login_go_register": {
+    "message": "Register"
+  },
+  "register_title": {
+    "message": "Register"
+  },
+  "register_username_ph": {
+    "message": "Username (3-20 chars)"
+  },
+  "register_password_ph": {
+    "message": "Password (min 6 chars)"
+  },
+  "register_password2_ph": {
+    "message": "Confirm password"
+  },
+  "register_btn": {
+    "message": "Register"
+  },
+  "register_have_account": {
+    "message": "Have an account?"
+  },
+  "register_go_login": {
+    "message": "Log in"
+  },
+  "admin_need_username_password": {
+    "message": "Please enter username and password"
+  },
+  "admin_need_cat_name": {
+    "message": "Please enter category name"
+  },
+  "admin_cat_added": {
+    "message": "✅ Category added"
+  },
+  "admin_cat_name_empty": {
+    "message": "Category name cannot be empty"
+  },
+  "admin_cat_updated": {
+    "message": "✅ Category name updated"
+  },
+  "admin_cat_deleted": {
+    "message": "Category deleted"
+  },
+  "admin_sorted": {
+    "message": "✅ Order updated"
+  },
+  "admin_hidden": {
+    "message": "Hidden"
+  },
+  "admin_visible": {
+    "message": "Visible"
+  },
+  "admin_select_first": {
+    "message": "Please check links to operate"
+  },
+  "admin_link_deleted": {
+    "message": "Link deleted"
+  },
+  "admin_updated": {
+    "message": "✅ Updated"
+  },
+  "admin_added": {
+    "message": "✅ Added"
+  },
+  "admin_select_cat": {
+    "message": "Please select target category"
+  },
+  "admin_no_valid_import": {
+    "message": "No valid data to import"
+  },
+  "admin_imported": {
+    "message": "✅ Imported {count} links"
+  },
+  "admin_no_export": {
+    "message": "No visible links to export in this category"
+  },
+  "admin_exported": {
+    "message": "✅ Exported {count} links to {filename}"
+  },
+  "admin_no_preview_data": {
+    "message": "No valid data, please check format"
+  },
+  "admin_logout_confirm": {
+    "message": "Are you sure you want to log out?"
+  },
+  "admin_delete_cat_with_links": {
+    "message": "Delete category \"{name}\"? {count} links under it will lose their category."
+  },
+  "admin_delete_cat": {
+    "message": "Delete category \"{name}\"?"
+  },
+  "admin_batch_confirm": {
+    "message": "Are you sure to {action} the {count} selected links?"
+  },
+  "admin_batch_action_show": {
+    "message": "show"
+  },
+  "admin_batch_action_hide": {
+    "message": "hide"
+  },
+  "admin_delete_link": {
+    "message": "Delete \"{title}\"?"
+  },
+  "admin_empty_overview": {
+    "message": "No link data yet. Add some in \"Links\"."
+  },
+  "admin_empty_links": {
+    "message": "No matching links"
+  },
+  "admin_no_visible_export": {
+    "message": "No visible links in this category"
+  },
+  "admin_hidden_tag": {
+    "message": "[hidden]"
+  },
+  "admin_no_category": {
+    "message": "No category"
+  },
+  "admin_action_show": {
+    "message": "Show"
+  },
+  "admin_action_hide": {
+    "message": "Hide"
+  },
+  "admin_drag_title": {
+    "message": "Drag to sort"
+  },
+  "admin_move_first": {
+    "message": "Move to top"
+  },
+  "admin_move_up": {
+    "message": "Move up"
+  },
+  "admin_move_down": {
+    "message": "Move down"
+  },
+  "admin_move_last": {
+    "message": "Move to bottom"
+  },
+  "admin_cat_top": {
+    "message": "To top"
+  },
+  "admin_cat_up": {
+    "message": "Up"
+  },
+  "admin_cat_down": {
+    "message": "Down"
+  },
+  "admin_cat_bottom": {
+    "message": "To bottom"
+  },
+  "admin_cat_edit": {
+    "message": "Rename"
+  },
+  "admin_cat_del": {
+    "message": "Delete category"
+  },
+  "admin_save_short": {
+    "message": "Save"
+  },
+  "admin_preview_title": {
+    "message": "Preview ({count} items)"
+  },
+  "admin_export_preview_title": {
+    "message": "Export preview: {name} ({count} items)"
+  },
+  "admin_export_records_hint": {
+    "message": "{count} records will be exported as a <code>Category,Title,URL</code> .txt file."
+  },
+  "admin_unknown_cat": {
+    "message": "Unknown category"
+  },
+  "admin_export_filename_base": {
+    "message": "nav_links"
+  },
+  "admin_addr_format_err": {
+    "message": "❌ Invalid address format"
+  },
+  "admin_url_format_err": {
+    "message": "❌ Invalid URL format"
+  },
+  "admin_avatar_title": {
+    "message": "Avatar Settings"
+  },
+  "admin_avatar_subtitle": {
+    "message": "Choose your avatar"
+  },
+  "admin_avatar_hint": {
+    "message": "Take effect immediately. Your avatar will show at the top-right corner."
+  },
+  "admin_avatar_saved": {
+    "message": "Avatar updated"
+  },
+  "theme_bright": {
+    "message": "Dawn"
+  },
+  "theme_deep": {
+    "message": "Ocean"
+  },
+  "theme_bamboo": {
+    "message": "Bamboo"
+  },
+  "theme_sunset": {
+    "message": "Sunset"
+  },
+  "theme_ink": {
+    "message": "Ink"
+  },
+  "theme_dark": {
+    "message": "Dark"
+  },
+  "admin_batch_delete": {
+    "message": "Batch Delete"
+  },
+  "admin_batch_delete_confirm": {
+    "message": "Delete {count} selected links? This cannot be undone."
+  },
+  "admin_batch_no_selection": {
+    "message": "Please select links to delete first"
+  },
+  "admin_batch_deleted": {
+    "message": "Deleted {count} links"
+  },
+  "theme_label": {
+    "message": "Theme"
+  },
+  "language_label": {
+    "message": "Language"
+  },
+  "logoHomeTitle": {
+    "message": "Back to home"
+  },
+  "regUsernamePlaceholder": {
+    "message": "3-20 characters"
+  },
+  "regPasswordPlaceholder": {
+    "message": "At least 6 characters"
+  },
+  "regPasswordConfirmPlaceholder": {
+    "message": "Re-enter password"
+  },
+  "bookmarkNeedLogin": {
+    "message": "Sign in or register to save bookmarks"
+  },
+  "bookmarkDomainHttpOnly": {
+    "message": "Only http/https URLs can be saved as a domain"
+  },
+  "bookmarkDomainParseFailed": {
+    "message": "The domain could not be parsed"
+  },
+  "admin_link_not_found": {
+    "message": "The link to edit could not be found"
+  },
+  "admin_duplicate_link": {
+    "message": "This link already exists in the selected category"
+  },
+  "admin_import_skipped": {
+    "message": "✅ Imported {imported}; skipped {skipped} duplicates"
+  },
+  "tutorial_intro": {
+    "message": "This text-only guide explains the main features with tables. Recommended setup: make Whale Navigation your browser home page for one-click access."
+  },
+  "tutorial_intl_html": {
+    "message": "<nav class='tut-nav'><button class='tut-nav-item active' data-tut='intl-start'>1. Getting started</button><button class='tut-nav-item' data-tut='intl-ui'>2. Interface</button><button class='tut-nav-item' data-tut='intl-usage'>3. Basic usage</button><button class='tut-nav-item' data-tut='intl-admin'>4. Admin</button><button class='tut-nav-item' data-tut='intl-feature'>5. Features</button><button class='tut-nav-item' data-tut='intl-faq'>6. FAQ</button><button class='tut-nav-item' data-tut='intl-appendix'>7. Appendix</button></nav><div class='tut-pane active' id='tut-intl-start'><h4>1. Getting started</h4><p>Install for free from the official Chrome, Edge or Firefox extension store. Setting this page as your browser home page is recommended.</p><div class='tut-tip'><b>Set the home page</b><br>Chrome: open <code>chrome://settings/</code>, choose On startup and Open a specific page. Edge and Firefox provide the same option under their home or startup settings. Copy the extension address from the address bar, for example <code>chrome-extension://…/pages/popup.html</code>.</div></div><div class='tut-pane' id='tut-intl-ui'><h4>2. Interface and search</h4><div class='table-wrap'><table><tr><th>Area</th><th>Description</th></tr><tr><td>Top toolbar</td><td>Home, local search, Bing, Google, All/My links, language, theme, admin and account controls.</td></tr><tr><td>Left categories</td><td>Jump to a category. Category names and icons follow the selected language.</td></tr><tr><td>Link cards</td><td>Open links, reorder them, move them between categories or delete them by dragging.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-usage'><h4>3. Saving links</h4><div class='table-wrap'><table><tr><th>Method</th><th>How it works</th></tr><tr><td>Add from page</td><td>Click the plus button, enter a title, URL and optional description, then choose a category and save.</td></tr><tr><td>Context menu</td><td>Right-click a web page and choose Save to Whale Navigation. The navigation page opens a prefilled save dialog.</td></tr><tr><td>Shortcut</td><td>Press <code>Ctrl+Shift+K</code>. You can change it in the extension shortcut settings.</td></tr><tr><td>Page or domain</td><td>Switch between saving the current page and saving the site home page with the detected site name.</td></tr><tr><td>Duplicates</td><td>URLs are normalized and existing duplicates are skipped.</td></tr></table></div><h4>4. Personal links and drag actions</h4><div class='table-wrap'><table><tr><th>Feature</th><th>Description</th></tr><tr><td>Personal links</td><td>Sign in to save private links. Accounts are isolated, and My shows only the current account.</td></tr><tr><td>Local files</td><td>Only Personal links allow <code>file://</code> or local paths. Enable Allow access to file URLs for the extension in <code>chrome://extensions</code> first.</td></tr><tr><td>Reorder</td><td>Drag a card to another position inside the same category.</td></tr><tr><td>Move category</td><td>Drag onto another category section or sidebar category, including between Personal and public categories.</td></tr><tr><td>Delete</td><td>A Delete link zone appears while dragging. Drop the card there and confirm.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-admin'><h4>5. Admin panel</h4><p>The admin panel includes overview, categories, links, batch import, batch export, avatar settings, this tutorial and About. Administrators can add, edit, delete or hide links and filter them by category and keyword.</p><h4>6. Batch import and export</h4><div class='table-wrap'><table><tr><th>Format</th><th>Description</th></tr><tr><td><code>Category,Title,URL</code></td><td>Recommended, one link per line. An unknown category falls back to the selected target category.</td></tr><tr><td><code>Title,URL</code></td><td>Two-column format, imported into the selected target category.</td></tr><tr><td>Export</td><td>Exports UTF-8 TXT by category with category, title and URL, ready for import on another computer.</td></tr></table></div><div class='tut-tip'><b>Examples</b><br><code>Common Sites,Baidu,https://www.baidu.com</code><br><code>Search Engines,Google,https://www.google.com</code></div></div><div class='tut-pane' id='tut-intl-feature'><h4>7. Themes, languages and privacy</h4><p>Seven interface languages and six themes are available: Dawn, Deep Sea, Bamboo, Sunset, Ink and Midnight. This tutorial changes language with the interface.</p><ul><li>Runs locally with no remote components, analytics or trackers.</li><li>Link data stays in the current browser and is not uploaded.</li><li>Navigation is available without an account; signing in enables Personal links.</li></ul></div><div class='tut-pane' id='tut-intl-faq'><h4>8. FAQ</h4><div class='table-wrap'><table><tr><th>Question</th><th>Answer</th></tr><tr><td>Why does the icon open a full page?</td><td>The full page provides more space. Set it as your browser home page for quick access.</td></tr><tr><td>Why am I asked to sign in?</td><td>After signing in or registering, the prefilled save dialog continues automatically.</td></tr><tr><td>The shortcut does nothing.</td><td>Check for a system shortcut conflict and change it in the extension management page.</td></tr><tr><td>How do I migrate data?</td><td>Export TXT by category, then import it on the new computer.</td></tr><tr><td>What happens on uninstall?</td><td>Local data is removed, so export a backup first.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-appendix'><h4>9. Appendix</h4><div class='table-wrap'><table><tr><th>Item</th><th>Details</th></tr><tr><td>Name</td><td>Whale Navigation</td></tr><tr><td>Architecture</td><td>Manifest V3 browser extension, with no backend or remote code</td></tr><tr><td>Shortcut</td><td><code>Ctrl+Shift+K</code></td></tr><tr><td>License</td><td>GNU GPL version 3 or later</td></tr></table></div></div>"
+  },
   "contextMenuTitle": {
     "message": "Save to Whale Navigation"
   },
   "commandSaveToNav": {
     "message": "Save current page to navigation"
+  },
+  "defaultCategory": {
+    "message": "Default"
+  },
+  "dropDeleteHint": {
+    "message": "Drop here to delete"
+  },
+  "dropDeleteActive": {
+    "message": "Release to delete"
+  },
+  "dropDeleteNeedLogin": {
+    "message": "Sign in to delete links"
   }
 }

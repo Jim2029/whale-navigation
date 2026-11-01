@@ -44,6 +44,15 @@
   "fabTitle": {
     "message": "URLを追加"
   },
+  "bookmarkSaved": {
+    "message": "ブックマークしました"
+  },
+  "bookmarkDomain": {
+    "message": "ドメインを保存"
+  },
+  "bookmarkPage": {
+    "message": "ページを保存"
+  },
   "notLoggedIn": {
     "message": "未ログイン"
   },
@@ -58,6 +67,9 @@
   },
   "loginToViewPersonal": {
     "message": "個人URLを表示するにはログインしてください"
+  },
+  "personalLoginHint": {
+    "message": "右上でログインすると個人のURLを登録できます"
   },
   "goLogin": {
     "message": "ログイン"
@@ -179,10 +191,526 @@
   "logoutConfirmCurrent": {
     "message": "現在のユーザー"
   },
+  "catName_cat_01": {
+    "message": "検索エンジン"
+  },
+  "catName_cat_personal": {
+    "message": "マイ"
+  },
+  "catName_cat_03": {
+    "message": "よく使うサイト"
+  },
+  "catName_cat_04": {
+    "message": "教育プラットフォーム"
+  },
+  "catName_cat_05": {
+    "message": "語学学習"
+  },
+  "catName_cat_06": {
+    "message": "ナビゲーションサイト"
+  },
+  "catName_cat_07": {
+    "message": "マルチメディア"
+  },
+  "catName_cat_08": {
+    "message": "ツールサイト"
+  },
+  "catName_cat_09": {
+    "message": "職業スキル"
+  },
+  "catName_cat_10": {
+    "message": "学術研究"
+  },
+  "catName_cat_11": {
+    "message": "電子書籍"
+  },
+  "catName_cat_12": {
+    "message": "人文・社会"
+  },
+  "catName_cat_13": {
+    "message": "理系・医学"
+  },
+  "catName_cat_14": {
+    "message": "エンタメ"
+  },
+  "catName_cat_15": {
+    "message": "オンライン講座"
+  },
+  "catName_cat_16": {
+    "message": "AIリソース"
+  },
+  "catName_cat_17": {
+    "message": "K12リソース"
+  },
+  "admin_title": {
+    "message": "クジラナビ - 管理画面"
+  },
+  "admin_home": {
+    "message": "ホームへ"
+  },
+  "admin_badge_default": {
+    "message": "管理者"
+  },
+  "admin_logout": {
+    "message": "ログアウト"
+  },
+  "admin_user_logout": {
+    "message": "{name} | ログアウト"
+  },
+  "admin_overview": {
+    "message": "概要"
+  },
+  "admin_categories": {
+    "message": "カテゴリ管理"
+  },
+  "admin_links": {
+    "message": "リンク管理"
+  },
+  "admin_batch_import": {
+    "message": "一括インポート"
+  },
+  "admin_batch_export": {
+    "message": "一括エクスポート"
+  },
+  "admin_about": {
+    "message": "について"
+  },
+  "admin_tutorial": {
+    "message": "使い方"
+  },
+  "admin_add_cat_title": {
+    "message": "新規カテゴリを追加"
+  },
+  "admin_cat_name_label": {
+    "message": "カテゴリ名 *"
+  },
+  "admin_cat_name_placeholder": {
+    "message": "例：学習リソース"
+  },
+  "admin_cat_icon_label": {
+    "message": "アイコン絵文字"
+  },
+  "admin_cat_icon_placeholder": {
+    "message": "📚"
+  },
+  "admin_add_cat_btn": {
+    "message": "カテゴリを追加"
+  },
+  "admin_current_cats": {
+    "message": "現在のカテゴリ"
+  },
+  "admin_no_cats": {
+    "message": "カテゴリがありません。追加してください"
+  },
+  "admin_add_link_btn": {
+    "message": "リンクを追加"
+  },
+  "admin_batch_bar_hint": {
+    "message": "リンクをチェックして一括操作："
+  },
+  "admin_batch_show": {
+    "message": "一括表示"
+  },
+  "admin_batch_hide": {
+    "message": "一括非表示"
+  },
+  "admin_all_cats": {
+    "message": "すべてのカテゴリ"
+  },
+  "admin_all_status": {
+    "message": "すべての状態"
+  },
+  "admin_status_visible": {
+    "message": "表示のみ"
+  },
+  "admin_status_hidden": {
+    "message": "非表示のみ"
+  },
+  "admin_search_placeholder": {
+    "message": "タイトル/URLを検索..."
+  },
+  "admin_batch_paste_title": {
+    "message": "データを貼り付け（1行1件）"
+  },
+  "admin_batch_target_cat": {
+    "message": "対象カテゴリ"
+  },
+  "admin_batch_placeholder": {
+    "message": "カテゴリ,タイトル,URL\n例：\nよく使うサイト,百度,https://www.baidu.com\n検索,Google,https://www.google.com\n2列の「タイトル,URL」も使用できます（上で選んだカテゴリを使用）。"
+  },
+  "admin_batch_format_hint": {
+    "message": "形式：<code>カテゴリ,タイトル,URL</code>。カテゴリを空欄にすると、上で選んだ対象カテゴリを使用します。2列の <code>タイトル,URL</code> にも対応。カンマと二重引用符は自動処理され、Tab区切りも使用できます。<br/>公開カテゴリのURLは <code>http://</code> または <code>https://</code> で始めてください。個人URLではローカルファイルも使用できます。"
+  },
+  "admin_preview_btn": {
+    "message": "プレビュー"
+  },
+  "admin_import_btn": {
+    "message": "インポート"
+  },
+  "admin_export_title": {
+    "message": "リンクをテキストファイルにエクスポート"
+  },
+  "admin_export_select_cat": {
+    "message": "カテゴリを選択"
+  },
+  "admin_export_format_hint": {
+    "message": "エクスポート形式：<code>カテゴリ,タイトル,URL</code>。カンマや引用符を含む項目は自動的に引用され、そのまま一括インポートに使用できます。"
+  },
+  "admin_export_btn": {
+    "message": ".txt としてエクスポート"
+  },
+  "admin_about_title": {
+    "message": "クジラナビ V1.4.3"
+  },
+  "admin_about_desc": {
+    "message": "Copyright (C) 2026 作者：jingbo<br/>本プログラムは自由ソフトウェアです：自由ソフトウェア財団が公開する GNU 一般公衆利用許諾契約書（GPL）第3版またはそれ以降の条項に従って、再配布および/または改変することができます。<br/>本プログラムは完全にローカルで動作し、リモートコンポーネントや機能はありません；<br/>入力したURLはご自身のコンピュータにのみ保存されます。<br/>すべてのデータはお使いのブラウザにのみ保存され、暗号化されません。共用のコンピュータでは機密性の高いURLを保存しないでください。また、Windows アカウントを適切に管理してください。<br/>プログラムやURLの更新はWeChat公式アカウント「半坡云」でご確認ください；<br/>連絡先メール：njunion@126.com"
+  },
+  "admin_about_qr_label": {
+    "message": "開発者のWeChat"
+  },
+  "admin_edit_modal_title": {
+    "message": "リンクを編集"
+  },
+  "admin_add_modal_title": {
+    "message": "リンクを追加"
+  },
+  "admin_title_label": {
+    "message": "タイトル *"
+  },
+  "admin_url_label": {
+    "message": "URL *"
+  },
+  "admin_desc_label": {
+    "message": "説明"
+  },
+  "admin_cat_label": {
+    "message": "カテゴリ"
+  },
+  "th_name": {
+    "message": "名前"
+  },
+  "th_url": {
+    "message": "URL"
+  },
+  "th_category": {
+    "message": "カテゴリ"
+  },
+  "th_desc": {
+    "message": "説明"
+  },
+  "th_actions": {
+    "message": "操作"
+  },
+  "th_status": {
+    "message": "状態"
+  },
+  "th_title": {
+    "message": "タイトル"
+  },
+  "stat_cat_count": {
+    "message": "カテゴリ数"
+  },
+  "stat_visible": {
+    "message": "表示リンク数"
+  },
+  "stat_hidden": {
+    "message": "非表示"
+  },
+  "login_title": {
+    "message": "ログインしてください"
+  },
+  "login_username_ph": {
+    "message": "ユーザー名"
+  },
+  "login_password_ph": {
+    "message": "パスワード"
+  },
+  "login_btn": {
+    "message": "ログイン"
+  },
+  "login_no_account": {
+    "message": "アカウントがない場合"
+  },
+  "login_go_register": {
+    "message": "登録へ"
+  },
+  "register_title": {
+    "message": "アカウント登録"
+  },
+  "register_username_ph": {
+    "message": "ユーザー名（3〜20文字）"
+  },
+  "register_password_ph": {
+    "message": "パスワード（6文字以上）"
+  },
+  "register_password2_ph": {
+    "message": "パスワード確認"
+  },
+  "register_btn": {
+    "message": "登録"
+  },
+  "register_have_account": {
+    "message": "アカウントをお持ちの場合"
+  },
+  "register_go_login": {
+    "message": "ログインへ"
+  },
+  "admin_need_username_password": {
+    "message": "ユーザー名とパスワードを入力してください"
+  },
+  "admin_need_cat_name": {
+    "message": "カテゴリ名を入力してください"
+  },
+  "admin_cat_added": {
+    "message": "✅ カテゴリを追加しました"
+  },
+  "admin_cat_name_empty": {
+    "message": "カテゴリ名を空にできません"
+  },
+  "admin_cat_updated": {
+    "message": "✅ カテゴリ名を更新しました"
+  },
+  "admin_cat_deleted": {
+    "message": "カテゴリを削除しました"
+  },
+  "admin_sorted": {
+    "message": "✅ 並び順を更新しました"
+  },
+  "admin_hidden": {
+    "message": "非表示にしました"
+  },
+  "admin_visible": {
+    "message": "表示にしました"
+  },
+  "admin_select_first": {
+    "message": "操作するリンクを先にチェックしてください"
+  },
+  "admin_link_deleted": {
+    "message": "リンクを削除しました"
+  },
+  "admin_updated": {
+    "message": "✅ 更新しました"
+  },
+  "admin_added": {
+    "message": "✅ 追加しました"
+  },
+  "admin_select_cat": {
+    "message": "対象カテゴリを選択してください"
+  },
+  "admin_no_valid_import": {
+    "message": "インポートできる有効なデータがありません"
+  },
+  "admin_imported": {
+    "message": "✅ {count} 件のリンクをインポートしました"
+  },
+  "admin_no_export": {
+    "message": "このカテゴリにはエクスポートできる表示リンクがありません"
+  },
+  "admin_exported": {
+    "message": "✅ {count} 件のリンクを {filename} にエクスポートしました"
+  },
+  "admin_no_preview_data": {
+    "message": "有効なデータがありません。形式を確認してください"
+  },
+  "admin_logout_confirm": {
+    "message": "ログアウトしてもよろしいですか？"
+  },
+  "admin_delete_cat_with_links": {
+    "message": "カテゴリ「{name}」を削除しますか？このカテゴリの {count} 件のリンクは分類が解除されます。"
+  },
+  "admin_delete_cat": {
+    "message": "カテゴリ「{name}」を削除しますか？"
+  },
+  "admin_batch_confirm": {
+    "message": "選択した {count} 件のリンクを{action}しますか？"
+  },
+  "admin_batch_action_show": {
+    "message": "表示"
+  },
+  "admin_batch_action_hide": {
+    "message": "非表示"
+  },
+  "admin_delete_link": {
+    "message": "「{title}」を削除しますか？"
+  },
+  "admin_empty_overview": {
+    "message": "URLデータがありません。「リンク管理」で追加してください。"
+  },
+  "admin_empty_links": {
+    "message": "一致するリンクがありません"
+  },
+  "admin_no_visible_export": {
+    "message": "このカテゴリには表示リンクがありません"
+  },
+  "admin_hidden_tag": {
+    "message": "[非表示]"
+  },
+  "admin_no_category": {
+    "message": "カテゴリなし"
+  },
+  "admin_action_show": {
+    "message": "表示"
+  },
+  "admin_action_hide": {
+    "message": "非表示"
+  },
+  "admin_drag_title": {
+    "message": "ドラッグして並び替え"
+  },
+  "admin_move_first": {
+    "message": "先頭へ移動"
+  },
+  "admin_move_up": {
+    "message": "1つ上へ移動"
+  },
+  "admin_move_down": {
+    "message": "1つ下へ移動"
+  },
+  "admin_move_last": {
+    "message": "最後へ移動"
+  },
+  "admin_cat_top": {
+    "message": "先頭へ"
+  },
+  "admin_cat_up": {
+    "message": "上へ"
+  },
+  "admin_cat_down": {
+    "message": "下へ"
+  },
+  "admin_cat_bottom": {
+    "message": "最後へ"
+  },
+  "admin_cat_edit": {
+    "message": "名前を変更"
+  },
+  "admin_cat_del": {
+    "message": "カテゴリを削除"
+  },
+  "admin_save_short": {
+    "message": "保存"
+  },
+  "admin_preview_title": {
+    "message": "プレビュー（全 {count} 件）"
+  },
+  "admin_export_preview_title": {
+    "message": "エクスポートプレビュー：{name}（全 {count} 件）"
+  },
+  "admin_export_records_hint": {
+    "message": "全 {count} 件を <code>カテゴリ,タイトル,URL</code> 形式の .txt ファイルとしてエクスポートします。"
+  },
+  "admin_unknown_cat": {
+    "message": "不明なカテゴリ"
+  },
+  "admin_export_filename_base": {
+    "message": "ナビURL"
+  },
+  "admin_addr_format_err": {
+    "message": "❌ アドレス形式が不正です"
+  },
+  "admin_url_format_err": {
+    "message": "❌ URL形式が不正です"
+  },
+  "admin_avatar_title": {
+    "message": "アバター設定"
+  },
+  "admin_avatar_subtitle": {
+    "message": "アバターを選択"
+  },
+  "admin_avatar_hint": {
+    "message": "選択するとすぐに反映され、ホーム画面の右上に表示されます。"
+  },
+  "admin_avatar_saved": {
+    "message": "アバターを更新しました"
+  },
+  "theme_bright": {
+    "message": "朝焼け"
+  },
+  "theme_deep": {
+    "message": "深海"
+  },
+  "theme_bamboo": {
+    "message": "竹林"
+  },
+  "theme_sunset": {
+    "message": "夕焼け"
+  },
+  "theme_ink": {
+    "message": "墨韻"
+  },
+  "theme_dark": {
+    "message": "暗闇"
+  },
+  "admin_batch_delete": {
+    "message": "一括削除"
+  },
+  "admin_batch_delete_confirm": {
+    "message": "選択した {count} 件のリンクを削除しますか？元に戻せません。"
+  },
+  "admin_batch_no_selection": {
+    "message": "削除するリンクを先に選択してください"
+  },
+  "admin_batch_deleted": {
+    "message": "{count} 件削除しました"
+  },
+  "theme_label": {
+    "message": "テーマ"
+  },
+  "language_label": {
+    "message": "言語"
+  },
+  "logoHomeTitle": {
+    "message": "ホームへ戻る"
+  },
+  "regUsernamePlaceholder": {
+    "message": "3～20文字"
+  },
+  "regPasswordPlaceholder": {
+    "message": "6文字以上"
+  },
+  "regPasswordConfirmPlaceholder": {
+    "message": "パスワードを再入力"
+  },
+  "bookmarkNeedLogin": {
+    "message": "ブックマークを保存するには登録またはログインが必要です"
+  },
+  "bookmarkDomainHttpOnly": {
+    "message": "http/https のURLだけをドメインとして保存できます"
+  },
+  "bookmarkDomainParseFailed": {
+    "message": "URLのドメインを解析できません"
+  },
+  "admin_link_not_found": {
+    "message": "編集するリンクが見つかりません"
+  },
+  "admin_duplicate_link": {
+    "message": "選択したカテゴリには同じリンクが既にあります"
+  },
+  "admin_import_skipped": {
+    "message": "✅ {imported} 件をインポートし、重複 {skipped} 件をスキップしました"
+  },
+  "tutorial_intro": {
+    "message": "このガイドでは、主な機能を文字と表だけで説明します。このページをブラウザのホームページに設定すると、すぐに開けて便利です。"
+  },
+  "tutorial_intl_html": {
+    "message": "<nav class='tut-nav'><button class='tut-nav-item active' data-tut='intl-start'>一、はじめに</button><button class='tut-nav-item' data-tut='intl-ui'>二、画面</button><button class='tut-nav-item' data-tut='intl-usage'>三、基本操作</button><button class='tut-nav-item' data-tut='intl-admin'>四、管理画面</button><button class='tut-nav-item' data-tut='intl-feature'>五、機能</button><button class='tut-nav-item' data-tut='intl-faq'>六、よくある質問</button><button class='tut-nav-item' data-tut='intl-appendix'>七、付録</button></nav><div class='tut-pane active' id='tut-intl-start'><h4>1. はじめに</h4><p>Chrome、Edge、Firefox の公式拡張ストアから無料でインストールできます。このページをブラウザのホームページに設定することをおすすめします。</p><div class='tut-tip'><b>ホームページの設定</b><br>Chrome は <code>chrome://settings/</code> の「起動時」で「特定のページを開く」を選びます。Edge と Firefox もホームまたは起動時の設定に同じ項目があります。拡張機能のアドレスはナビゲーションページのアドレスバーからコピーできます。例：<code>chrome-extension://…/pages/popup.html</code></div></div><div class='tut-pane' id='tut-intl-ui'><h4>2. 画面と検索</h4><div class='table-wrap'><table><tr><th>場所</th><th>説明</th></tr><tr><td>上部ツールバー</td><td>ホーム、サイト内検索、Bing、Google、すべて/マイ、言語、テーマ、管理、アカウント。</td></tr><tr><td>左のカテゴリ</td><td>クリックすると該当カテゴリへ移動します。名前とアイコンは言語に合わせて変わります。</td></tr><tr><td>URLカード</td><td>URLを開くほか、並べ替え、カテゴリ間の移動、ドラッグ削除ができます。</td></tr></table></div></div><div class='tut-pane' id='tut-intl-usage'><h4>3. URLの保存</h4><div class='table-wrap'><table><tr><th>方法</th><th>操作</th></tr><tr><td>ページから追加</td><td>右下の「＋」を押し、タイトル、URL、説明を入力してカテゴリを選びます。</td></tr><tr><td>右クリック</td><td>Webページを右クリックし「鲸波ナビに保存」を選ぶと、入力済みの保存画面が開きます。</td></tr><tr><td>ショートカット</td><td><code>Ctrl+Shift+K</code> で保存できます。拡張機能の設定で変更できます。</td></tr><tr><td>ページ/ドメイン</td><td>現在のページを保存するか、サイト名付きのホームページを保存するかを切り替えます。</td></tr><tr><td>重複</td><td>URLを正規化し、既に存在する重複URLは追加しません。</td></tr></table></div><h4>4. 個人URLとドラッグ操作</h4><div class='table-wrap'><table><tr><th>機能</th><th>説明</th></tr><tr><td>個人URL</td><td>ログイン後に非公開で保存できます。アカウントごとに分離され、「マイ」には現在のアカウントのURLだけが表示されます。</td></tr><tr><td>ローカルファイル</td><td><code>file://</code> とローカルパスは個人URLだけで使用できます。先に <code>chrome://extensions</code> の拡張機能詳細で「ファイルの URL へのアクセスを許可する」を有効にしてください。</td></tr><tr><td>並べ替え</td><td>同じカテゴリ内でカードをドラッグして順序を変更します。</td></tr><tr><td>カテゴリ移動</td><td>別のカテゴリ領域または左側のカテゴリ名へドラッグします。個人URLと公開カテゴリの間も移動できます。</td></tr><tr><td>削除</td><td>ドラッグ中に「URLを削除」領域が表示されます。そこへドロップして確認します。</td></tr></table></div></div><div class='tut-pane' id='tut-intl-admin'><h4>5. 管理画面</h4><p>データ概要、カテゴリ、URL、一括インポート、一括エクスポート、アバター、使い方、情報の各パネルがあります。管理者はURLの追加、編集、削除、非表示、カテゴリやキーワードでの絞り込みができます。</p><h4>6. 一括インポートとエクスポート</h4><div class='table-wrap'><table><tr><th>形式</th><th>説明</th></tr><tr><td><code>カテゴリ,タイトル,URL</code></td><td>推奨形式です。1行に1件。不明なカテゴリは選択中の対象カテゴリへ追加されます。</td></tr><tr><td><code>タイトル,URL</code></td><td>2列形式です。選択中の対象カテゴリへ追加されます。</td></tr><tr><td>エクスポート</td><td>カテゴリ別にUTF-8のTXTを出力します。別のパソコンでそのままインポートできます。</td></tr></table></div><div class='tut-tip'><b>例</b><br><code>よく使うサイト,百度,https://www.baidu.com</code><br><code>検索エンジン,Google,https://www.google.com</code></div></div><div class='tut-pane' id='tut-intl-feature'><h4>7. テーマ、言語、プライバシー</h4><p>7言語と6テーマに対応しています：朝焼け、深海、竹林、夕焼け、墨韻、暗闇。言語を切り替えると、このガイドも同じ言語に変わります。</p><ul><li>外部コンポーネント、解析、トラッカーなしでローカル動作します。</li><li>URLデータは現在のブラウザ内だけに保存され、サーバーへ送信されません。</li><li>ログインなしでナビゲーションを利用でき、ログインすると個人URLが使えます。</li></ul></div><div class='tut-pane' id='tut-intl-faq'><h4>8. よくある質問</h4><div class='table-wrap'><table><tr><th>質問</th><th>回答</th></tr><tr><td>アイコンで全画面が開くのはなぜ？</td><td>より多くのURLを表示するための仕様です。ホームページに設定すると便利です。</td></tr><tr><td>ログインを求められるのはなぜ？</td><td>登録またはログイン後に、入力済みの保存画面が自動的に続きます。</td></tr><tr><td>ショートカットが反応しない</td><td>システムや他のソフトとの競合を確認し、拡張機能の管理画面で変更してください。</td></tr><tr><td>データを移行するには？</td><td>カテゴリ別にTXTをエクスポートし、新しいパソコンでインポートします。</td></tr><tr><td>アンインストールすると？</td><td>ローカルデータが消えるため、事前にエクスポートしてください。</td></tr></table></div></div><div class='tut-pane' id='tut-intl-appendix'><h4>9. 付録</h4><div class='table-wrap'><table><tr><th>項目</th><th>内容</th></tr><tr><td>名前</td><td>Whale Navigation</td></tr><tr><td>構成</td><td>Manifest V3 拡張機能。バックエンドやリモートコードはありません</td></tr><tr><td>ショートカット</td><td><code>Ctrl+Shift+K</code></td></tr><tr><td>ライセンス</td><td>GNU GPL バージョン3以降</td></tr></table></div></div>"
+  },
   "contextMenuTitle": {
     "message": "くじらナビに保存"
   },
   "commandSaveToNav": {
     "message": "現在のページをナビに保存"
+  },
+  "defaultCategory": {
+    "message": "既定"
+  },
+  "dropDeleteHint": {
+    "message": "ここにドロップして削除"
+  },
+  "dropDeleteActive": {
+    "message": "離すと削除します"
+  },
+  "dropDeleteNeedLogin": {
+    "message": "削除するにはログインしてください"
   }
 }

@@ -44,6 +44,15 @@
   "fabTitle": {
     "message": "إضافة رابط"
   },
+  "bookmarkSaved": {
+    "message": "تم الحفظ"
+  },
+  "bookmarkDomain": {
+    "message": "حفظ النطاق"
+  },
+  "bookmarkPage": {
+    "message": "حفظ الصفحة"
+  },
   "notLoggedIn": {
     "message": "لم تسجل الدخول"
   },
@@ -58,6 +67,9 @@
   },
   "loginToViewPersonal": {
     "message": "يرجى تسجيل الدخول لعرض روابطك الشخصية"
+  },
+  "personalLoginHint": {
+    "message": "سجّل الدخول من الزاوية العلوية اليمنى لحفظ روابطك"
   },
   "goLogin": {
     "message": "تسجيل الدخول"
@@ -179,10 +191,526 @@
   "logoutConfirmCurrent": {
     "message": "المستخدم الحالي"
   },
+  "catName_cat_01": {
+    "message": "محركات البحث"
+  },
+  "catName_cat_personal": {
+    "message": "شخصي"
+  },
+  "catName_cat_03": {
+    "message": "مواقع مفضلة"
+  },
+  "catName_cat_04": {
+    "message": "منصات تعليمية"
+  },
+  "catName_cat_05": {
+    "message": "تعلم اللغات"
+  },
+  "catName_cat_06": {
+    "message": "مواقع الدليل"
+  },
+  "catName_cat_07": {
+    "message": "وسائط متعددة"
+  },
+  "catName_cat_08": {
+    "message": "أدوات"
+  },
+  "catName_cat_09": {
+    "message": "مهارات مهنية"
+  },
+  "catName_cat_10": {
+    "message": "بحث أكاديمي"
+  },
+  "catName_cat_11": {
+    "message": "كتب إلكترونية"
+  },
+  "catName_cat_12": {
+    "message": "علوم إنسانية"
+  },
+  "catName_cat_13": {
+    "message": "علوم وطب"
+  },
+  "catName_cat_14": {
+    "message": "ترفيه"
+  },
+  "catName_cat_15": {
+    "message": "دورات أونلاين"
+  },
+  "catName_cat_16": {
+    "message": "موارد الذكاء الاصطناعي"
+  },
+  "catName_cat_17": {
+    "message": "موارد K12"
+  },
+  "admin_title": {
+    "message": "ملاحة الحوت - الإدارة"
+  },
+  "admin_home": {
+    "message": "الرئيسية"
+  },
+  "admin_badge_default": {
+    "message": "مشرف"
+  },
+  "admin_logout": {
+    "message": "خروج"
+  },
+  "admin_user_logout": {
+    "message": "{name} | خروج"
+  },
+  "admin_overview": {
+    "message": "نظرة عامة"
+  },
+  "admin_categories": {
+    "message": "إدارة الفئات"
+  },
+  "admin_links": {
+    "message": "إدارة الروابط"
+  },
+  "admin_batch_import": {
+    "message": "استيراد"
+  },
+  "admin_batch_export": {
+    "message": "تصدير"
+  },
+  "admin_about": {
+    "message": "حول"
+  },
+  "admin_tutorial": {
+    "message": "الدليل"
+  },
+  "admin_add_cat_title": {
+    "message": "إضافة فئة جديدة"
+  },
+  "admin_cat_name_label": {
+    "message": "اسم الفئة *"
+  },
+  "admin_cat_name_placeholder": {
+    "message": "مثال: مصادر التعلم"
+  },
+  "admin_cat_icon_label": {
+    "message": "رمز تعبيري للأيقونة"
+  },
+  "admin_cat_icon_placeholder": {
+    "message": "📚"
+  },
+  "admin_add_cat_btn": {
+    "message": "إضافة فئة"
+  },
+  "admin_current_cats": {
+    "message": "الفئات الحالية"
+  },
+  "admin_no_cats": {
+    "message": "لا توجد فئات بعد، أضف فئة"
+  },
+  "admin_add_link_btn": {
+    "message": "إضافة رابط"
+  },
+  "admin_batch_bar_hint": {
+    "message": "حدد الروابط لعمليات مجمعة:"
+  },
+  "admin_batch_show": {
+    "message": "إظهار مجمّع"
+  },
+  "admin_batch_hide": {
+    "message": "إخفاء مجمّع"
+  },
+  "admin_all_cats": {
+    "message": "كل الفئات"
+  },
+  "admin_all_status": {
+    "message": "كل الحالات"
+  },
+  "admin_status_visible": {
+    "message": "المرئي فقط"
+  },
+  "admin_status_hidden": {
+    "message": "المخفي فقط"
+  },
+  "admin_search_placeholder": {
+    "message": "ابحث عن العنوان/الرابط..."
+  },
+  "admin_batch_paste_title": {
+    "message": "الصق البيانات (واحد لكل سطر)"
+  },
+  "admin_batch_target_cat": {
+    "message": "الفئة الهدف"
+  },
+  "admin_batch_placeholder": {
+    "message": "الفئة,العنوان,الرابط\nمثال:\nمواقع شائعة,بايدو,https://www.baidu.com\nبحث,Google,https://www.google.com\nيمكن استخدام صيغة العمودين العنوان,الرابط مع الفئة الهدف المحددة."
+  },
+  "admin_batch_format_hint": {
+    "message": "التنسيق: <code>الفئة,العنوان,الرابط</code>. اترك الفئة فارغة لاستخدام الفئة الهدف المحددة. تدعم أيضًا صيغة <code>العنوان,الرابط</code>. تتم معالجة الفواصل وعلامات الاقتباس تلقائيًا ويمكن استخدام Tab.<br/>يجب أن تبدأ روابط الفئات العامة بـ <code>http://</code> أو <code>https://</code>، بينما تدعم الروابط الشخصية مسارات الملفات المحلية."
+  },
+  "admin_preview_btn": {
+    "message": "معاينة"
+  },
+  "admin_import_btn": {
+    "message": "استيراد"
+  },
+  "admin_export_title": {
+    "message": "تصدير الروابط إلى ملف نصي"
+  },
+  "admin_export_select_cat": {
+    "message": "اختر الفئة"
+  },
+  "admin_export_format_hint": {
+    "message": "صيغة التصدير: <code>الفئة,العنوان,الرابط</code>. تُوضع علامات اقتباس تلقائيًا حول الحقول التي تحتوي على فواصل أو اقتباسات ويمكن استيرادها مباشرة."
+  },
+  "admin_export_btn": {
+    "message": "تصدير كـ .txt"
+  },
+  "admin_about_title": {
+    "message": "ملاحة الحوت V1.4.3"
+  },
+  "admin_about_desc": {
+    "message": "Copyright (C) 2026 المؤلف: jingbo<br/>هذا البرنامج برنامج حر: يمكنك إعادة توزيعه و/أو تعديله وفقًا لشروط رخصة GNU العامة (GPL) الصادرة عن مؤسسة البرمجيات الحرة، الإصدار 3 أو أي إصدار لاحق.<br/>يعمل هذا البرنامج محليًا بالكامل، دون أي مكونات أو وظائف عن بُعد;<br/>يتم حفظ عناوين URL التي تدخلها على جهاز الكمبيوتر الخاص بك فقط.<br/>تُحفظ جميع البيانات في متصفحك فقط دون تشفير. تجنّب حفظ عناوين URL الحساسة على جهاز كمبيوتر مشترك، واحرص على تأمين حساب Windows الخاص بك.<br/>تابع حساب WeChat الرسمي Banpoyun للحصول على تحديثات البرنامج أو الروابط;<br/>البريد الإلكتروني للتواصل: njunion@126.com"
+  },
+  "admin_about_qr_label": {
+    "message": "حساب المؤلف على WeChat"
+  },
+  "admin_edit_modal_title": {
+    "message": "تعديل الرابط"
+  },
+  "admin_add_modal_title": {
+    "message": "إضافة رابط"
+  },
+  "admin_title_label": {
+    "message": "العنوان *"
+  },
+  "admin_url_label": {
+    "message": "الرابط *"
+  },
+  "admin_desc_label": {
+    "message": "الوصف"
+  },
+  "admin_cat_label": {
+    "message": "الفئة"
+  },
+  "th_name": {
+    "message": "الاسم"
+  },
+  "th_url": {
+    "message": "الرابط"
+  },
+  "th_category": {
+    "message": "الفئة"
+  },
+  "th_desc": {
+    "message": "الوصف"
+  },
+  "th_actions": {
+    "message": "إجراءات"
+  },
+  "th_status": {
+    "message": "الحالة"
+  },
+  "th_title": {
+    "message": "العنوان"
+  },
+  "stat_cat_count": {
+    "message": "عدد الفئات"
+  },
+  "stat_visible": {
+    "message": "روابط مرئية"
+  },
+  "stat_hidden": {
+    "message": "مخفي"
+  },
+  "login_title": {
+    "message": "يرجى تسجيل الدخول"
+  },
+  "login_username_ph": {
+    "message": "اسم المستخدم"
+  },
+  "login_password_ph": {
+    "message": "كلمة المرور"
+  },
+  "login_btn": {
+    "message": "تسجيل الدخول"
+  },
+  "login_no_account": {
+    "message": "ليس لديك حساب؟"
+  },
+  "login_go_register": {
+    "message": "إنشاء حساب"
+  },
+  "register_title": {
+    "message": "إنشاء حساب"
+  },
+  "register_username_ph": {
+    "message": "اسم المستخدم (3-20 حرفًا)"
+  },
+  "register_password_ph": {
+    "message": "كلمة المرور (6 أحرف على الأقل)"
+  },
+  "register_password2_ph": {
+    "message": "تأكيد كلمة المرور"
+  },
+  "register_btn": {
+    "message": "إنشاء"
+  },
+  "register_have_account": {
+    "message": "لديك حساب بالفعل؟"
+  },
+  "register_go_login": {
+    "message": "تسجيل الدخول"
+  },
+  "admin_need_username_password": {
+    "message": "يرجى إدخال اسم المستخدم وكلمة المرور"
+  },
+  "admin_need_cat_name": {
+    "message": "يرجى إدخال اسم الفئة"
+  },
+  "admin_cat_added": {
+    "message": "✅ تمت إضافة الفئة"
+  },
+  "admin_cat_name_empty": {
+    "message": "لا يمكن أن يكون اسم الفئة فارغًا"
+  },
+  "admin_cat_updated": {
+    "message": "✅ تم تحديث اسم الفئة"
+  },
+  "admin_cat_deleted": {
+    "message": "تم حذف الفئة"
+  },
+  "admin_sorted": {
+    "message": "✅ تم تحديث الترتيب"
+  },
+  "admin_hidden": {
+    "message": "تم الإخفاء"
+  },
+  "admin_visible": {
+    "message": "تم الإظهار"
+  },
+  "admin_select_first": {
+    "message": "حدد أولاً الروابط المراد تنفيذ الإجراء عليها"
+  },
+  "admin_link_deleted": {
+    "message": "تم حذف الرابط"
+  },
+  "admin_updated": {
+    "message": "✅ تم التحديث"
+  },
+  "admin_added": {
+    "message": "✅ تمت الإضافة"
+  },
+  "admin_select_cat": {
+    "message": "يرجى اختيار الفئة الهدف"
+  },
+  "admin_no_valid_import": {
+    "message": "لا توجد بيانات صالحة للاستيراد"
+  },
+  "admin_imported": {
+    "message": "✅ تم استيراد {count} رابطًا"
+  },
+  "admin_no_export": {
+    "message": "لا توجد روابط مرئية للتصدير في هذه الفئة"
+  },
+  "admin_exported": {
+    "message": "✅ تم تصدير {count} رابطًا إلى {filename}"
+  },
+  "admin_no_preview_data": {
+    "message": "لا توجد بيانات صالحة، يرجى التحقق من التنسيق"
+  },
+  "admin_logout_confirm": {
+    "message": "هل أنت متأكد من تسجيل الخروج؟"
+  },
+  "admin_delete_cat_with_links": {
+    "message": "هل تريد حذف الفئة \"{name}\"؟ ستفقد {count} روابط تحتها فئتها."
+  },
+  "admin_delete_cat": {
+    "message": "هل تريد حذف الفئة \"{name}\"؟"
+  },
+  "admin_batch_confirm": {
+    "message": "هل أنت متأكد من {action} الروابط المحددة ({count})؟"
+  },
+  "admin_batch_action_show": {
+    "message": "إظهار"
+  },
+  "admin_batch_action_hide": {
+    "message": "إخفاء"
+  },
+  "admin_delete_link": {
+    "message": "هل تريد حذف \"{title}\"؟"
+  },
+  "admin_empty_overview": {
+    "message": "لا توجد بيانات روابط بعد. أضف من \"إدارة الروابط\"."
+  },
+  "admin_empty_links": {
+    "message": "لا توجد روابط مطابقة"
+  },
+  "admin_no_visible_export": {
+    "message": "لا توجد روابط مرئية في هذه الفئة"
+  },
+  "admin_hidden_tag": {
+    "message": "[مخفي]"
+  },
+  "admin_no_category": {
+    "message": "بدون فئة"
+  },
+  "admin_action_show": {
+    "message": "إظهار"
+  },
+  "admin_action_hide": {
+    "message": "إخفاء"
+  },
+  "admin_drag_title": {
+    "message": "اسحب للترتيب"
+  },
+  "admin_move_first": {
+    "message": "انقل للأعلى"
+  },
+  "admin_move_up": {
+    "message": "تقديم"
+  },
+  "admin_move_down": {
+    "message": "تأخير"
+  },
+  "admin_move_last": {
+    "message": "انقل للأسفل"
+  },
+  "admin_cat_top": {
+    "message": "للأعلى"
+  },
+  "admin_cat_up": {
+    "message": "أعلى"
+  },
+  "admin_cat_down": {
+    "message": "أسفل"
+  },
+  "admin_cat_bottom": {
+    "message": "للأسفل"
+  },
+  "admin_cat_edit": {
+    "message": "إعادة تسمية"
+  },
+  "admin_cat_del": {
+    "message": "حذف الفئة"
+  },
+  "admin_save_short": {
+    "message": "حفظ"
+  },
+  "admin_preview_title": {
+    "message": "معاينة ({count} عنصر)"
+  },
+  "admin_export_preview_title": {
+    "message": "معاينة التصدير: {name} ({count} عنصر)"
+  },
+  "admin_export_records_hint": {
+    "message": "سيتم تصدير {count} سجلًا كملف .txt بتنسيق <code>الفئة,العنوان,الرابط</code>."
+  },
+  "admin_unknown_cat": {
+    "message": "فئة غير معروفة"
+  },
+  "admin_export_filename_base": {
+    "message": "nav_links"
+  },
+  "admin_addr_format_err": {
+    "message": "❌ صيغة العنوان غير صحيحة"
+  },
+  "admin_url_format_err": {
+    "message": "❌ صيغة الرابط غير صحيحة"
+  },
+  "admin_avatar_title": {
+    "message": "إعدادات الصورة الرمزية"
+  },
+  "admin_avatar_subtitle": {
+    "message": "اختر صورتك الرمزية"
+  },
+  "admin_avatar_hint": {
+    "message": "يسري التحديد فوراً. ستظهر صورتك في الزاوية العلوية اليمنى."
+  },
+  "admin_avatar_saved": {
+    "message": "تم تحديث الصورة الرمزية"
+  },
+  "theme_bright": {
+    "message": "فجر"
+  },
+  "theme_deep": {
+    "message": "محيط"
+  },
+  "theme_bamboo": {
+    "message": "خيزران"
+  },
+  "theme_sunset": {
+    "message": "غروب"
+  },
+  "theme_ink": {
+    "message": "حبر"
+  },
+  "theme_dark": {
+    "message": "مظلم"
+  },
+  "admin_batch_delete": {
+    "message": "حذف جماعي"
+  },
+  "admin_batch_delete_confirm": {
+    "message": "هل تريد حذف {count} روابط محددة؟ لا يمكن التراجع."
+  },
+  "admin_batch_no_selection": {
+    "message": "يرجى تحديد الروابط المراد حذفها أولاً"
+  },
+  "admin_batch_deleted": {
+    "message": "تم حذف {count} رابط"
+  },
+  "theme_label": {
+    "message": "السمة"
+  },
+  "language_label": {
+    "message": "اللغة"
+  },
+  "logoHomeTitle": {
+    "message": "العودة إلى الصفحة الرئيسية"
+  },
+  "regUsernamePlaceholder": {
+    "message": "من 3 إلى 20 حرفًا"
+  },
+  "regPasswordPlaceholder": {
+    "message": "6 أحرف على الأقل"
+  },
+  "regPasswordConfirmPlaceholder": {
+    "message": "أعد إدخال كلمة المرور"
+  },
+  "bookmarkNeedLogin": {
+    "message": "سجّل أو أنشئ حسابًا لحفظ الإشارات"
+  },
+  "bookmarkDomainHttpOnly": {
+    "message": "يمكن حفظ عناوين http/https فقط كنطاق"
+  },
+  "bookmarkDomainParseFailed": {
+    "message": "تعذر تحليل نطاق الرابط"
+  },
+  "admin_link_not_found": {
+    "message": "تعذر العثور على الرابط المطلوب تعديله"
+  },
+  "admin_duplicate_link": {
+    "message": "هذا الرابط موجود بالفعل في الفئة المحددة"
+  },
+  "admin_import_skipped": {
+    "message": "✅ تم استيراد {imported} وتخطي {skipped} مكررًا"
+  },
+  "tutorial_intro": {
+    "message": "يشرح هذا الدليل أهم المزايا بالنصوص والجداول فقط. يُنصح بتعيين هذه الصفحة كصفحة بداية للمتصفح."
+  },
+  "tutorial_intl_html": {
+    "message": "<div dir='rtl'><nav class='tut-nav'><button class='tut-nav-item active' data-tut='intl-start'>١. البدء</button><button class='tut-nav-item' data-tut='intl-ui'>٢. الواجهة</button><button class='tut-nav-item' data-tut='intl-usage'>٣. الاستخدام الأساسي</button><button class='tut-nav-item' data-tut='intl-admin'>٤. الإدارة</button><button class='tut-nav-item' data-tut='intl-feature'>٥. الميزات</button><button class='tut-nav-item' data-tut='intl-faq'>٦. الأسئلة الشائعة</button><button class='tut-nav-item' data-tut='intl-appendix'>٧. الملحق</button></nav><div class='tut-pane active' id='tut-intl-start'><h4>1. البدء</h4><p>يمكن تثبيت الإضافة مجانًا من متجر Chrome أو Edge أو Firefox الرسمي. يُنصح بتعيين صفحة التنقل كصفحة بداية للمتصفح.</p><div class='tut-tip'><b>تعيين صفحة البداية</b><br>في Chrome افتح <code>chrome://settings/</code> واختر «عند بدء التشغيل» ثم «فتح صفحات محددة». يوفر Edge وFirefox خيارًا مشابهًا في إعدادات البدء. انسخ عنوان الإضافة من شريط العنوان، مثل <code>chrome-extension://…/pages/popup.html</code>.</div></div><div class='tut-pane' id='tut-intl-ui'><h4>2. الواجهة والبحث</h4><div class='table-wrap'><table><tr><th>المنطقة</th><th>الوصف</th></tr><tr><td>شريط الأدوات العلوي</td><td>الصفحة الرئيسية، البحث المحلي، Bing، Google، الكل/روابطي، اللغة، السمة، الإدارة والحساب.</td></tr><tr><td>الفئات اليسرى</td><td>انتقل مباشرة إلى الفئة. تتغير الأسماء والأيقونات مع اللغة المحددة.</td></tr><tr><td>بطاقات الروابط</td><td>افتح الروابط أو أعد ترتيبها أو انقلها بين الفئات أو احذفها بالسحب.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-usage'><h4>3. حفظ الروابط</h4><div class='table-wrap'><table><tr><th>الطريقة</th><th>الخطوات</th></tr><tr><td>الإضافة من الصفحة</td><td>اضغط زر الإضافة، وأدخل العنوان والرابط والوصف الاختياري، ثم اختر الفئة واحفظ.</td></tr><tr><td>قائمة السياق</td><td>انقر بزر الفأرة الأيمن في صفحة ويب واختر الحفظ في Whale Navigation. تُفتح نافذة حفظ معبأة مسبقًا.</td></tr><tr><td>اختصار لوحة المفاتيح</td><td>اضغط <code>Ctrl+Shift+K</code>. يمكن تغيير الاختصار من إعدادات الإضافة.</td></tr><tr><td>الصفحة أو النطاق</td><td>بدّل بين حفظ الصفحة الحالية وحفظ الصفحة الرئيسية للموقع مع اسم الموقع المكتشف.</td></tr><tr><td>التكرار</td><td>تُوحّد صيغة الروابط ويتم تخطي الروابط المكررة الموجودة مسبقًا.</td></tr></table></div><h4>4. الروابط الشخصية والسحب</h4><div class='table-wrap'><table><tr><th>الميزة</th><th>الوصف</th></tr><tr><td>الروابط الشخصية</td><td>سجّل الدخول لحفظ روابط خاصة. الحسابات معزولة، وتعرض «روابطي» روابط الحساب الحالي فقط.</td></tr><tr><td>الملفات المحلية</td><td>تسمح الروابط الشخصية فقط بعناوين <code>file://</code> أو المسارات المحلية. فعّل السماح بالوصول إلى عناوين الملفات في تفاصيل الإضافة داخل <code>chrome://extensions</code>.</td></tr><tr><td>إعادة الترتيب</td><td>اسحب البطاقة إلى موضع آخر داخل الفئة نفسها.</td></tr><tr><td>نقل الفئة</td><td>اسحبها إلى فئة أخرى أو إلى اسم فئة في الشريط الجانبي، بما في ذلك بين الروابط الشخصية والفئات العامة.</td></tr><tr><td>الحذف</td><td>تظهر منطقة حذف الرابط أثناء السحب. أفلته هناك ثم أكد الحذف.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-admin'><h4>5. لوحة الإدارة</h4><p>تتضمن النظرة العامة والفئات والروابط والاستيراد والتصدير الجماعي والأفاتار وهذا الدليل ومعلومات التطبيق. يمكن للمدير إضافة الروابط وتعديلها وحذفها وإخفاءها وتصفيتها حسب الفئة والكلمة المفتاحية.</p><h4>6. الاستيراد والتصدير الجماعي</h4><div class='table-wrap'><table><tr><th>التنسيق</th><th>الوصف</th></tr><tr><td><code>الفئة,العنوان,الرابط</code></td><td>التنسيق الموصى به، رابط واحد في كل سطر. تستخدم الفئة الهدف المحددة إذا لم توجد الفئة.</td></tr><tr><td><code>العنوان,الرابط</code></td><td>تنسيق من عمودين ويستخدم الفئة الهدف المحددة.</td></tr><tr><td>التصدير</td><td>يصدّر ملف TXT بترميز UTF-8 حسب الفئة مع الفئة والعنوان والرابط للاستيراد على جهاز آخر.</td></tr></table></div><div class='tut-tip'><b>أمثلة</b><br><code>مواقع شائعة,Baidu,https://www.baidu.com</code><br><code>محركات البحث,Google,https://www.google.com</code></div></div><div class='tut-pane' id='tut-intl-feature'><h4>7. السمات واللغات والخصوصية</h4><p>تتوفر سبع لغات وست سمات: فجر، محيط، خيزران، غروب، حبر، مظلم. يتغير هذا الدليل تلقائيًا مع لغة الواجهة.</p><ul><li>يعمل محليًا دون مكونات بعيدة أو تحليلات أو متتبعات.</li><li>تبقى بيانات الروابط في المتصفح ولا تُرفع إلى خادم.</li><li>يمكن استخدام التنقل دون حساب، ويسجل الدخول لتفعيل الروابط الشخصية.</li></ul></div><div class='tut-pane' id='tut-intl-faq'><h4>8. الأسئلة الشائعة</h4><div class='table-wrap'><table><tr><th>السؤال</th><th>الإجابة</th></tr><tr><td>لماذا تُفتح صفحة كاملة؟</td><td>لتوفير مساحة أكبر. عيّن الصفحة كصفحة بداية للوصول السريع.</td></tr><tr><td>لماذا يُطلب تسجيل الدخول؟</td><td>بعد التسجيل أو الدخول تستمر نافذة الحفظ المعبأة تلقائيًا.</td></tr><tr><td>الاختصار لا يعمل.</td><td>تحقق من تعارضه مع النظام أو برنامج آخر وغيّره من إدارة الإضافات.</td></tr><tr><td>كيف أنقل البيانات؟</td><td>صدّر TXT حسب الفئة ثم استورده على الجهاز الجديد.</td></tr><tr><td>ماذا يحدث عند إلغاء التثبيت؟</td><td>تُحذف البيانات المحلية، لذلك صدّر نسخة احتياطية أولًا.</td></tr></table></div></div><div class='tut-pane' id='tut-intl-appendix'><h4>9. الملحق</h4><div class='table-wrap'><table><tr><th>العنصر</th><th>التفاصيل</th></tr><tr><td>الاسم</td><td>Whale Navigation</td></tr><tr><td>البنية</td><td>إضافة Manifest V3 دون خادم خلفي أو تعليمات برمجية بعيدة</td></tr><tr><td>الاختصار</td><td><code>Ctrl+Shift+K</code></td></tr><tr><td>الترخيص</td><td>GNU GPL الإصدار 3 أو أحدث</td></tr></table></div></div></div>"
+  },
   "contextMenuTitle": {
     "message": "حفظ في ملاحة الحوت"
   },
   "commandSaveToNav": {
     "message": "حفظ الصفحة الحالية في الملاحة"
+  },
+  "defaultCategory": {
+    "message": "افتراضية"
+  },
+  "dropDeleteHint": {
+    "message": "أفلت هنا للحذف"
+  },
+  "dropDeleteActive": {
+    "message": "أفلت للحذف"
+  },
+  "dropDeleteNeedLogin": {
+    "message": "سجّل الدخول للحذف"
   }
 }

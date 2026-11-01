@@ -319,6 +319,17 @@
       background: var(--bg-hover); color: var(--accent); font-weight: 600;
       border-left-color: var(--accent);
     }
+    body.dragging-link .sidebar-item[data-catid]:not([data-catid=""]) {
+      outline: 1px dashed color-mix(in srgb, var(--accent) 42%, transparent);
+      outline-offset: -3px;
+    }
+    body.dragging-link .sidebar-item.drag-over-category {
+      color: #fff; background: var(--accent);
+      outline: 1px solid var(--accent);
+    }
+    body.dragging-link .sidebar-item.drag-over-category .item-count {
+      color: var(--accent); background: #fff;
+    }
     .sidebar-item .item-icon { font-size: 15px; width: 18px; text-align: center; }
     .sidebar-item .item-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .sidebar-item .item-count {
@@ -337,7 +348,19 @@
     .content::-webkit-scrollbar-thumb { background: var(--content-scrollbar); border-radius: 5px; }
 
     /* Category Section */
-    .category-section { margin-bottom: 36px; scroll-margin-top: 10px; }
+    .category-section {
+      margin-bottom: 36px; scroll-margin-top: 10px;
+      border-radius: 14px; transition: background .15s ease, outline-color .15s ease;
+    }
+    body.dragging-link .category-section {
+      outline: 1px dashed color-mix(in srgb, var(--accent) 34%, transparent);
+      outline-offset: 5px;
+    }
+    body.dragging-link .category-section.drag-over-category {
+      background: color-mix(in srgb, var(--accent) 7%, transparent);
+      outline: 2px solid var(--accent);
+      outline-offset: 5px;
+    }
     .category-header {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 14px;
@@ -376,6 +399,7 @@
       opacity: 0.4;
       transform: scale(0.95);
     }
+    body.dragging-link, body.dragging-link .link-card { cursor: grabbing; }
     .link-card.drag-over {
       border-color: var(--accent);
       box-shadow: 0 0 0 2px rgba(102,126,234,.3);
@@ -428,6 +452,36 @@
     }
     .fab:hover { transform: scale(1.1); }
 
+    /* ─── Drag-to-delete Drop Zone ───────────────────────── */
+    .delete-drop-zone {
+      position: fixed; left: 50%; bottom: 24px; width: 330px; min-height: 72px;
+      display: flex; align-items: center; gap: 13px; padding: 12px 16px;
+      border: 1.5px dashed color-mix(in srgb, var(--danger) 55%, transparent);
+      border-radius: 18px; background: color-mix(in srgb, var(--bg-card) 94%, transparent);
+      color: var(--danger); box-shadow: 0 14px 42px var(--modal-shadow);
+      backdrop-filter: blur(16px); z-index: 180; opacity: 0; pointer-events: none;
+      transform: translateX(-50%) translateY(24px) scale(.96);
+      transition: opacity .18s ease, transform .18s ease, background .18s ease, color .18s ease;
+    }
+    .delete-drop-zone.show {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    .delete-drop-zone.drag-over {
+      color: #fff; border-color: transparent; background: var(--danger);
+      transform: translateX(-50%) translateY(0) scale(1.03);
+      box-shadow: 0 16px 48px color-mix(in srgb, var(--danger) 38%, transparent);
+    }
+    .delete-drop-icon {
+      width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center;
+      border-radius: 13px; background: color-mix(in srgb, currentColor 11%, transparent);
+    }
+    .delete-drop-icon svg { width: 22px; height: 22px; }
+    .delete-drop-copy { display: flex; flex-direction: column; gap: 3px; }
+    .delete-drop-copy strong { color: currentColor; font-size: 13px; font-weight: 800; }
+    .delete-drop-copy span { color: var(--text-muted); font-size: 10.5px; }
+    .delete-drop-zone.drag-over .delete-drop-copy span { color: rgba(255,255,255,.78); }
+
     /* ─── Modal ──────────────────────────────────────────── */
     .modal-mask {
       display: none; position: fixed; inset: 0;
@@ -459,6 +513,17 @@
       background: var(--bg-input);
     }
     .form-input:focus, .form-select:focus { border-color: var(--accent); background: var(--bg-card); }
+    .file-access-hint {
+      display: none; margin-top: 8px; padding: 9px 11px;
+      border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border-color));
+      border-radius: 9px; background: color-mix(in srgb, var(--accent) 6%, var(--bg-input));
+      color: var(--text-secondary); font-size: 11px; line-height: 1.65;
+    }
+    .file-access-hint.show { display: block; }
+    .file-access-hint code {
+      padding: 1px 4px; border-radius: 4px; color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
     .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
     .btn-primary {
       padding: 9px 24px; background: var(--accent-gradient);
@@ -520,18 +585,18 @@
 <!-- ══ Header ═══════════════════════════════════════════════ -->
 <header class="header">
   <div class="header-logo">
-    <img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50" style="cursor:pointer;" title="回首页">
+    <img id="mainLogo" src="../icons/logo-zh_CN.png" alt="鲸波导航" width="177" height="50" style="cursor:pointer;" title="回首页" data-i18n-alt="appName" data-i18n-title="logoHomeTitle">
   </div>
   <div class="header-search">
     <div class="search-engine-tabs" id="engineTabs">
-      <button class="engine-tab active" data-engine="local">本站检索</button>
-      <button class="engine-tab" data-engine="bing">必应</button>
+      <button class="engine-tab active" data-engine="local" data-i18n="engineLocal">本站检索</button>
+      <button class="engine-tab" data-engine="bing" data-i18n="engineBing">必应</button>
       <button class="engine-tab" data-engine="google">Google</button>
     </div>
     <div class="search-row">
       <span class="search-icon">🔍</span>
       <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索网址或名称…" />
-      <button class="search-submit-btn" id="searchSubmitBtn" data-i18n="searchBtnLocal">本站检索</button>
+      <button class="search-submit-btn" id="searchSubmitBtn" data-i18n="searchBtnLocal">搜索</button>
     </div>
   </div>
   <div class="header-actions">
@@ -539,7 +604,7 @@
       <button class="view-tab active" data-view="all" data-i18n="viewAll">全部</button>
       <button class="view-tab" data-view="mine" data-i18n="viewMine">我的</button>
     </div>
-    <select id="langSelect" title="Language / 语言" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+    <select id="langSelect" title="Language / 语言" data-i18n-title="language_label" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
       <option value="" disabled selected style="color:#888;">Language</option>
       <option value="zh_CN" style="color:#222;">简体中文</option>
       <option value="en" style="color:#222;">English</option>
@@ -549,12 +614,12 @@
       <option value="ar" style="color:#222;">العربية</option>
       <option value="id" style="color:#222;">Bahasa Indonesia</option>
     </select>
-    <select id="themeSelect" title="配色" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
+    <select id="themeSelect" title="配色" data-i18n-title="theme_label" style="background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:6px 8px;font-size:12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;">
     </select>
     <button class="btn-icon" id="openAdminBtn" data-i18n-title="adminBtnTitle" data-i18n="adminBtn" disabled>⚙️ 管理</button>
     <div class="user-status" id="userStatusBtn">
       <div class="avatar" id="userAvatar">?</div>
-      <span class="uname" id="userNameDisplay">未登录</span>
+      <span class="uname" id="userNameDisplay" data-i18n="notLoggedIn">未登录</span>
     </div>
   </div>
 </header>
@@ -569,7 +634,7 @@
 </div>
 
 <!-- FAB -->
-<button class="fab" id="fabBtn" title="添加网址">＋</button>
+<button class="fab" id="fabBtn" title="添加网址" data-i18n-title="fabTitle">＋</button>
 
 <!-- Modal: 添加网址 -->
 <div class="modal-mask" id="addModal">
@@ -593,6 +658,7 @@
     <div class="form-group">
       <label class="form-label" data-i18n="addCatLabel">所属分类 *</label>
       <select class="form-select" id="addCategory"></select>
+      <div class="file-access-hint" id="fileAccessHint" data-i18n-html="fileAccessHint"></div>
     </div>
     <div class="form-actions">
       <button class="btn-secondary" id="cancelAdd" data-i18n="cancelBtn">取消</button>
@@ -630,15 +696,15 @@
     <div class="auth-panel" id="authPanelRegister">
       <div class="form-group">
         <label class="form-label" data-i18n="usernameLabel">用户名 *</label>
-        <input class="form-input" id="regUsername" placeholder="3-20个字符" autocomplete="username" />
+        <input class="form-input" id="regUsername" placeholder="3-20个字符" data-i18n-placeholder="regUsernamePlaceholder" autocomplete="username" />
       </div>
       <div class="form-group">
         <label class="form-label" data-i18n="passwordLabel">密码 *</label>
-        <input class="form-input" id="regPassword" type="password" placeholder="至少6位" autocomplete="new-password" />
+        <input class="form-input" id="regPassword" type="password" placeholder="至少6位" data-i18n-placeholder="regPasswordPlaceholder" autocomplete="new-password" />
       </div>
       <div class="form-group">
         <label class="form-label" data-i18n="passwordLabel">确认密码 *</label>
-        <input class="form-input" id="regPassword2" type="password" placeholder="再次输入密码" autocomplete="new-password" />
+        <input class="form-input" id="regPassword2" type="password" placeholder="再次输入密码" data-i18n-placeholder="regPasswordConfirmPlaceholder" autocomplete="new-password" />
       </div>
       <div class="auth-error" id="registerError"></div>
       <div class="form-actions">
@@ -650,6 +716,17 @@
 </div>
 
 <!-- Toast -->
+<div class="delete-drop-zone" id="deleteDropZone" aria-hidden="true" aria-live="polite">
+  <div class="delete-drop-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/>
+    </svg>
+  </div>
+  <div class="delete-drop-copy">
+    <strong data-i18n="deleteDropTitle">删除网址</strong>
+    <span data-i18n="deleteDropHint">拖动到这里并松开鼠标</span>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script src="../i18n.js"></script>

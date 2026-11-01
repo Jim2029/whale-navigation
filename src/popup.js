@@ -53,6 +53,8 @@ let addFromBookmark = false;  // 标记"收藏当前页"流程，用于区分保
 let originalPageUrl = "";      // 收藏弹窗中 URL 输入框的原始页面地址（供"收藏页面"切换回）
 let originalPageTitle = "";    // 收藏弹窗中标题输入框的原始页面标题（供"收藏页面"切换回）
 let originalSiteName = "";     // 网站标准名称（og:site_name，切换"收藏域名"时用作标题）
+let draggingLinkId = "";
+let draggingLinkSource = "";
 const PERSONAL_CAT_ID = "cat_personal";
 let currentEngine = "local";
 
@@ -64,6 +66,7 @@ const SEARCH_ENGINES = {
 
 // ─── Init ───────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
+  await registerCurrentNavTab();
   await initTheme();
   await loadData();
   // i18n：根据 storage 覆盖或浏览器语言初始化，并把 [data-i18n] 属性挂载到静态元素上
@@ -123,6 +126,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   autoOpenBookmark();
 });
 
+async function registerCurrentNavTab() {
+  try {
+    const tab = await chrome.tabs.getCurrent();
+    if (tab && tab.id != null) {
+      await chrome.storage.local.set({ navTabId: tab.id });
+    }
+  } catch (e) { /* 非标签页环境或权限不足时忽略 */ }
+}
+
+window.addEventListener("focus", registerCurrentNavTab);
+
 // 右键菜单/快捷键进入时：已登录则弹出预填收藏框，未登录则引导注册
 async function autoOpenBookmark() {
   try {
@@ -138,7 +152,7 @@ async function autoOpenBookmark() {
     }
     if (!currentUser) {
       // 未登录：先提示，用户确认后再弹注册/登录窗口
-      if (confirm("收藏网址功能需要注册/登录")) {
+      if (confirm(_t("bookmarkNeedLogin"))) {
         openAuthModal();
         switchAuthTab("register");
         // 保留 _pendingLink，登录/注册成功后衔接
@@ -241,6 +255,12 @@ function renderEngineTabs() {
       currentEngine = btn.dataset.engine;
       renderEngineTabs();
       updateSearchPlaceholder();
+      // 离开本站模式时清空搜索结果
+      if (currentEngine !== "local" && searchQuery) {
+        searchQuery = "";
+        renderSidebar();
+        renderContent();
+      }
     });
   });
 }
@@ -251,7 +271,7 @@ function updateSearchPlaceholder() {
   if (!input) return;
   const eng = SEARCH_ENGINES[currentEngine];
   input.placeholder = _t(eng.placeholderKey);
-  btn.textContent = currentEngine === "local" ? _t("searchBtnLocal") : _t("engineLocal");
+  btn.textContent = _t("searchBtnLocal");
 }
 
 async function loadData() {
@@ -311,6 +331,7 @@ function getLinksForView(catId) {
   // 管理员预置网址（排除隐藏的）
   let adminLinks = adminData.links
     .filter(l => !l.hidden)
+    .filter(l => l.categoryId !== PERSONAL_CAT_ID)
     .filter(l => !catId || l.categoryId === catId)
     .map(l => ({ ...l, _source: "admin" }));
 
@@ -423,7 +444,7 @@ function renderSidebar() {
     const displayName = _t("catName_" + cat.id, {}, cat.name);
     html += `
       <div class="sidebar-item ${isActive ? "active" : ""}" data-catid="${cat.id}">
-        <span class="item-icon">${cat.icon || "📁"}</span>
+        <span class="item-icon">${escHtml(cat.icon || "📁")}</span>
         <span class="item-name">${escHtml(displayName)}</span>
         <span class="item-count">${countDisplay}</span>
       </div>`;
@@ -443,6 +464,10 @@ function renderSidebar() {
         document.getElementById("content").scrollTop = 0;
       }
     });
+  });
+  sidebar.querySelectorAll(".sidebar-item[data-catid]").forEach(el => {
+    const catId = el.dataset.catid;
+    if (catId) bindCategoryDropTarget(el, catId);
   });
 }
 
@@ -484,10 +509,10 @@ function renderContent() {
       if (isPersonal && !currentUser) {
         hasAny = true;
         html += `
-          <div class="category-section" id="cat_${cat.id}" style="margin-bottom:14px;">
+          <div class="category-section" id="cat_${cat.id}" data-cat-id="${escAttr(cat.id)}" style="margin-bottom:14px;">
             <div class="category-header" style="margin-bottom:6px;padding-bottom:6px;">
               <div class="category-title">
-                <span class="cat-icon">${cat.icon || "📁"}</span>
+                <span class="cat-icon">${escHtml(cat.icon || "📁")}</span>
                 ${escHtml(catDisplayName)}
               </div>
             </div>
@@ -501,10 +526,10 @@ function renderContent() {
       if (currentView === "mine" && links.length === 0) return;
       hasAny = true;
       html += `
-        <div class="category-section" id="cat_${cat.id}">
+        <div class="category-section" id="cat_${cat.id}" data-cat-id="${escAttr(cat.id)}">
           <div class="category-header">
             <div class="category-title">
-              <span class="cat-icon">${cat.icon || "📁"}</span>
+              <span class="cat-icon">${escHtml(cat.icon || "📁")}</span>
               ${escHtml(catDisplayName)}
             </div>
             <span style="font-size:12px;color:var(--text-muted);">${_t("linksCount", { count: links.length })}</span>
@@ -546,7 +571,7 @@ function renderContent() {
       await saveUserLinks();
       renderSidebar();
       renderContent();
-      showToast("已删除");
+      showToast(_t("deleted"));
     });
   });
 
@@ -556,7 +581,7 @@ function renderContent() {
 function renderCard(link) {
   // 所有卡片样式完全一致，不区分来源
   return `
-    <div class="link-card" data-url="${escAttr(link.url)}" data-id="${link.id}" title="${escAttr(link.url)}">
+    <div class="link-card" data-url="${escAttr(link.url)}" data-id="${link.id}" data-source="${escAttr(link._source || "")}" data-category-id="${escAttr(link.categoryId || "")}" title="${escAttr(link.url)}">
       <div class="link-title">${escHtml(link.title)}</div>
       ${link.desc ? `<div class="link-desc" title="${escAttr(link.desc)}">${escHtml(link.desc)}</div>` : ""}
     </div>`;
@@ -567,21 +592,33 @@ function bindDragSort(container) {
   const grids = container.querySelectorAll(".link-grid");
   grids.forEach(grid => {
     let draggedCard = null;
+    const sourceSection = grid.closest(".category-section");
+    const sourceCatId = sourceSection?.dataset.catId || "";
+    if (sourceSection && sourceCatId) bindCategoryDropTarget(sourceSection, sourceCatId);
 
     grid.querySelectorAll(".link-card").forEach(card => {
       card.setAttribute("draggable", "true");
 
       card.addEventListener("dragstart", (e) => {
         draggedCard = card;
+        draggingLinkId = card.dataset.id;
+        draggingLinkSource = card.dataset.source || "";
         card.classList.add("dragging");
+        document.body.classList.add("dragging-link");
         e.dataTransfer.effectAllowed = "move";
         e.dataTransfer.setData("text/plain", card.dataset.id);
+        showDeleteDropZone(true);
       });
 
       card.addEventListener("dragend", () => {
         card.classList.remove("dragging");
         grid.querySelectorAll(".drag-over").forEach(c => c.classList.remove("drag-over"));
         draggedCard = null;
+        draggingLinkId = "";
+        draggingLinkSource = "";
+        document.body.classList.remove("dragging-link");
+        clearCategoryDropHighlights();
+        showDeleteDropZone(false);
       });
 
       card.addEventListener("dragover", (e) => {
@@ -594,17 +631,34 @@ function bindDragSort(container) {
 
       card.addEventListener("drop", async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         card.classList.remove("drag-over");
         if (!draggedCard || draggedCard === card) return;
 
         const dragId = draggedCard.dataset.id;
         const dropId = card.dataset.id;
+        const dragCatId = draggedCard.closest(".category-section")?.dataset.catId || "";
+        const dropCatId = card.closest(".category-section")?.dataset.catId || "";
+
+        if (dragCatId && dropCatId && dragCatId !== dropCatId) {
+          const moved = await moveFrontLink(dragId, draggedCard.dataset.source || "", dropCatId, dropId);
+          document.body.classList.remove("dragging-link");
+          clearCategoryDropHighlights();
+          showDeleteDropZone(false);
+          if (moved) renderContent();
+          return;
+        }
 
         // 优先在 userLinksData 中排序
         await reorderUserLinks(dragId, dropId);
         // 再尝试 adminData
         await reorderAdminLinks(dragId, dropId);
 
+        draggingLinkId = "";
+        draggingLinkSource = "";
+        document.body.classList.remove("dragging-link");
+        clearCategoryDropHighlights();
+        showDeleteDropZone(false);
         renderContent();
       });
     });
@@ -630,8 +684,200 @@ async function reorderAdminLinks(dragId, dropId) {
   await chrome.storage.local.set({ adminData });
 }
 
+function categoryUrlKey(raw) {
+  const value = String(raw || "").trim();
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase().replace(/^www\./, "");
+    const path = url.pathname.replace(/\/+$/, "") || "/";
+    return host + path + url.search;
+  } catch (e) {
+    return value;
+  }
+}
+
+async function moveFrontLink(id, source, targetCatId, dropId) {
+  const userIndex = userLinksData.findIndex(link => link.id === id);
+  const adminIndex = adminData.links.findIndex(link => link.id === id);
+  let sourceStore = "";
+  let sourceIndex = -1;
+
+  if (source === "user" && userIndex >= 0) {
+    sourceStore = "user";
+    sourceIndex = userIndex;
+  } else if (source === "admin" && adminIndex >= 0) {
+    sourceStore = "admin";
+    sourceIndex = adminIndex;
+  } else if (userIndex >= 0) {
+    sourceStore = "user";
+    sourceIndex = userIndex;
+  } else if (adminIndex >= 0) {
+    sourceStore = "admin";
+    sourceIndex = adminIndex;
+  } else {
+    return false;
+  }
+
+  const sourceLink = sourceStore === "user" ? userLinksData[sourceIndex] : adminData.links[sourceIndex];
+  if (!sourceLink || sourceLink.categoryId === targetCatId) return false;
+  if (targetCatId === PERSONAL_CAT_ID && !currentUser) {
+    showToast(_t("needLogin"));
+    openAuthModal();
+    return false;
+  }
+
+  const targetLinks = targetCatId === PERSONAL_CAT_ID
+    ? userLinksData.filter(link => link.categoryId === PERSONAL_CAT_ID)
+    : adminData.links.filter(link => link.categoryId === targetCatId);
+  const sourceKey = categoryUrlKey(sourceLink.url);
+  if (targetLinks.some(link => link.id !== id && categoryUrlKey(link.url) === sourceKey)) {
+    showToast("⚠️ " + _t("admin_duplicate_link"));
+    return false;
+  }
+
+  if (sourceStore === "user") {
+    userLinksData.splice(sourceIndex, 1);
+  } else {
+    adminData.links.splice(sourceIndex, 1);
+  }
+
+  const movedLink = { ...sourceLink, categoryId: targetCatId, hidden: false };
+  if (targetCatId === PERSONAL_CAT_ID) {
+    const dropIndex = dropId ? userLinksData.findIndex(link => link.id === dropId) : -1;
+    userLinksData.splice(dropIndex >= 0 ? dropIndex : userLinksData.length, 0, movedLink);
+  } else {
+    const dropIndex = dropId ? adminData.links.findIndex(link => link.id === dropId) : -1;
+    adminData.links.splice(dropIndex >= 0 ? dropIndex : adminData.links.length, 0, movedLink);
+  }
+
+  const writes = [];
+  if (sourceStore === "user" || targetCatId === PERSONAL_CAT_ID) writes.push(saveUserLinks());
+  if (sourceStore === "admin" || targetCatId !== PERSONAL_CAT_ID) {
+    writes.push(chrome.storage.local.set({ adminData }));
+  }
+  await Promise.all(writes);
+
+  const targetCategory = adminData.categories.find(category => category.id === targetCatId);
+  const targetName = _t("catName_" + targetCatId, {}, targetCategory?.name || targetCatId);
+  showToast(_t("movedToCategory", { category: targetName }));
+  return true;
+}
+
+function clearCategoryDropHighlights() {
+  document.querySelectorAll(".drag-over-category").forEach(el => {
+    el.classList.remove("drag-over-category");
+  });
+}
+
+function bindCategoryDropTarget(element, categoryId) {
+  if (!element || !categoryId) return;
+
+  element.addEventListener("dragover", (e) => {
+    if (!draggingLinkId || e.target.closest?.(".link-card")) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "move";
+    clearCategoryDropHighlights();
+    element.classList.add("drag-over-category");
+  });
+
+  element.addEventListener("dragleave", (e) => {
+    if (e.relatedTarget && element.contains(e.relatedTarget)) return;
+    element.classList.remove("drag-over-category");
+  });
+
+  element.addEventListener("drop", async (e) => {
+    if (!draggingLinkId || e.target.closest?.(".link-card")) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const id = draggingLinkId;
+    const source = draggingLinkSource;
+    draggingLinkId = "";
+    draggingLinkSource = "";
+    document.body.classList.remove("dragging-link");
+    clearCategoryDropHighlights();
+    showDeleteDropZone(false);
+
+    const moved = await moveFrontLink(id, source, categoryId, "");
+    if (moved) renderContent();
+  });
+}
+
+function showDeleteDropZone(show) {
+  const zone = document.getElementById("deleteDropZone");
+  if (!zone) return;
+  zone.classList.toggle("show", show);
+  zone.classList.remove("drag-over");
+  zone.setAttribute("aria-hidden", show ? "false" : "true");
+}
+
+async function deleteFrontLink(id, source) {
+  const userIndex = userLinksData.findIndex(l => l.id === id);
+  const adminIndex = adminData.links.findIndex(l => l.id === id);
+  const userLink = userIndex >= 0 ? userLinksData[userIndex] : null;
+  const adminLink = adminIndex >= 0 ? adminData.links[adminIndex] : null;
+  const link = source === "user" ? userLink : source === "admin" ? adminLink : (userLink || adminLink);
+
+  if (!link) return;
+  if (!currentUser) {
+    showToast(_t("needLogin"));
+    openAuthModal();
+    return;
+  }
+
+  if (!confirm(_t("admin_delete_link", { title: link.title || link.url }))) return;
+
+  if (source === "admin" && adminIndex >= 0) {
+    adminData.links.splice(adminIndex, 1);
+    await chrome.storage.local.set({ adminData });
+  } else if (source === "user" && userIndex >= 0) {
+    userLinksData.splice(userIndex, 1);
+    await saveUserLinks();
+  } else if (userIndex >= 0) {
+    userLinksData.splice(userIndex, 1);
+    await saveUserLinks();
+  } else if (adminIndex >= 0) {
+    adminData.links.splice(adminIndex, 1);
+    await chrome.storage.local.set({ adminData });
+  } else {
+    return;
+  }
+
+  renderSidebar();
+  renderContent();
+  showToast("✅ " + _t("deleted"));
+}
+
+function bindDeleteDropZone() {
+  const zone = document.getElementById("deleteDropZone");
+  if (!zone) return;
+  zone.addEventListener("dragover", (e) => {
+    if (!draggingLinkId) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "move";
+    zone.classList.add("drag-over");
+  });
+  zone.addEventListener("dragleave", () => zone.classList.remove("drag-over"));
+  zone.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = draggingLinkId || e.dataTransfer.getData("text/plain");
+    const source = draggingLinkSource;
+    draggingLinkId = "";
+    draggingLinkSource = "";
+    document.body.classList.remove("dragging-link");
+    clearCategoryDropHighlights();
+    showDeleteDropZone(false);
+    await deleteFrontLink(id, source);
+  });
+}
+
 // ─── Events ─────────────────────────────────────────────────
 function bindEvents() {
+  bindDeleteDropZone();
+
   // View tabs
   document.querySelectorAll(".view-tab").forEach(tab => {
     tab.addEventListener("click", () => {
@@ -653,25 +899,9 @@ function bindEvents() {
     renderContent();
   });
 
-  // Search engine tabs
+  // Search engine tabs（点击逻辑见 renderEngineTabs）
   const engineTabs = document.getElementById("engineTabs");
   const searchSubmitBtn = document.getElementById("searchSubmitBtn");
-  engineTabs.querySelectorAll(".engine-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      currentEngine = tab.dataset.engine;
-      engineTabs.querySelectorAll(".engine-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      const engine = SEARCH_ENGINES[currentEngine];
-      searchSubmitBtn.textContent = currentEngine === "local" ? "本站检索" : engine.label + "搜索";
-      searchInputEl.placeholder = engine.placeholder;
-      // 离开本站模式时清空搜索结果
-      if (currentEngine !== "local" && searchQuery) {
-        searchQuery = "";
-        renderSidebar();
-        renderContent();
-      }
-    });
-  });
 
   // Search submit button
   searchSubmitBtn.addEventListener("click", () => {
@@ -742,6 +972,7 @@ function bindEvents() {
     openAddModal();
   });
   document.getElementById("toggleUrlBtn").addEventListener("click", toggleUrlScope);
+  document.getElementById("addCategory").addEventListener("change", updateFileAccessHint);
   document.getElementById("cancelAdd").addEventListener("click", closeAddModal);
   document.getElementById("confirmAdd").addEventListener("click", saveUserLink);
   document.getElementById("addModal").addEventListener("click", (e) => {
@@ -801,15 +1032,15 @@ async function doLogin() {
   const password = document.getElementById("loginPassword").value;
   const errEl = document.getElementById("loginError");
 
-  if (!username) { errEl.textContent = "请输入用户名"; return; }
-  if (!password) { errEl.textContent = "请输入密码"; return; }
+  if (!username) { errEl.textContent = _t("usernamePlaceholder"); return; }
+  if (!password) { errEl.textContent = _t("passwordPlaceholder"); return; }
 
   const res = await chrome.storage.local.get("accounts");
   const accounts = res.accounts || {};
   const account = accounts[username];
 
-  if (!account) { errEl.textContent = "用户不存在"; return; }
-  if (account.passwordHash !== hashPassword(password)) { errEl.textContent = "密码错误"; return; }
+  if (!account) { errEl.textContent = _t("userNotFound"); return; }
+  if (account.passwordHash !== hashPassword(password)) { errEl.textContent = _t("passwordWrong"); return; }
 
   currentUser = { username: account.username, createdAt: account.createdAt };
   await chrome.storage.local.set({ currentUser });
@@ -819,7 +1050,7 @@ async function doLogin() {
   renderUserStatus();
   renderSidebar();
   renderContent();
-  showToast("✅ 欢迎回来，" + currentUser.username);
+  showToast("✅ " + _t("welcomeBack", { name: currentUser.username }));
   continueBookmarkAfterLogin();
 }
 
@@ -830,21 +1061,21 @@ async function doRegister() {
   const errEl = document.getElementById("registerError");
 
   if (!username || username.length < 3 || username.length > 20) {
-    errEl.textContent = "用户名需要3-20个字符"; return;
+    errEl.textContent = _t("usernameLenError"); return;
   }
-  if (/[^a-zA-Z0-9_\u4e00-\u9fff]/.test(username)) {
-    errEl.textContent = "用户名只允许中文、字母、数字和下划线"; return;
+  if (/[^a-zA-Z0-9_\p{Script=Han}]/u.test(username)) {
+    errEl.textContent = _t("usernameCharsetError"); return;
   }
   if (!password || password.length < 6) {
-    errEl.textContent = "密码至少6位"; return;
+    errEl.textContent = _t("passwordLenError"); return;
   }
   if (password !== password2) {
-    errEl.textContent = "两次密码不一致"; return;
+    errEl.textContent = _t("passwordMismatch"); return;
   }
 
   const res = await chrome.storage.local.get("accounts");
   const accounts = res.accounts || {};
-  if (accounts[username]) { errEl.textContent = "用户名已被注册"; return; }
+  if (accounts[username]) { errEl.textContent = _t("usernameExists"); return; }
 
   accounts[username] = {
     username,
@@ -862,7 +1093,7 @@ async function doRegister() {
   renderUserStatus();
   renderSidebar();
   renderContent();
-  showToast("✅ 注册成功，已自动登录");
+  showToast("✅ " + _t("registeredAutoLogin"));
   continueBookmarkAfterLogin();
 }
 
@@ -873,7 +1104,7 @@ async function doLogout() {
   renderUserStatus();
   renderSidebar();
   renderContent();
-  showToast("已退出登录");
+  showToast(_t("loggedOut"));
 }
 
 // ─── Add user link modal ─────────────────────────────────────
@@ -883,10 +1114,11 @@ function openAddModal(prefill) {
   const cats = getVisibleCategories();
   const sel = document.getElementById("addCategory");
   sel.innerHTML = cats.map(c =>
-    `<option value="${c.id}">${c.icon || ""} ${escHtml(_t("catName_" + c.id, {}, c.name))}</option>`
+    `<option value="${c.id}">${escHtml(c.icon || "")} ${escHtml(_t("catName_" + c.id, {}, c.name))}</option>`
   ).join("");
   // 默认选中"个人网址"分类（个人网址优先收藏到个人分类，用户可自行修改）
   sel.value = PERSONAL_CAT_ID;
+  updateFileAccessHint();
 
   document.getElementById("addTitle").value = (prefill && prefill.title) ? prefill.title : "";
   document.getElementById("addUrl").value = (prefill && prefill.url) ? prefill.url : "";
@@ -900,6 +1132,13 @@ function openAddModal(prefill) {
 
 function closeAddModal() {
   document.getElementById("addModal").classList.remove("show");
+}
+
+function updateFileAccessHint() {
+  const select = document.getElementById("addCategory");
+  const hint = document.getElementById("fileAccessHint");
+  if (!select || !hint) return;
+  hint.classList.toggle("show", select.value === PERSONAL_CAT_ID);
 }
 
 // 重置 URL 切换按钮为"收藏域名"状态（打开弹窗时调用）
@@ -945,7 +1184,7 @@ function toggleUrlScope() {
   if (btn.dataset.mode !== "page") {
     // 当前是页面 URL，切换为网站域名
     if (!/^https?:\/\//i.test(currentUrl)) {
-      showToast("仅 http/https 网址支持收藏域名");
+      showToast(_t("bookmarkDomainHttpOnly"));
       return;
     }
     try {
@@ -958,7 +1197,7 @@ function toggleUrlScope() {
       btn.dataset.mode = "page";
       btn.textContent = _t("bookmarkPage");
     } catch (e) {
-      showToast("无法解析该网址的域名");
+      showToast(_t("bookmarkDomainParseFailed"));
     }
   } else {
     // 当前是网站域名，切换回页面 URL + 页面标题
@@ -970,20 +1209,20 @@ function toggleUrlScope() {
 }
 
 async function saveUserLink() {
-  if (!currentUser) { showToast("请先登录"); return; }
+  if (!currentUser) { showToast(_t("needLogin")); return; }
 
   const title = document.getElementById("addTitle").value.trim();
   const url   = document.getElementById("addUrl").value.trim();
   const desc  = document.getElementById("addDesc").value.trim();
   const catId = document.getElementById("addCategory").value;
 
-  if (!title) { showToast("请输入标题"); return; }
-  if (!url)   { showToast("请输入网址"); return; }
+  if (!title) { showToast(_t("needTitle")); return; }
+  if (!url)   { showToast(_t("needUrl")); return; }
   if (!isValidUrlForCat(url, catId)) {
     if (catId === PERSONAL_CAT_ID) {
-      showToast("请输入有效的地址（http/https 网址、file:/// 本地网页、或本地文件路径）");
+      showToast(_t("needValidUrlPersonal"));
     } else {
-      showToast("请输入有效的网址（以 http/https 开头）");
+      showToast(_t("needValidUrl"));
     }
     return;
   }
@@ -1012,7 +1251,7 @@ async function saveUserLink() {
   closeAddModal();
   renderSidebar();
   renderContent();
-  showToast(addFromBookmark ? _t("bookmarkSaved") : "✅ 已添加到我的导航");
+  showToast(addFromBookmark ? _t("bookmarkSaved") : "✅ " + _t("addedToMyNav"));
   addFromBookmark = false;
 }
 
